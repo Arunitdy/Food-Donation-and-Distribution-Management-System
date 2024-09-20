@@ -1,0 +1,16 @@
+
+button,a{
+    cursor:pointer;
+  }
+  
+input{
+    cursor:text;
+  }
+  
+.SignBar{
+  position: absolute;
+  place-items: center;
+  width: 60%;
+  height: 100px;
+  background-color: blueviolet;
+}

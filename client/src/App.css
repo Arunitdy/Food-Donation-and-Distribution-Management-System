@@ -1,0 +1,62 @@
+
+button,a{
+  cursor:pointer;
+}
+input{
+  cursor:text;
+}
+
+.NavBar {
+  background-color: #333;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between; /* Aligns the NavButton and Sign button inline */
+  align-items: center; /* Vertically centers items */
+  width: 100%;
+  min-width: 360px;
+}
+/* NavButton group container */
+.NavButton {
+  display: flex;
+  gap: 15px; 
+  margin-left:10px ;/* Creates space between the individual buttons */
+}
+
+/* Individual buttons inside NavButton */
+.individual-NavButton {
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for individual buttons */
+.individual-NavButton:hover {
+  background-color: #777;
+}
+
+/* Sign button styling */
+.Sign {
+  margin-right: 6%;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for Sign button */
+.Sign:hover {
+  background-color: #e64a19;
+}
+Button:active {
+  transform:scale(.8);
+  background-color: #777;
+}
