@@ -18,7 +18,6 @@ input{
   justify-content: space-between; /* Aligns the NavButton and Sign button inline */
   align-items: center; /* Vertically centers items */
   width: 100%;
-  min-width: 360px;
 }
 /* NavButton group container */
 .NavButton {
@@ -81,4 +80,90 @@ Button:active {
   transform:scale(.8);
   background-color: #777;
   transition: background-color 0.3s ease;
+}
+/* General mobile styles */
+@media (max-width: 768px) {
+  .NavBar {
+    justify-content: flex-start;  /* Align items to the left */
+    padding: 10px;
+  }
+  
+  .NavBar-Auth {
+    display: none;  /* Hide the login/create account buttons on mobile */
+  }
+
+  /* Menu toggle (hamburger button) */
+  .menu-toggle {
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  /* Sliding menu container */
+  .NavButton {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 50px;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+  }
+
+  .NavButton.open {
+    left: 0;  /* Slide in when menu is open */
+  }
+
+  .individual-NavButton {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    text-align: left;
+    border: none;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+
+  .individual-NavButton:hover {
+    background-color: #777;
+  }
+}
+
+/* For larger screens, the NavButton stays inline */
+@media (min-width: 769px) {
+  .NavButton {
+    display: flex;
+    position: relative;
+    left: 0;
+    box-shadow: none;
+  }
+  
+  .menu-toggle {
+    display: none;  /* Hide the hamburger button */
+  }
+
+  .NavBar-Auth {
+    display: flex;
+  }
+}
+
+/* Additional CSS for buttons and login */
+.navBar-a-create-new-account {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.navBar-a-create-new-account:hover {
+  text-decoration: underline;
 }
