@@ -14,19 +14,20 @@ input{
   left: 50%;
   transform: translate(-50%, -50%); 
   width: auto;
-  background-color: blueviolet;
+  background-color:transparent;
   margin: 0 auto;
   padding: 10px 10px 20px 20px;
-  border: 1px solid #ccc;
+  border: 2px solid #b0aeae;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   text-align: left;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
 }
 .close-button{
   display: block;
   margin-left: auto;
   background-color: transparent;
-  color: white;
+  color: rgb(81, 80, 80);
   border: none;
   font-size: 15px;
   border-radius: 5px;
@@ -50,6 +51,7 @@ input{
 .login-container-Login-button {
   width: 40%;
   padding: 10px;
+  font-size: 15px;
   background-color: #28a745;
   color: white;
   border: none;
@@ -58,10 +60,12 @@ input{
   display: block;                  /* Ensure it's a block element */
   margin: 0 auto; 
   transition: background-color 0.3s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
 }
 .login-container-Login-button:hover{
   background-color: aliceblue;
   color: #28a745;
+  border: 2px solid wheat;
 }
 
 .error-message {

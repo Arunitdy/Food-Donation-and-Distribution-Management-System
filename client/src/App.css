@@ -28,6 +28,7 @@ input{
 
 /* Individual buttons inside NavButton */
 .individual-NavButton {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
   background-color: #555;
   color: white;
   border: none;
@@ -37,12 +38,26 @@ input{
   font-size: 16px;
   transition: background-color 0.3s ease;
 }
-
+.NavBar-Auth {
+  margin-right: 6%;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between Create Account link and Login button */
+}
 /* Hover effect for individual buttons */
 .individual-NavButton:hover {
   background-color: #777;
 }
+.navBar-a-creat-new-account {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  margin-right: 10px; /* Optional spacing */
+}
 
+.navBar-a-creat-new-account:hover {
+  text-decoration: underline;
+}
 /* Sign button styling */
 .Login-button-navBar {
   margin-right: 6%;
@@ -54,6 +69,7 @@ input{
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
 /* Hover effect for Sign button */
