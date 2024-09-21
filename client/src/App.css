@@ -5,6 +5,11 @@ button,a{
 input{
   cursor:text;
 }
+.App{
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
 
 .NavBar {
   background-color: #333;
@@ -18,8 +23,7 @@ input{
 /* NavButton group container */
 .NavButton {
   display: flex;
-  gap: 15px; 
-  margin-left:10px ;/* Creates space between the individual buttons */
+  gap: 15px;  ;/* Creates space between the individual buttons */
 }
 
 /* Individual buttons inside NavButton */
@@ -40,7 +44,7 @@ input{
 }
 
 /* Sign button styling */
-.Sign {
+.Login-button-navBar {
   margin-right: 6%;
   background-color: #ff5722;
   color: white;
@@ -53,10 +57,12 @@ input{
 }
 
 /* Hover effect for Sign button */
-.Sign:hover {
-  background-color: #e64a19;
+.Login-button-navBar:hover {
+  background-color: #fcfbfa;
+  color: #ff5722;
 }
 Button:active {
   transform:scale(.8);
   background-color: #777;
+  transition: background-color 0.3s ease;
 }
