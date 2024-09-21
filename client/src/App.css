@@ -78,6 +78,7 @@ input{
 }
 Button:active {
   transform:scale(.8);
-  background-color: #777;
+  background-color: #faf6f6;
   transition: background-color 0.3s ease;
+  transition: transform 0.3s ease;
 }
