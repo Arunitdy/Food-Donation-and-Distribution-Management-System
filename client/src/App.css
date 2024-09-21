@@ -167,3 +167,118 @@ Button:active {
 .navBar-a-create-new-account:hover {
   text-decoration: underline;
 }
+/* Base styles */
+.App {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+
+.NavBar {
+  background-color: #333;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.NavButton {
+  display: none; /* Hide on smaller screens */
+}
+
+.NavBar-Auth {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* SideNav hidden initially */
+.SideNav {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 200px;
+  height: 100%;
+  background-color: #333;
+  transition: left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.SideNav.open {
+  left: 0;
+}
+
+.menu-button {
+  background-color: #333;
+  color: white;
+  font-size: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+.navBar-a-create-new-account {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.Login-button-navBar {
+  background-color: #ff5722;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Styles for mobile view */
+@media (max-width: 768px) {
+  .NavBar {
+    justify-content: space-between; /* Keep elements spaced */
+  }
+
+  .NavButton {
+    display: none; /* Hide regular buttons on small screens */
+  }
+
+  .NavBar-Auth {
+    display: none; /* Hide login and create account when side menu opens */
+  }
+
+  .SideNav {
+    display: flex; /* Show the side navigation */
+  }
+
+  .menu-button {
+    display: block; /* Show the menu button on small screens */
+  }
+}
+
+/* Styles for larger screens */
+@media (min-width: 769px) {
+  .NavBar {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .NavButton {
+    display: flex; /* Display buttons in row */
+  }
+
+  .SideNav {
+    display: none; /* Hide SideNav on larger screens */
+  }
+
+  .NavBar-Auth {
+    display: flex; /* Show login and create account */
+  }
+
+  .menu-button {
+    display: none; /* Hide menu button on large screens */
+  }
+}

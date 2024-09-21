@@ -23,37 +23,42 @@ function useSignButtonListener(ref, setLoginVisible) {
     };
   }, [ref, setLoginVisible]);
 }
-
 function App() {
-  const [loginVisible, setLoginVisible] = useState(false); // Manage visibility of Login
+  const [loginVisible, setLoginVisible] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuButtonRef = useRef(null);
   const signButtonRef = useRef(null);
 
-  // Use custom hook for cleaner code
-  useSignButtonListener(signButtonRef, setLoginVisible);
+  const handleMenuClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
-  <div className="App">
-    <div className='NavBar'>
-      {loginVisible && <Login setLoginVisible={setLoginVisible} />} {/* Render Login when visible */}
-      
-      {/* NavButton group */}
-      <div className='NavButton'>
-        <button className='Donor individual-NavButton'>Donor</button>
-        <button className='Center individual-NavButton'>Center</button>
-        <button className='Receiver individual-NavButton'>Receiver</button>
-        <button className='Employee individual-NavButton'>Employee</button>
-      </div>
-      
-      {/* New container for Create Account link and Login button */}
-      <div className="NavBar-Auth">
-        <a className='navBar-a-creat-new-account' href="#">
-          Create a new account
-        </a>
-        <button className='Login-button-navBar' ref={signButtonRef}>Login</button>
+    <div className="App">
+      {/* Main NavBar */}
+      <div className="NavBar">
+        {loginVisible && <Login setLoginVisible={setLoginVisible} />}
+
+        {/* Mobile menu button */}
+        <button className="menu-button" onClick={handleMenuClick} ref={menuButtonRef}>
+          ☰
+        </button>
+
+        {/* SideNav for small screens */}
+        <div className={`SideNav ${isMenuOpen ? 'open' : ''}`}>
+          <button className="Donor individual-NavButton">Donor</button>
+          <button className="Center individual-NavButton">Center</button>
+          <button className="Receiver individual-NavButton">Receiver</button>
+          <button className="Employee individual-NavButton">Employee</button>
+        </div>
+
+        {/* Auth Buttons: Login and Create Account */}
+        <div className="NavBar-Auth">
+          <a className="navBar-a-create-new-account" href="#">Create a new account</a>
+          <button className="Login-button-navBar" ref={signButtonRef}>Login</button>
+        </div>
       </div>
     </div>
-  </div>
-  
   );
 }
 
