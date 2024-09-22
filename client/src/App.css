@@ -25,8 +25,7 @@ Button:active {
 .NavBar {
   margin: 10px 20px;
   background-color: #f8f8f8;
-  display: flex;
-  justify-content: space-between; /* Aligns the NavButton and Sign button inline */
+  display: flex; /* Aligns the NavButton and Sign button inline */
   align-items: center; /* Vertically centers items */
   width: auto;
   box-shadow: 0 0.625em 1em 0 rgba(42, 43, 42, 0.79);
@@ -176,15 +175,19 @@ Button:active {
     padding: 5px;
   }
   .NavBar-logo{
-    margin: 3px;
+    margin: 4px;
     width:40px;
   }
   .NavButton {
-    display: none;  /* Hide NavButton on small screens */
+    display: none;
+    margin: 0px;  /* Hide NavButton on small screens */
   }
-
   .NavBar-Toggle {
+    margin-left: 0px;
     display: block;  /* Show toggle button on small screens */
+  }
+  .NavBar-Auth{
+    margin-left: auto;
   }
 }
 
