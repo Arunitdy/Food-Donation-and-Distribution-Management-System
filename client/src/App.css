@@ -5,6 +5,12 @@ button,a{
 input{
   cursor:text;
 }
+Button:active {
+  transform:scale(.8);
+  background-color: #faf6f6;
+  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease;
+}
 .App{
   position: relative;
   height: 700px;
@@ -41,7 +47,6 @@ input{
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
-  text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
 }
 .NavBar-Auth {
   display: flex;
@@ -80,10 +85,4 @@ input{
 .Login-button-navBar:hover {
   background-color: #fcfbfa;
   color: #1caeed;
-}
-Button:active {
-  transform:scale(.8);
-  background-color: #faf6f6;
-  transition: background-color 0.3s ease;
-  transition: transform 0.3s ease;
 }
