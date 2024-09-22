@@ -103,3 +103,22 @@ Button:active {
   background-color: #fcfbfa;
   color: #1caeed;
 }
+.NavBar-Auth-profile-button{
+  background-color: transparent;
+  border: 2px solid #1caeed;
+  border-radius: 30px;
+  box-shadow: 0px 0px 20px 1px rgb(52, 195, 243);
+}
+.NavBar-Auth-profile-button:hover{
+  background-color:#1caeed ;
+  transition:background-color 0.3s ease ;
+}
+.NavBar-Auth-profile-button-img{
+  width: 20px;
+  border-radius: 40px;
+  border: none;
+  background-color: transparent;
+}
+
+
+/**/

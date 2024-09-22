@@ -1,21 +1,21 @@
 import './Login.css';
 import React, { useState } from 'react';
 
-const Login = ({ setLoginVisible }) => {
+const Login = ({ setLoginVisible, setLoginSiginin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [isSuccess,setisSuccess]=useState(false);//change color of error message
+  const [isSuccess, setIsSuccess] = useState(false); // Change color of error message
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    
     // Basic validation
     if (email === '' || password === '') {
       setErrorMessage('Please fill in all fields.');
       console.log('setErrorMessage:Please fill in all fields.');
       return;
-    }
-    else if (password.length < 8) {
+    } else if (password.length < 8) {
       setErrorMessage('Password must be at least 8 characters long.');
       console.log('setErrorMessage:Password must be at least 8 characters long.');
       return;
@@ -38,9 +38,10 @@ const Login = ({ setLoginVisible }) => {
       if (data.success) {
         // Handle successful login (e.g., save token, redirect)
         setErrorMessage('Login successful!');
-        setisSuccess(true)
+        setIsSuccess(true);
         console.log('Login successful!');
-        setLoginVisible(false); // Close login after successful login
+        setLoginVisible(false); // Close login modal
+        setLoginSiginin(false); // Hide login and create account in NavBar
       } else {
         // Handle failed login
         setErrorMessage('Invalid email or password.');
@@ -48,24 +49,32 @@ const Login = ({ setLoginVisible }) => {
     } catch (error) {
       console.error('Error:', error);
       setErrorMessage('An error occurred. Please try again.');
+      
+      setLoginVisible(false); // Close login modal
+      setLoginSiginin(false); // Hide login and create account in NavBar
     }
   };
 
   const closeModal = () => {
     console.log("close login");
     setLoginVisible(false); // Close the login component
+   
   };
 
   return (
     <div className="login-container">
       <button className="close-button" onClick={closeModal}>✖</button>
       <h2>Login</h2>
-      {errorMessage && <p className="error-message" style={{color:isSuccess?'green':'red'}}>{errorMessage}</p>}
-      <form  onSubmit={handleSubmit}>
+      {errorMessage && (
+        <p className="error-message" style={{ color: isSuccess ? 'green' : 'red' }}>
+          {errorMessage}
+        </p>
+      )}
+      <form onSubmit={handleSubmit}>
         <div>
           <label>Email</label>
           <input
-            className='Login-input'
+            className="Login-input"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -76,7 +85,7 @@ const Login = ({ setLoginVisible }) => {
         <div>
           <label>Password</label>
           <input
-            className='Login-input'
+            className="Login-input"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -84,7 +93,7 @@ const Login = ({ setLoginVisible }) => {
             required
           />
         </div>
-        <button className='login-container-Login-button' type="submit">Login</button>
+        <button className="login-container-Login-button" type="submit">Login</button>
       </form>
     </div>
   );

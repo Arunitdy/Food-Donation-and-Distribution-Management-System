@@ -8,8 +8,8 @@ function useSignButtonListener(ref, setLoginVisible) {
     const refCurrent = ref.current;
     console.log("refCurrent:",refCurrent)
     const handleClick = () => {
-      console.log("sing button pressed")
-      setLoginVisible(true);  // Show the Login component
+      console.log("Sign button pressed");
+      setLoginVisible(true);
     };
 
     if (refCurrent) {
@@ -27,36 +27,45 @@ function useSignButtonListener(ref, setLoginVisible) {
 function App() {
   const [loginVisible, setLoginVisible] = useState(false); // Manage visibility of Login
   const signButtonRef = useRef(null);
+  const [loginSiginin, setLoginSiginin] = useState(true); // To toggle login and create-account visibility
 
   // Use custom hook for cleaner code
   useSignButtonListener(signButtonRef, setLoginVisible);
 
   return (
-  <div className="App">
-   
-      {loginVisible && <Login setLoginVisible={setLoginVisible} />} {/* Render Login when visible */}
-      <div>    
-        <div className='NavBar'>
-          {/* NavButton group */}
-          <img className='NavBar-logo' src='logo.png' alt='logo'></img>
-          <div className='NavButton'>
-            <button className='Home individual-NavButton'>Home</button>
-            <button className='Donor individual-NavButton'>Donor</button>
-            <button className='Center individual-NavButton'>Center</button>
-            <button className='Receiver individual-NavButton'>Receiver</button>
-            <button className='Employee individual-NavButton'>Employee</button>
+    <div className="App">
+      {loginVisible && <Login setLoginVisible={setLoginVisible} setLoginSiginin={setLoginSiginin} />} {/* Render Login when visible */}
+      
+      <div className="body">
+        <div className="NavBar">
+          <img className="NavBar-logo" src="logo.png" alt="logo" />
+          <div className="NavButton">
+            <button className="Home individual-NavButton">Home</button>
+            <button className="Donor individual-NavButton">Donor</button>
+            <button className="Center individual-NavButton">Center</button>
+            <button className="Receiver individual-NavButton">Receiver</button>
+            <button className="Employee individual-NavButton">Employee</button>
           </div>
-          
-          {/* New container for Create Account link and Login button */}
-          <div className="NavBar-Auth">
-            <a className='navBar-a-creat-new-account' href="#">
-              Create a new account
-            </a>
-            <button className='Login-button-navBar' ref={signButtonRef} >Login</button>
-          </div>
+
+          {/* Conditional rendering of Login and Create Account buttons */}
+          {loginSiginin ? 
+          (
+            <div className="NavBar-Auth">
+              <a className="navBar-a-creat-new-account" href="#">
+                Create a new account
+              </a>
+              <button className="Login-button-navBar" ref={signButtonRef}>Login</button>
+            </div>
+            ): ( 
+            <div className="NavBar-Auth">
+              <button className='NavBar-Auth-profile-button'>
+                <img  className="NavBar-Auth-profile-button-img"src='profile.png'></img>
+              </button>
+            </div>)
+          }
         </div>
       </div>
-  </div>
+    </div>
   );
 }
 
