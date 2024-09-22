@@ -33,11 +33,12 @@ function App() {
 
   return (
   <div className="App">
-    <div> 
+   
       {loginVisible && <Login setLoginVisible={setLoginVisible} />} {/* Render Login when visible */}
-          
+      <div>    
         <div className='NavBar'>
           {/* NavButton group */}
+          <img className='NavBar-logo' src='logo.png' alt='logo'></img>
           <div className='NavButton'>
             <button className='Home individual-NavButton'>Home</button>
             <button className='Donor individual-NavButton'>Donor</button>
