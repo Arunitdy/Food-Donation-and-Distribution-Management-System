@@ -22,6 +22,7 @@ input{
   border-radius: 15px;
   text-align: left;
   box-shadow: 0 0.625em 1em 0 rgba(42, 43, 42, 0.79);
+  z-index: 100;
 }
 .close-button{
   display: block;
@@ -71,4 +72,12 @@ input{
   color: red;
   font-size: 13px;
   margin-bottom: 10px;
+}
+
+
+@media screen and (max-width: 768px) {
+
+  .login-container{
+    width:300px;
+  }
 }

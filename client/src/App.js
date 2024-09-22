@@ -73,7 +73,7 @@ function App() {
           {loginSiginin ? (
             <div className="NavBar-Auth">
               <a className="navBar-a-creat-new-account" href="#">
-                Create a new account
+                New account
               </a>
               <button className="Login-button-navBar" ref={signButtonRef}>Login</button>
             </div>

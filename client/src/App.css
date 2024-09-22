@@ -127,7 +127,9 @@ Button:active {
   padding: 10px;
   display: none;  /* Hidden on large screens */
 }
-
+.NavBar-Toggle span{
+  margin-left: 6px;
+}
 .NavBar-Toggle:hover {
   color: #1caeed;
   transform: scale(1.1);
@@ -147,7 +149,6 @@ Button:active {
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 100;
 }
 
 .NavButton-Popup .individual-NavButton {
@@ -159,6 +160,25 @@ Button:active {
 
 /* Responsive design - show/hide based on screen size */
 @media screen and (max-width: 768px) {
+  .NavButton-Popup{
+    width: 100px;
+    left: 1%;
+  }
+  .NavBar{
+    margin:0px ;
+  }
+  .navBar-a-creat-new-account{
+    font-size: 10px;
+  }
+  .Login-button-navBar{
+    width:50px;
+    font-size: 10px;
+    padding: 5px;
+  }
+  .NavBar-logo{
+    margin: 3px;
+    width:40px;
+  }
   .NavButton {
     display: none;  /* Hide NavButton on small screens */
   }
