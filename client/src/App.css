@@ -35,7 +35,6 @@ Button:active {
 .NavBar-logo{
   width: 60px;
   margin: 1px 20px;
-  padding: 0px;
 
 }
 /* NavButton group container */
@@ -67,8 +66,7 @@ Button:active {
 .individual-NavButton:hover {
   color: #1caeed;
   transform:scale(1.1);
-  transition: color 0.3s ease;
-  transition: transform 0.3s ease;
+  transition: color 0.3s ease,transform 0.3s ease;
 }
 
 .individual-NavButton:active {
@@ -119,6 +117,55 @@ Button:active {
   border: none;
   background-color: transparent;
 }
+/* NavBar Toggle Button (for opening/closing the NavMenu) */
+.NavBar-Toggle {
+  background-color: transparent;
+  color: #1caeed;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  display: none;  /* Hidden on large screens */
+}
 
+.NavBar-Toggle:hover {
+  color: #fcfbfa;
+  transform: scale(1.1);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
 
-/**/
+/* Pop-out NavButton container (for small screens) */
+.NavButton-Popup {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background-color: #f8f8f8;
+  box-shadow: 0 0.625em 1em 0 rgba(42, 43, 42, 0.79);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 100;
+}
+
+.NavButton-Popup .individual-NavButton {
+  margin-bottom: 10px;
+}
+
+/* Responsive design - show/hide based on screen size */
+@media screen and (max-width: 768px) {
+  .NavButton {
+    display: none;  /* Hide NavButton on small screens */
+  }
+
+  .NavBar-Toggle {
+    display: block;  /* Show toggle button on small screens */
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .NavButton-Popup {
+    display: none;  /* Hide pop-out menu on large screens */
+  }
+}

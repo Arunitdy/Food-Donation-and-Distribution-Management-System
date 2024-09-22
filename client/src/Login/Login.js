@@ -51,7 +51,7 @@ const Login = ({ setLoginVisible, setLoginSiginin }) => {
       setErrorMessage('An error occurred. Please try again.');
       
       setLoginVisible(false); // Close login modal
-      setLoginSiginin(false); // Hide login and create account in NavBar
+      setLoginSiginin(false); // Hide login button in NavBar
     }
   };
 

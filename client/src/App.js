@@ -26,11 +26,16 @@ function useSignButtonListener(ref, setLoginVisible) {
 
 function App() {
   const [loginVisible, setLoginVisible] = useState(false); // Manage visibility of Login
+  const [navVisible, setNavVisible] = useState(false); // For NavButton popup visibility
   const signButtonRef = useRef(null);
   const [loginSiginin, setLoginSiginin] = useState(true); // To toggle login and create-account visibility
 
   // Use custom hook for cleaner code
   useSignButtonListener(signButtonRef, setLoginVisible);
+
+  const toggleNavMenu = () => {
+    setNavVisible(!navVisible);
+  };
 
   return (
     <div className="App">
@@ -39,6 +44,13 @@ function App() {
       <div className="body">
         <div className="NavBar">
           <img className="NavBar-logo" src="logo.png" alt="logo" />
+
+          {/* Button to open the pop-out menu (Visible only on small screens) */}
+          <button className="NavBar-Toggle" onClick={toggleNavMenu}>
+            {navVisible ? '✖' : '☰'} {/* Menu icon or Close icon */}
+          </button>
+
+          {/* Regular NavButton group (Visible only on larger screens) */}
           <div className="NavButton">
             <button className="Home individual-NavButton">Home</button>
             <button className="Donor individual-NavButton">Donor</button>
@@ -47,22 +59,31 @@ function App() {
             <button className="Employee individual-NavButton">Employee</button>
           </div>
 
-          {/* Conditional rendering of Login and Create Account buttons */}
-          {loginSiginin ? 
-          (
+          {/* Conditional rendering for pop-out NavButton menu (only on small screens) */}
+          {navVisible && (
+            <div className="NavButton-Popup">
+              <button className="individual-NavButton">Home</button>
+              <button className="individual-NavButton">Donor</button>
+              <button className="individual-NavButton">Center</button>
+              <button className="individual-NavButton">Receiver</button>
+              <button className="individual-NavButton">Employee</button>
+            </div>
+          )}
+          
+          {loginSiginin ? (
             <div className="NavBar-Auth">
               <a className="navBar-a-creat-new-account" href="#">
                 Create a new account
               </a>
               <button className="Login-button-navBar" ref={signButtonRef}>Login</button>
             </div>
-            ): ( 
+          ) : (
             <div className="NavBar-Auth">
               <button className='NavBar-Auth-profile-button'>
-                <img  className="NavBar-Auth-profile-button-img"src='profile.png'></img>
+                <img className="NavBar-Auth-profile-button-img" src='profile.png' alt='profile'/>
               </button>
-            </div>)
-          }
+            </div>
+          )}
         </div>
       </div>
     </div>
