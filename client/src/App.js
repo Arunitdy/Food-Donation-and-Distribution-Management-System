@@ -33,27 +33,29 @@ function App() {
 
   return (
   <div className="App">
-    <div className='NavBar'>
+    <div> 
       {loginVisible && <Login setLoginVisible={setLoginVisible} />} {/* Render Login when visible */}
-      
-      {/* NavButton group */}
-      <div className='NavButton'>
-        <button className='Donor individual-NavButton'>Donor</button>
-        <button className='Center individual-NavButton'>Center</button>
-        <button className='Receiver individual-NavButton'>Receiver</button>
-        <button className='Employee individual-NavButton'>Employee</button>
+          
+        <div className='NavBar'>
+          {/* NavButton group */}
+          <div className='NavButton'>
+            <button className='Home individual-NavButton'>Home</button>
+            <button className='Donor individual-NavButton'>Donor</button>
+            <button className='Center individual-NavButton'>Center</button>
+            <button className='Receiver individual-NavButton'>Receiver</button>
+            <button className='Employee individual-NavButton'>Employee</button>
+          </div>
+          
+          {/* New container for Create Account link and Login button */}
+          <div className="NavBar-Auth">
+            <a className='navBar-a-creat-new-account' href="#">
+              Create a new account
+            </a>
+            <button className='Login-button-navBar' ref={signButtonRef}>Login</button>
+          </div>
+        </div>
       </div>
-      
-      {/* New container for Create Account link and Login button */}
-      <div className="NavBar-Auth">
-        <a className='navBar-a-creat-new-account' href="#">
-          Create a new account
-        </a>
-        <button className='Login-button-navBar' ref={signButtonRef}>Login</button>
-      </div>
-    </div>
   </div>
-  
   );
 }
 

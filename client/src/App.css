@@ -7,48 +7,54 @@ input{
 }
 .App{
   position: relative;
-  height: 100vh;
+  height: 700px;
   width: 100%;
+  background-size: cover; /* Ensures the image covers the entire element */
+  background-position: center; /* Centers the image */
+  background-image: url("https://cdn.create.vista.com/api/media/small/364028514/stock-photo-cropped-view-woman-putting-groat-wooden-box-card-food-donation");
 }
 
 .NavBar {
-  background-color: #333;
-  padding: 20px;
+  margin: 10px 20px;
+  background-color: #f8f8f8;
+  padding: 20px 20px 20px 20px;
   display: flex;
   justify-content: space-between; /* Aligns the NavButton and Sign button inline */
   align-items: center; /* Vertically centers items */
-  width: 100%;
+  width: auto;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
 }
 /* NavButton group container */
 .NavButton {
-  display: flex;
-  gap: 15px;  ;/* Creates space between the individual buttons */
+  display: flex;  ;/* Creates space between the individual buttons */
 }
 
 /* Individual buttons inside NavButton */
 .individual-NavButton {
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
-  background-color: #555;
-  color: white;
+  font-family: 	Times New Roman;
+  background-color: transparent;
+  color: rgb(24, 23, 23);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
+  text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
 }
 .NavBar-Auth {
-  margin-right: 6%;
   display: flex;
   align-items: center;
   gap: 10px; /* Space between Create Account link and Login button */
 }
 /* Hover effect for individual buttons */
 .individual-NavButton:hover {
-  background-color: #777;
+
+  transform:scale(1.2);
 }
 .navBar-a-creat-new-account {
-  color: white;
+  color: #1caeed;
   text-decoration: none;
   font-size: 16px;
   margin-right: 10px; /* Optional spacing */
@@ -59,8 +65,7 @@ input{
 }
 /* Sign button styling */
 .Login-button-navBar {
-  margin-right: 6%;
-  background-color: #ff5722;
+  background-color: #1caeed;
   color: white;
   border: none;
   padding: 10px 25px;
@@ -74,7 +79,7 @@ input{
 /* Hover effect for Sign button */
 .Login-button-navBar:hover {
   background-color: #fcfbfa;
-  color: #ff5722;
+  color: #1caeed;
 }
 Button:active {
   transform:scale(.8);
