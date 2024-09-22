@@ -84,7 +84,7 @@ Button:active {
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0.625em 1em 0 rgb(48, 192, 240);
 }
 
 /* Hover effect for Sign button */
