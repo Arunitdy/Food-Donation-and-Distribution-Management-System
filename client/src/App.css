@@ -15,8 +15,8 @@ Button:active {
   position: relative;
   height: 700px;
   width: 100%;
-  background-size: cover; /* Ensures the image covers the entire element */
-  background-position: center; /* Centers the image */
+  background-size: cover; 
+  background-position: center; 
 }
 .body{
   backdrop-filter: blur(10px);
@@ -25,8 +25,8 @@ Button:active {
 .NavBar {
   margin: 10px 20px;
   background-color: #f8f8f8;
-  display: flex; /* Aligns the NavButton and Sign button inline */
-  align-items: center; /* Vertically centers items */
+  display: flex;
+  align-items: center; 
   width: auto;
   box-shadow: 0 0.625em 1em 0 rgba(42, 43, 42, 0.79);
   border-radius: 10px;
@@ -36,14 +36,14 @@ Button:active {
   margin: 1px 20px;
 
 }
-/* NavButton group container */
+
 .NavButton {
   padding: 20px 20px 20px 20px;
   margin: 0px auto;
   display: flex;  ;
 }
 
-/* Individual buttons inside NavButton */
+
 .individual-NavButton {
   background-color: transparent;
   color: rgb(101, 116, 123);
@@ -59,9 +59,9 @@ Button:active {
   padding: 20px 20px 20px 20px;
   display: flex;
   align-items: center;
-  gap: 10px; /* Space between Create Account link and Login button */
+  gap: 10px; 
 }
-/* Hover effect for individual buttons */
+
 .individual-NavButton:hover {
   color: #1caeed;
   transform:scale(1.1);
@@ -76,13 +76,13 @@ Button:active {
   color: #1caeed;
   text-decoration: none;
   font-size: 16px;
-  margin-right: 10px; /* Optional spacing */
+  margin-right: 10px;
 }
 
 .navBar-a-creat-new-account:hover {
   text-decoration: underline;
 }
-/* Sign button styling */
+
 .Login-button-navBar {
   background-color: #1caeed;
   color: white;
@@ -95,7 +95,6 @@ Button:active {
   box-shadow: 0 0.625em 1em 0 rgb(48, 192, 240);
 }
 
-/* Hover effect for Sign button */
 .Login-button-navBar:hover {
   background-color: #fcfbfa;
   color: #1caeed;
@@ -116,7 +115,7 @@ Button:active {
   border: none;
   background-color: transparent;
 }
-/* NavBar Toggle Button (for opening/closing the NavMenu) */
+
 .NavBar-Toggle {
   background-color: transparent;
   color:  rgb(101, 116, 123);
@@ -124,7 +123,7 @@ Button:active {
   font-size: 13px;
   cursor: pointer;
   padding: 10px;
-  display: none;  /* Hidden on large screens */
+  display: none; 
 }
 .NavBar-Toggle span{
   margin-left: 6px;
@@ -135,7 +134,6 @@ Button:active {
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Pop-out NavButton container (for small screens) */
 .NavButton-Popup {
   position: absolute;
   top: 70px;
@@ -157,7 +155,6 @@ Button:active {
   width: 100%;
 }
 
-/* Responsive design - show/hide based on screen size */
 @media screen and (max-width: 768px) {
   .NavButton-Popup{
     width: 100px;
@@ -180,11 +177,11 @@ Button:active {
   }
   .NavButton {
     display: none;
-    margin: 0px;  /* Hide NavButton on small screens */
+    margin: 0px;  
   }
   .NavBar-Toggle {
     margin-left: 0px;
-    display: block;  /* Show toggle button on small screens */
+    display: block;  
   }
   .NavBar-Auth{
     margin-left: auto;
@@ -193,6 +190,6 @@ Button:active {
 
 @media screen and (min-width: 769px) {
   .NavButton-Popup {
-    display: none;  /* Hide pop-out menu on large screens */
+    display: none; 
   }
 }

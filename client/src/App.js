@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import './App.css';
 import { Login } from "./Login/Login.js";
 
-// Custom hook to handle event listener
 function useSignButtonListener(ref, setLoginVisible) {
   useEffect(() => {
     const refCurrent = ref.current;
@@ -39,18 +38,15 @@ function App() {
 
   return (
     <div className="App">
-      {loginVisible && <Login setLoginVisible={setLoginVisible} setLoginSiginin={setLoginSiginin} />} {/* Render Login when visible */}
+      {loginVisible && <Login setLoginVisible={setLoginVisible} setLoginSiginin={setLoginSiginin} />}
       
       <div className="body">
         <div className="NavBar">
           <img className="NavBar-logo" src="logo.png" alt="logo" />
 
-          {/* Button to open the pop-out menu (Visible only on small screens) */}
           <button className="NavBar-Toggle" onClick={toggleNavMenu}>Menu 
-             {navVisible ? <span>&#9650;</span> : <span>&#9660;</span>}  {/* Menu icon or Close icon */}
+             {navVisible ? <span>&#9650;</span> : <span>&#9660;</span>}  
           </button>
-
-          {/* Regular NavButton group (Visible only on larger screens) */}
           <div className="NavButton">
             <button className="Home individual-NavButton">Home</button>
             <button className="Donor individual-NavButton">Donor</button>
@@ -59,7 +55,6 @@ function App() {
             <button className="Employee individual-NavButton">Employee</button>
           </div>
 
-          {/* Conditional rendering for pop-out NavButton menu (only on small screens) */}
           {navVisible && (
             <div className="NavButton-Popup">
               <button className="individual-NavButton">Home</button>
@@ -73,7 +68,7 @@ function App() {
           {loginSiginin ? (
             <div className="NavBar-Auth">
               <a className="navBar-a-creat-new-account" href="#">
-                New account
+                Create a new account
               </a>
               <button className="Login-button-navBar" ref={signButtonRef}>Login</button>
             </div>

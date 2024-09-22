@@ -10,7 +10,7 @@ const Login = ({ setLoginVisible, setLoginSiginin }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     
-    // Basic validation
+    //  email  password validation
     if (email === '' || password === '') {
       setErrorMessage('Please fill in all fields.');
       console.log('setErrorMessage:Please fill in all fields.');
@@ -36,28 +36,24 @@ const Login = ({ setLoginVisible, setLoginSiginin }) => {
       const data = await response.json();
 
       if (data.success) {
-        // Handle successful login (e.g., save token, redirect)
         setErrorMessage('Login successful!');
         setIsSuccess(true);
         console.log('Login successful!');
         setLoginVisible(false); // Close login modal
         setLoginSiginin(false); // Hide login and create account in NavBar
-      } else {
-        // Handle failed login
+      } 
+      else {
         setErrorMessage('Invalid email or password.');
       }
     } catch (error) {
       console.error('Error:', error);
       setErrorMessage('An error occurred. Please try again.');
-      
-      setLoginVisible(false); // Close login modal
-      setLoginSiginin(false); // Hide login button in NavBar
     }
   };
 
   const closeModal = () => {
     console.log("close login");
-    setLoginVisible(false); // Close the login component
+    setLoginVisible(false); 
    
   };
 

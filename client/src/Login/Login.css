@@ -58,7 +58,7 @@ input{
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  display: block;                  /* Ensure it's a block element */
+  display: block;                 
   margin: 0 auto; 
   transition: background-color 0.3s ease;
   box-shadow: 0 0.625em 1em 0 rgba(37, 192, 101, 0.79);
