@@ -51,7 +51,7 @@ function App() {
             <a className='navBar-a-creat-new-account' href="#">
               Create a new account
             </a>
-            <button className='Login-button-navBar' ref={signButtonRef}>Login</button>
+            <button className='Login-button-navBar' ref={signButtonRef} >Login</button>
           </div>
         </div>
       </div>
