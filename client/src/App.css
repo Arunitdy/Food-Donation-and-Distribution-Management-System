@@ -105,7 +105,7 @@ Button:active {
   background-color: transparent;
   border: 2px solid #1caeed;
   border-radius: 30px;
-  box-shadow: 0px 0px 20px 1px rgb(52, 195, 243);
+ /* box-shadow: 0px 0px 20px 1px rgb(52, 195, 243);*/
 }
 .NavBar-Auth-profile-button:hover{
   background-color:#1caeed ;
@@ -120,16 +120,16 @@ Button:active {
 /* NavBar Toggle Button (for opening/closing the NavMenu) */
 .NavBar-Toggle {
   background-color: transparent;
-  color: #1caeed;
+  color:  rgb(101, 116, 123);
   border: none;
-  font-size: 24px;
+  font-size: 13px;
   cursor: pointer;
   padding: 10px;
   display: none;  /* Hidden on large screens */
 }
 
 .NavBar-Toggle:hover {
-  color: #fcfbfa;
+  color: #1caeed;
   transform: scale(1.1);
   transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -138,7 +138,8 @@ Button:active {
 .NavButton-Popup {
   position: absolute;
   top: 70px;
-  right: 20px;
+  right: 40%;
+  left: 40%;
   background-color: #f8f8f8;
   box-shadow: 0 0.625em 1em 0 rgba(42, 43, 42, 0.79);
   border-radius: 10px;
@@ -151,6 +152,9 @@ Button:active {
 
 .NavButton-Popup .individual-NavButton {
   margin-bottom: 10px;
+  border-bottom: 1px solid gray;
+  border-radius: 0px;
+  width: 100%;
 }
 
 /* Responsive design - show/hide based on screen size */

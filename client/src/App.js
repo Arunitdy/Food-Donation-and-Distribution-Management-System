@@ -46,8 +46,8 @@ function App() {
           <img className="NavBar-logo" src="logo.png" alt="logo" />
 
           {/* Button to open the pop-out menu (Visible only on small screens) */}
-          <button className="NavBar-Toggle" onClick={toggleNavMenu}>
-            {navVisible ? '✖' : '☰'} {/* Menu icon or Close icon */}
+          <button className="NavBar-Toggle" onClick={toggleNavMenu}>Menu 
+             {navVisible ? <span>&#9650;</span> : <span>&#9660;</span>}  {/* Menu icon or Close icon */}
           </button>
 
           {/* Regular NavButton group (Visible only on larger screens) */}
