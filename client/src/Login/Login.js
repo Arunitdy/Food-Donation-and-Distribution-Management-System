@@ -25,7 +25,7 @@ const Login = ({ setLoginVisible }) => {
     const loginData = { email, password };
     console.log(loginData);
     try {
-      const response = await fetch('https://your-backend-api.com/login', {
+      const response = await fetch('http://localhost:8080/login/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

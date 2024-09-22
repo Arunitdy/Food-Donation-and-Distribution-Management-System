@@ -17,7 +17,6 @@ Button:active {
   width: 100%;
   background-size: cover; /* Ensures the image covers the entire element */
   background-position: center; /* Centers the image */
-  background-image: url("https://cdn.create.vista.com/api/media/small/364028514/stock-photo-cropped-view-woman-putting-groat-wooden-box-card-food-donation");
 }
 
 .NavBar {
@@ -38,14 +37,14 @@ Button:active {
 
 /* Individual buttons inside NavButton */
 .individual-NavButton {
-  font-family: 	Times New Roman;
   background-color: transparent;
-  color: rgb(24, 23, 23);
+  color: rgb(101, 116, 123);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-weight: bolder;
+  font-size: 13px;
   transition: background-color 0.3s ease;
 }
 .NavBar-Auth {
@@ -55,8 +54,15 @@ Button:active {
 }
 /* Hover effect for individual buttons */
 .individual-NavButton:hover {
+  color: #1caeed;
+  transform:scale(1.1);
+  transition: color 0.3s ease;
+  transition: transform 0.3s ease;
+}
 
-  transform:scale(1.2);
+.individual-NavButton:active {
+  transform:scale(.8);
+  transition: transform 0.3 ease;
 }
 .navBar-a-creat-new-account {
   color: #1caeed;
