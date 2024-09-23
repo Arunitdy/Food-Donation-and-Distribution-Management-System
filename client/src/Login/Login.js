@@ -1,5 +1,7 @@
 import './Login.css';
+import {auth} from '../firebase/firebase.js';
 import React, { useState } from 'react';
+import {signInWithEmailAndPassword} from 'firebase/auth';
 
 const Login = ({ setLoginVisible, setLoginSiginin }) => {
   const [email, setEmail] = useState('');
@@ -15,7 +17,7 @@ const Login = ({ setLoginVisible, setLoginSiginin }) => {
       setErrorMessage('Please fill in all fields.');
       console.log('setErrorMessage:Please fill in all fields.');
       return;
-    } else if (password.length < 8) {
+    } else if (password.length < 2) {
       setErrorMessage('Password must be at least 8 characters long.');
       console.log('setErrorMessage:Password must be at least 8 characters long.');
       return;
@@ -24,6 +26,7 @@ const Login = ({ setLoginVisible, setLoginSiginin }) => {
     // API call to backend for authentication
     const loginData = { email, password };
     console.log(loginData);
+    /*
     try {
       const response = await fetch('http://localhost:8080/login/add', {
         method: 'POST',
@@ -45,6 +48,10 @@ const Login = ({ setLoginVisible, setLoginSiginin }) => {
       else {
         setErrorMessage('Invalid email or password.');
       }
+*/try{
+
+      await signInWithEmailAndPassword(auth,email,password)
+      alert("login");
     } catch (error) {
       console.error('Error:', error);
       setErrorMessage('An error occurred. Please try again.');
@@ -54,7 +61,12 @@ const Login = ({ setLoginVisible, setLoginSiginin }) => {
   const closeModal = () => {
     console.log("close login");
     setLoginVisible(false); 
-   
+    /*
+    const inputs = document.querySelectorAll(".Login-input");
+    inputs.forEach(input => {
+        input.value = "";
+    });
+    */
   };
 
   return (
