@@ -52,6 +52,11 @@ const Login = ({ setLoginVisible, setLoginSiginin }) => {
 
       await signInWithEmailAndPassword(auth,email,password)
       alert("login");
+      setErrorMessage('Login successful!');
+      setIsSuccess(true);
+      console.log('Login successful!');
+      setLoginVisible(false); // Close login modal
+      setLoginSiginin(false); // Hide login and create account in NavBar
     } catch (error) {
       console.error('Error:', error);
       setErrorMessage('An error occurred. Please try again.');
