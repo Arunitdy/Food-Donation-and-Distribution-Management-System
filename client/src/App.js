@@ -47,15 +47,7 @@ function App() {
           <button className="NavBar-Toggle" onClick={toggleNavMenu}>Menu 
              {navVisible ? <span>&#9650;</span> : <span>&#9660;</span>}  
           </button>
-          <div className="NavButton">
-            <button className="Home individual-NavButton">Home</button>
-            <button className="Donor individual-NavButton">Donor</button>
-            <button className="Center individual-NavButton">Center</button>
-            <button className="Receiver individual-NavButton">Receiver</button>
-            <button className="Employee individual-NavButton">Employee</button>
-          </div>
-
-          {navVisible && (
+          {navVisible ? (
             <div className="NavButton-Popup">
               <button className="individual-NavButton">Home</button>
               <button className="individual-NavButton">Donor</button>
@@ -63,7 +55,14 @@ function App() {
               <button className="individual-NavButton">Receiver</button>
               <button className="individual-NavButton">Employee</button>
             </div>
-          )}
+          ):(
+          <div className="NavButton">
+            <button className="Home individual-NavButton">Home</button>
+            <button className="Donor individual-NavButton">Donor</button>
+            <button className="Center individual-NavButton">Center</button>
+            <button className="Receiver individual-NavButton">Receiver</button>
+            <button className="Employee individual-NavButton">Employee</button>
+          </div>)}
           
           {loginSiginin ? (
             <div className="NavBar-Auth">
