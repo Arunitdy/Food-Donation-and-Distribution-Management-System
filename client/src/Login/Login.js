@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import  axios  from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-//import { signInWithEmailAndPassword } from 'firebase/auth';
-//import { auth } from '../firebase/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase/firebase';
 
 export const Login = ({ setLoginSiginin,setLoginVisible }) => {
   const [email, setEmail] = useState('');
@@ -23,14 +22,9 @@ export const Login = ({ setLoginSiginin,setLoginVisible }) => {
       console.log("setErrorMessage:Password must be at least 8 characters long.");
       return;
     }
-   const logindata={email,password};
-    try {
-      //await signInWithEmailAndPassword(auth, email, password);
-      
-      const response = await axios.post('http://localhost:8080/login/add', logindata);
-      const data=await response.json();
-      console.log(data); 
 
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
       setErrorMessage('Login successful!');
       alert("login successful!");
       console.log('Login successful!');
@@ -40,7 +34,7 @@ export const Login = ({ setLoginSiginin,setLoginVisible }) => {
       navigate('/');  // Redirect to home page
     } catch (error) {
       console.error('Error:', error);
-      setErrorMessage('An error occurred during login.');
+      setErrorMessage('Invalid email or password.');
       console.log("setErrorMessage:'Invalid email or password.'");
     }
   };

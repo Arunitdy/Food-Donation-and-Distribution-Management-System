@@ -176,9 +176,6 @@ button, a {
   }
   
   @media screen and (max-width: 768px) {
-    .NavBar-logo-name{
-      font-size: 25px;
-    }
     .NavButton-Popup {
       width: 100px;
       left: 1%;
@@ -217,7 +214,6 @@ button, a {
   }
   
   @media screen and (min-width: 769px) {
-   
     .NavButton-Popup {
       display: none; 
     }
