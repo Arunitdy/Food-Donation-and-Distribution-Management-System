@@ -21,22 +21,27 @@ Button:active {
 .body{
   backdrop-filter: blur(10px);
 }
-
 .NavBar {
+  position: sticky;
+  top: 0;
   margin: 10px 20px;
   background-color: #f8f8f8;
   display: flex;
   align-items: center; 
+  border: 1px solid wheat;
   width: auto;
-  box-shadow: 0 0.625em 1em 0 rgba(42, 43, 42, 0.79);
+  box-shadow: 0 0 20px 0px rgba(0, 28, 105, 0.2);
   border-radius: 10px;
+  z-index: 1000;
 }
 .NavBar-logo{
   width: 60px;
-  margin: 1px 20px;
-
+  margin: 1px 1px 1px 20px;
 }
-
+.NavBar-logo-name{
+  color: #425BA4;
+  margin-inline:6px ;
+}
 .NavButton {
   padding: 20px 20px 20px 20px;
   margin: 0px auto;
@@ -46,7 +51,7 @@ Button:active {
 
 .individual-NavButton {
   background-color: transparent;
-  color: rgb(101, 116, 123);
+  color: rgb(39, 38, 38);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -63,7 +68,7 @@ Button:active {
 }
 
 .individual-NavButton:hover {
-  color: #1caeed;
+  color: #425BA4;
   transform:scale(1.1);
   transition: color 0.3s ease,transform 0.3s ease;
 }
@@ -73,7 +78,7 @@ Button:active {
   transition: transform 0.3 ease;
 }
 .navBar-a-creat-new-account {
-  color: #1caeed;
+  color: #425BA4;
   text-decoration: none;
   font-size: 16px;
   margin-right: 10px;
@@ -84,29 +89,45 @@ Button:active {
 }
 
 .Login-button-navBar {
-  background-color: #1caeed;
+  background-color: #425BA4;
   color: white;
-  border: none;
+  border: 1px solid wheat;
   padding: 10px 25px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
-  box-shadow: 0 0.625em 1em 0 rgb(48, 192, 240);
 }
 
 .Login-button-navBar:hover {
   background-color: #fcfbfa;
-  color: #1caeed;
+  color: #425BA4;
+}
+.SignUp-button-navBar{
+  
+  background-color: #fcfbfa;
+  color: #425BA4;
+  
+  border: 1px solid wheat;
+  padding: 10px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+
+}
+.SignUp-button-navBar:hover {
+  background-color: #425BA4;
+  color: white;
 }
 .NavBar-Auth-profile-button{
   background-color: transparent;
-  border: 2px solid #1caeed;
+  border: 2px solid #425BA4;
   border-radius: 30px;
  /* box-shadow: 0px 0px 20px 1px rgb(52, 195, 243);*/
 }
 .NavBar-Auth-profile-button:hover{
-  background-color:#1caeed ;
+  background-color:#425BA4 ;
   transition:background-color 0.3s ease ;
 }
 .NavBar-Auth-profile-button-img{
@@ -129,7 +150,7 @@ Button:active {
   margin-left: 6px;
 }
 .NavBar-Toggle:hover {
-  color: #1caeed;
+  color: #425BA4;
   transform: scale(1.1);
   transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -171,6 +192,12 @@ Button:active {
     font-size: 10px;
     padding: 5px;
   }
+  .SignUp-button-navBar{
+    width:50px;
+    font-size: 10px;
+    padding: 5px;
+
+  }
   .NavBar-logo{
     margin: 4px;
     width:40px;
@@ -191,5 +218,128 @@ Button:active {
 @media screen and (min-width: 769px) {
   .NavButton-Popup {
     display: none; 
+  }
+}
+
+
+/*footer */
+
+.footer {
+  margin-top: 100%;
+  background-color: #425BA4; 
+  padding: 40px  40px  0px  40px;
+  color: white;
+}
+
+.footer-container {
+  display: flex;
+  font-size: 15px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-column {
+  flex: 1;
+  margin: 10px;
+  min-width: 200px;
+}
+
+.footer h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.footer ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer ul li {
+  margin-bottom: 10px;
+}
+
+.footer ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-description {
+  max-width: 250px;
+}
+
+.footer-logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.app-button-download {
+  width: 120px;
+  margin-right: 10px;
+}
+.app-button-download:hover{
+  transform: scale(1.1);
+  transition:transform .3s ease;
+}
+.app-button-download{
+   cursor:pointer;
+}
+.app-buttons {
+  margin-top: 20px;
+}
+.footer .social a {
+  display: inline-block; 
+  width: 36px; 
+  height: 36px;
+  border: 1px solid #ffffff;
+  border-radius: 50%; 
+  background-color:transparent; 
+  text-align: center;
+  margin-right: 10px;
+}
+.footer .social a img{
+  width:35px;
+  object-fit: cover;
+}
+.footer .social a :hover{
+  transform: scale(1.1);
+}
+.fa{
+  border-radius: 50%;
+}
+.footer-link-container{
+  font-size: 13px;
+  margin-left: 20%;
+  padding: 10px;
+}
+.footer-link-container .link ,.footer-copyright{
+  color: white;
+  margin-inline: 3px;
+  text-decoration: none;
+}
+.footer-link-container .link:hover {
+  text-decoration: underline;
+}
+@media (max-width: 768px) {
+  .footer-container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .footer-column {
+      text-align: center;
+  }
+
+  .footer-description {
+      text-align: center;
+      max-width: none;
+  }
+
+  .app-buttons img {
+      margin: 0 auto;
   }
 }
