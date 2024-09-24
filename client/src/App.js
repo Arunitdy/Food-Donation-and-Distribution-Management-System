@@ -75,20 +75,20 @@ function App() {
           </button>
 
           <div className="NavButton">
-            <button className="Home individual-NavButton">Home</button>
-            <button className="Donor individual-NavButton">Donor</button>
-            <button className="Center individual-NavButton">Center</button>
-            <button className="Receiver individual-NavButton">Receiver</button>
-            <button className="Employee individual-NavButton">Employee</button>
+            <button className="Home individual-NavButton">HOME</button>
+            <button className="Donor individual-NavButton">DONOR</button>
+            <button className="Center individual-NavButton">CENTER</button>
+            <button className="Receiver individual-NavButton">RECEIVER</button>
+            <button className="Employee individual-NavButton">EMPLOYEE</button>
           </div>
 
           {navVisible && (
             <div className="NavButton-Popup">
-              <button className="individual-NavButton">Home</button>
-              <button className="individual-NavButton">Donor</button>
-              <button className="individual-NavButton">Center</button>
-              <button className="individual-NavButton">Receiver</button>
-              <button className="individual-NavButton">Employee</button>
+              <button className="Home individual-NavButton">HOME</button>
+              <button className="Donor individual-NavButton">DONOR</button>
+              <button className="Center individual-NavButton">CENTER</button>
+              <button className="Receiver individual-NavButton">RECEIVER</button>
+              <button className="Employee individual-NavButton">EMPLOYEE</button>
             </div>
           )}
 
@@ -177,7 +177,14 @@ function App() {
                         <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAZjIr23tvjBqyt4fGvtFEVdRaQmbRcgMZLuXHfE7Lj0EbMJHy4Q4bm7ZvBQRxMHu435c&usqp=CAU' class="fa fa-youtube"/>                    
                       </a>
             </div>
-                
+            <div class="footer-link-container">
+              <div class="footer-links">
+                <a className='link ' href="#terms-of-service">Terms of Service</a>
+                <a className='link ' href="#general-terms">General Terms and Conditions</a>
+                <a className='link ' href="#privacy-policy">Privacy Policy</a>
+                <a class="footer-copyright">&copy; 2019-2024 NETFLAIRS TECHNOLOGY - All rights reserved.</a>
+              </div>
+          </div>    
         </footer>
       </div>
     </div>
