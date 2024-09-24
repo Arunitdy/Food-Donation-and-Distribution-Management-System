@@ -28,12 +28,12 @@ Button:active {
   display: flex;
   align-items: center; 
   width: auto;
-  box-shadow: 0 0.625em 1em 0 rgba(42, 43, 42, 0.79);
+  box-shadow: 0 0 20px 0px rgba(0, 28, 105, 0.2);
   border-radius: 10px;
 }
 .NavBar-logo{
   width: 60px;
-  margin: 1px 20px;
+  margin: 1px 1px 1px 20px;
 
 }
 
@@ -98,6 +98,24 @@ Button:active {
 .Login-button-navBar:hover {
   background-color: #fcfbfa;
   color: #1caeed;
+}
+.SignUp-button-navBar{
+  
+  background-color: #fcfbfa;
+  color: #1caeed;
+  
+  border: none;
+  padding: 10px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 0.625em 1em 0 rgb(48, 192, 240);
+
+}
+.SignUp-button-navBar:hover {
+  background-color: #1caeed;
+  color: white;
 }
 .NavBar-Auth-profile-button{
   background-color: transparent;
@@ -170,6 +188,12 @@ Button:active {
     width:50px;
     font-size: 10px;
     padding: 5px;
+  }
+  .SignUp-button-navBar{
+    width:50px;
+    font-size: 10px;
+    padding: 5px;
+
   }
   .NavBar-logo{
     margin: 4px;

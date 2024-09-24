@@ -14,7 +14,8 @@ const firebaseConfig = {
   storageBucket: "fddms-143aa.appspot.com",
   messagingSenderId: "698113378669",
   appId: "1:698113378669:web:f3e4286fa18b97704eb264",
-  measurementId: "G-HXDCSJ4JKV"
+  measurementId: "G-HXDCSJ4JKV",
+  databaseURL: "https://fddms-143aa-default-rtdb.firebaseio.com/",
 };
 
 // Initialize Firebase
