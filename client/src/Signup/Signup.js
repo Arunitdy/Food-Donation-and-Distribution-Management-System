@@ -35,7 +35,7 @@ const Signup = ({ setSignupVisible, setLoginSiginin }) => {
       setLoginSiginin(false); // Hide login and create account in NavBar
     } catch (error) {
       console.error('Error:', error.message);
-      if( error.message===" Firebase: Error (auth/email-already-in-use).")
+      if((error.message.includes('auth/email-already-in-use')))
       {
         setErrorMessage('.email-already-in-use.');
       }else{
