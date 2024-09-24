@@ -28,26 +28,28 @@ Button:active {
   background-color: #f8f8f8;
   display: flex;
   align-items: center; 
-  border: 1px solid wheat;
+  border: 1px solid rgb(114, 135, 249);
   width: auto;
   box-shadow: 0 0 20px 0px rgba(0, 28, 105, 0.2);
   border-radius: 10px;
   z-index: 1000;
 }
+
 .NavBar-logo{
   width: 60px;
   margin: 1px 1px 1px 20px;
 }
+
 .NavBar-logo-name{
   color: #425BA4;
   margin-inline:6px ;
 }
+
 .NavButton {
   padding: 20px 20px 20px 20px;
   margin: 0px auto;
   display: flex;  ;
 }
-
 
 .individual-NavButton {
   background-color: transparent;
@@ -91,7 +93,7 @@ Button:active {
 .Login-button-navBar {
   background-color: #425BA4;
   color: white;
-  border: 1px solid wheat;
+  border: 1px solid rgb(179, 185, 245);
   padding: 10px 25px;
   border-radius: 5px;
   cursor: pointer;
@@ -103,19 +105,18 @@ Button:active {
   background-color: #fcfbfa;
   color: #425BA4;
 }
+
 .SignUp-button-navBar{
-  
-  background-color: #fcfbfa;
+  background-color:#fcfbfa;
   color: #425BA4;
-  
-  border: 1px solid wheat;
+  border: 1px solid rgb(114, 135, 249);
   padding: 10px 25px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
-
 }
+
 .SignUp-button-navBar:hover {
   background-color: #425BA4;
   color: white;

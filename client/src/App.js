@@ -106,10 +106,10 @@ function App() {
         </div>
      
 
-        <footer class="footer">
-            <div class="footer-container">
+        <footer className="footer">
+            <div className="footer-container">
               
-                <div class="footer-column">
+                <div className="footer-column">
                     <h3>How to Donate</h3>
                     <ul>
                         <li><a href="#">For Individuals</a></li>
@@ -120,8 +120,7 @@ function App() {
                     </ul>
                 </div>
 
-              
-                <div class="footer-column">
+                <div className="footer-column">
                     <h3>Tools & API</h3>
                     <ul>
                         <li><a href="#">Donation API</a></li>
@@ -131,8 +130,7 @@ function App() {
                     </ul>
                 </div>
 
-                
-                <div class="footer-column">
+                <div className="footer-column">
                     <h3>Support</h3>
                     <ul>
                         <li><a href="#">Contact Us</a></li>
@@ -141,7 +139,7 @@ function App() {
                     </ul>
                 </div>
 
-                <div class="footer-column">
+                <div className="footer-column">
                     <h3>Company</h3>
                     <ul>
                         <li><a href="#">About Us</a></li>
@@ -149,12 +147,11 @@ function App() {
                     </ul>
                 </div>
 
-                <div class="footer-column">
-                    <div class="footer-logo"> FoodCare</div>
-                    <p class="footer-description">FoodCare is a platform that helps individuals and businesses donate excess food to those in need. Through advanced algorithms, we ensure fast, fair, and efficient distribution.</p>
+                <div className="footer-column">
+                    <div className="footer-logo"> FoodCare</div>
+                    <p className="footer-description">FoodCare is a platform that helps individuals and businesses donate excess food to those in need. Through advanced algorithms, we ensure fast, fair, and efficient distribution.</p>
                     
-                  
-                    <div class="app-buttons">
+                    <div className="app-buttons">
                         <img  className="app-button-download"src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play"/>
                         <img  className="app-button-download"src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/2560px-Download_on_the_App_Store_Badge.svg.png" alt="App Store"/>
                     </div>
@@ -162,7 +159,7 @@ function App() {
                
                  
             </div>
-            <div class="social">
+            <div className="social">
                       <a href="" target="_blank">
                          <img src='https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-large-size-PNG.png' class="fa fa-facebook"/>
                       </a>
@@ -176,12 +173,12 @@ function App() {
                         <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAZjIr23tvjBqyt4fGvtFEVdRaQmbRcgMZLuXHfE7Lj0EbMJHy4Q4bm7ZvBQRxMHu435c&usqp=CAU' class="fa fa-youtube"/>                    
                       </a>
             </div>
-            <div class="footer-link-container">
-              <div class="footer-links">
-                <a className='link ' href="#terms-of-service">Terms of Service</a>
-                <a className='link ' href="#general-terms">General Terms and Conditions</a>
-                <a className='link ' href="#privacy-policy">Privacy Policy</a>
-                <a class="footer-copyright">&copy; 2019-2024 NETFLAIRS TECHNOLOGY - All rights reserved.</a>
+            <div className="footer-link-container">
+              <div className="footer-links">
+                <a className='link' href="#terms-of-service">Terms of Service</a>
+                <a className='link' href="#general-terms">General Terms and Conditions</a>
+                <a className='link' href="#privacy-policy">Privacy Policy</a>
+                <a className="footer-copyright">&copy; 2019-2024 NETFLAIRS TECHNOLOGY - All rights reserved.</a>
               </div>
           </div>    
         </footer>
