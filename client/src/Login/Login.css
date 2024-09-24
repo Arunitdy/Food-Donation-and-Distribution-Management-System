@@ -14,20 +14,20 @@ input{
   left: 50%;
   transform: translate(-50%, -50%); 
   width: auto;
-  background-color:white;
+  background-color:transparent;
   backdrop-filter: blur(10px);
   margin: 0 auto;
   padding: 10px 10px 20px 20px;
-  border: none;
-  border-radius: 15px;
+  border: 2px solid #c0c0c0;
+  border-radius: 10px;
   text-align: left;
-  box-shadow: 0 0 20px 0px rgba(0, 28, 105, 0.2);
+  box-shadow: 0px  4px 6px rgba(0, 0, 0, 0.9);
 }
 .close-button{
   display: block;
   margin-left: auto;
   background-color: transparent;
-  color: rgb(122, 120, 120);
+  color: rgb(81, 80, 80);
   border: none;
   font-size: 15px;
   border-radius: 5px;
@@ -45,7 +45,7 @@ input{
   padding: 10px;
   margin: 10px 0px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .login-container-Login-button {
@@ -55,28 +55,21 @@ input{
   background-color: #28a745;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  display: block;                 
+  display: block;                  /* Ensure it's a block element */
   margin: 0 auto; 
   transition: background-color 0.3s ease;
-  box-shadow: 0 0.625em 1em 0 rgba(37, 192, 101, 0.79);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
 }
 .login-container-Login-button:hover{
   background-color: aliceblue;
   color: #28a745;
+  border: 2px solid wheat;
 }
 
 .error-message {
   color: red;
   font-size: 13px;
   margin-bottom: 10px;
-}
-
-
-@media screen and (max-width: 768px) {
-
-  .login-container{
-    width:300px;
-  }
 }
