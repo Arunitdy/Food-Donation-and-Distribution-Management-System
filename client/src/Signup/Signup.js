@@ -1,20 +1,20 @@
-// Signup.js
-import './Signup.css';
-import { auth } from '../firebase/firebase.js';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Signup.css';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase/firebase';
 
-const Signup = ({ setSignupVisible, setLoginSiginin }) => {
+export const Signup = ({setSignupVisible, setLoginSiginin }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isSuccess,setisSuccess]=useState(false)
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Validate fields
+    //validate fieldes
     if (username === '' || email === '' || password === '') {
       setErrorMessage('Please fill in all fields.');
       return;
@@ -24,78 +24,67 @@ const Signup = ({ setSignupVisible, setLoginSiginin }) => {
     }
 
     try {
-      // Firebase authentication for creating new users
-      const response= await createUserWithEmailAndPassword(auth,email, password);
-      console.log(response);
-
-      // You can optionally save the username to your backend or Firebase Realtime Database/Firestore
+      await createUserWithEmailAndPassword(auth, email, password);
+      console.log(Response);
       setErrorMessage('Signup successful!');
-      setIsSuccess(true);
-      setSignupVisible(false); // Close signup modal
-      setLoginSiginin(false); // Hide login and create account in NavBar
+      setLoginSiginin(false);
+      setLoginSiginin(false);
+      setisSuccess(true);
+      navigate('/');
     } catch (error) {
-      console.error('Error:', error.message);
-      if((error.message.includes('auth/email-already-in-use')))
-      {
-        setErrorMessage('email already in use.');
-      }else{
-        setErrorMessage('An error occurred during signup. Please try again.');
-      }
-     
+      setErrorMessage(error.message.includes('auth/email-already-in-use') ? 'Email already in use.' : 'An error occurred during signup.');
     }
   };
-
-  const closeModal = () => {
+  const closeModel=()=>{
     setSignupVisible(false);
   };
 
   return (
-    <div className="signup-container">
-      <button className="close-button" onClick={closeModal}>✖</button>
+  <div className="signup-container">
+    <button className="close-button" onClick={closeModel}>✕</button> 
       <h2>Signup</h2>
-      {errorMessage && (
-        <p className="error-message" style={{ color: isSuccess ? 'green' : 'red' }}>
-          {errorMessage}
-        </p>
-      )}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username</label>
-          <input
-            className="Signup-input"
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter your username"
-            required
-          />
-        </div>
-        <div>
-          <label>Email</label>
-          <input
-            className="Signup-input"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            required
-          />
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            className="Signup-input"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-            required
-          />
-        </div>
-        <button className="signup-container-Signup-button" type="submit">Signup</button>
-      </form>
-    </div>
+          {errorMessage && <p className="error-message" style={{color:isSuccess?'green':'red'}}>{errorMessage}</p>}
+          
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Username</label>
+              <input 
+                type="text" 
+                className="Signup-input"
+                value={username} 
+                onChange={(e) => setUsername(e.target.value)} 
+                placeholder='Enter your username'
+                required
+              />
+            </div>
+            
+            <div>
+              <label>Email</label>
+              <input 
+                type="email" 
+                className="Signup-input"
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} 
+                placeholder='Enter your email'
+                required
+              />
+            </div>
+            
+            <div>
+              <label>Password</label>
+              <input 
+                type="password" 
+                className="Signup-input"
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+                placeholder='enter your password'
+                required
+              />
+            </div>
+            
+            <button type="submit" className="signup-container-Signup-button">Signup</button>
+        </form>
+  </div>
+  
   );
 };
-
-export { Signup };

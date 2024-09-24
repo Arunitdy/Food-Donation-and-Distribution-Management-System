@@ -1,0 +1,221 @@
+button, a {
+    cursor: pointer;
+  }
+  
+  input {
+    cursor: text;
+  }
+  
+  button:active {
+    transform: scale(.8);
+    background-color: #faf6f6;
+    transition: background-color 0.3s ease;
+    transition: transform 0.3s ease;
+  }
+  
+  .NavBar {
+    position: sticky;
+    top: 0;
+    margin: 10px 20px;
+    background-color: #f8f8f8;
+    display: flex;
+    align-items: center; 
+    border: 1px solid rgb(114, 135, 249);
+    width: auto;
+    box-shadow: 0 0 20px 0px rgba(0, 28, 105, 0.2);
+    border-radius: 10px;
+    z-index: 1000;
+  }
+  
+  .NavBar-logo {
+    width: 60px;
+    margin: 1px 1px 1px 20px;
+  }
+  
+  .NavBar-logo-name {
+    color: #425BA4;
+    margin-inline: 6px;
+  }
+  
+  .NavButton {
+    padding: 20px 20px 20px 20px;
+    margin: 0px auto;
+    display: flex;
+  }
+  
+  .individual-NavButton {
+    background-color: transparent;
+    color: rgb(39, 38, 38);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bolder;
+    font-size: 13px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .NavBar-Auth {
+    padding: 20px 20px 20px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+  }
+  
+  .individual-NavButton:hover {
+    color: #425BA4;
+    transform: scale(1.1);
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .individual-NavButton:active {
+    transform: scale(.8);
+    transition: transform 0.3 ease;
+  }
+  
+  .navBar-a-creat-new-account {
+    color: #425BA4;
+    text-decoration: none;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  .navBar-a-creat-new-account:hover {
+    text-decoration: underline;
+  }
+  
+  .Login-button-navBar {
+    background-color: #425BA4;
+    color: white;
+    border: 1px solid rgb(179, 185, 245);
+    padding: 10px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .Login-button-navBar:hover {
+    background-color: #fcfbfa;
+    color: #425BA4;
+  }
+  
+  .SignUp-button-navBar {
+    background-color: #fcfbfa;
+    color: #425BA4;
+    border: 1px solid rgb(114, 135, 249);
+    padding: 10px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .SignUp-button-navBar:hover {
+    background-color: #425BA4;
+    color: white;
+  }
+  
+  .NavBar-Auth-profile-button {
+    background-color: transparent;
+    border: 2px solid #425BA4;
+    border-radius: 30px;
+  }
+  
+  .NavBar-Auth-profile-button:hover {
+    background-color: #425BA4;
+    transition: background-color 0.3s ease;
+  }
+  
+  .NavBar-Auth-profile-button-img {
+    width: 20px;
+    border-radius: 40px;
+    border: none;
+    background-color: transparent;
+  }
+  
+  .NavBar-Toggle {
+    background-color: transparent;
+    color: rgb(101, 116, 123);
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 10px;
+    display: none; 
+  }
+  
+  .NavBar-Toggle span {
+    margin-left: 6px;
+  }
+  
+  .NavBar-Toggle:hover {
+    color: #425BA4;
+    transform: scale(1.1);
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .NavButton-Popup {
+    position: absolute;
+    top: 70px;
+    right: 40%;
+    left: 40%;
+    background-color: #f8f8f8;
+    box-shadow: 0 0.625em 1em 0 rgba(42, 43, 42, 0.79);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .NavButton-Popup .individual-NavButton {
+    margin-bottom: 10px;
+    border-bottom: 1px solid gray;
+    border-radius: 0px;
+    width: 100%;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .NavButton-Popup {
+      width: 100px;
+      left: 1%;
+    }
+    .NavBar {
+      margin: 0px;
+    }
+    .navBar-a-creat-new-account {
+      font-size: 10px;
+    }
+    .Login-button-navBar {
+      width: 50px;
+      font-size: 10px;
+      padding: 5px;
+    }
+    .SignUp-button-navBar {
+      width: 50px;
+      font-size: 10px;
+      padding: 5px;
+    }
+    .NavBar-logo {
+      margin: 4px;
+      width: 40px;
+    }
+    .NavButton {
+      display: none;
+      margin: 0px;
+    }
+    .NavBar-Toggle {
+      margin-left: 0px;
+      display: block;
+    }
+    .NavBar-Auth {
+      margin-left: auto;
+    }
+  }
+  
+  @media screen and (min-width: 769px) {
+    .NavButton-Popup {
+      display: none; 
+    }
+  }
+  
