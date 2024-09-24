@@ -69,7 +69,7 @@ function App() {
       <div className="body">
         <div className="NavBar">
           <img className="NavBar-logo" src="logo.png" alt="logo" />
-
+          <h1 className='NavBar-logo-name'>FoodCare</h1>
           <button className="NavBar-Toggle" onClick={toggleNavMenu}>
             Menu {navVisible ? <span>&#9650;</span> : <span>&#9660;</span>}
           </button>
@@ -105,63 +105,81 @@ function App() {
             </div>
           )}
         </div>
-      </div>
+     
 
-    <footer class="footer">
-        <div class="footer-container">
-           
-            <div class="footer-column">
-                <h3>How to Donate</h3>
-                <ul>
-                    <li><a href="#">For Individuals</a></li>
-                    <li><a href="#">For Businesses</a></li>
-                    <li><a href="#">For Nonprofits</a></li>
-                    <li><a href="#">For Developers</a></li>
-                    <li><a href="#">For Local Communities</a></li>
-                </ul>
-            </div>
-
-           
-            <div class="footer-column">
-                <h3>Tools & API</h3>
-                <ul>
-                    <li><a href="#">Donation API</a></li>
-                    <li><a href="#">Integration Tools</a></li>
-                    <li><a href="#">Real-time Distribution</a></li>
-                    <li><a href="#">Resource Management</a></li>
-                </ul>
-            </div>
-
-            
-            <div class="footer-column">
-                <h3>Support</h3>
-                <ul>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Refund Policy</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-column">
-                <h3>Company</h3>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-column">
-                <div class="footer-logo">FoodCare</div>
-                <p class="footer-description">FoodCare is a platform that helps individuals and businesses donate excess food to those in need. Through advanced algorithms, we ensure fast, fair, and efficient distribution.</p>
-                
-               
-                <div class="app-buttons">
-                    <img  className="app-button-download"src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play"/>
-                    <img  className="app-button-download"src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/2560px-Download_on_the_App_Store_Badge.svg.png" alt="App Store"/>
+        <footer class="footer">
+            <div class="footer-container">
+              
+                <div class="footer-column">
+                    <h3>How to Donate</h3>
+                    <ul>
+                        <li><a href="#">For Individuals</a></li>
+                        <li><a href="#">For Businesses</a></li>
+                        <li><a href="#">For Nonprofits</a></li>
+                        <li><a href="#">For Developers</a></li>
+                        <li><a href="#">For Local Communities</a></li>
+                    </ul>
                 </div>
+
+              
+                <div class="footer-column">
+                    <h3>Tools & API</h3>
+                    <ul>
+                        <li><a href="#">Donation API</a></li>
+                        <li><a href="#">Integration Tools</a></li>
+                        <li><a href="#">Real-time Distribution</a></li>
+                        <li><a href="#">Resource Management</a></li>
+                    </ul>
+                </div>
+
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <div class="footer-logo"> FoodCare</div>
+                    <p class="footer-description">FoodCare is a platform that helps individuals and businesses donate excess food to those in need. Through advanced algorithms, we ensure fast, fair, and efficient distribution.</p>
+                    
+                  
+                    <div class="app-buttons">
+                        <img  className="app-button-download"src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play"/>
+                        <img  className="app-button-download"src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/2560px-Download_on_the_App_Store_Badge.svg.png" alt="App Store"/>
+                    </div>
+                </div>
+               
+                 
             </div>
-        </div>
-    </footer>
+            <div class="social">
+                      <a href="" target="_blank">
+                         <img src='https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-large-size-PNG.png' class="fa fa-facebook"/>
+                      </a>
+                      <a href="" target="_blank">
+                        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTEEj5FJorXllMEvr7SNuA14DJX6DV7eu09Q&s' class="fa fa-instagram"/>
+                      </a>
+                      <a href="" target="_blank">
+                        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrIbiofxGclX20CWBDtpmjOcbbuqEJS6PrSQ&s' class="fa fa-linkedin"/>
+                      </a>
+                      <a href="g" target="_blank">
+                        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAZjIr23tvjBqyt4fGvtFEVdRaQmbRcgMZLuXHfE7Lj0EbMJHy4Q4bm7ZvBQRxMHu435c&usqp=CAU' class="fa fa-youtube"/>                    
+                      </a>
+            </div>
+                
+        </footer>
+      </div>
     </div>
   );
 }

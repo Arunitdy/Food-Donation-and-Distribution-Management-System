@@ -21,9 +21,9 @@ Button:active {
 .body{
   backdrop-filter: blur(10px);
 }
-
 .NavBar {
   position: sticky;
+  top: 0;
   margin: 10px 20px;
   background-color: #f8f8f8;
   display: flex;
@@ -31,12 +31,16 @@ Button:active {
   width: auto;
   box-shadow: 0 0 20px 0px rgba(0, 28, 105, 0.2);
   border-radius: 10px;
+  z-index: 1000;
 }
 .NavBar-logo{
   width: 60px;
   margin: 1px 1px 1px 20px;
 }
-
+.NavBar-logo-name{
+  color: #425BA4;
+  margin-inline:6px ;
+}
 .NavButton {
   padding: 20px 20px 20px 20px;
   margin: 0px auto;
@@ -285,7 +289,26 @@ Button:active {
 .app-buttons {
   margin-top: 20px;
 }
-
+.footer .social a {
+  display: inline-block; 
+  width: 36px; 
+  height: 36px;
+  border: 1px solid #ffffff;
+  border-radius: 50%; 
+  background-color:transparent; 
+  text-align: center;
+  margin-right: 10px;
+}
+.footer .social a img{
+  width:35px;
+  object-fit: cover;
+}
+.footer .social a :hover{
+  transform: scale(1.1);
+}
+.fa{
+  border-radius: 50%;
+}
 /* Responsive Design */
 @media (max-width: 768px) {
   .footer-container {
