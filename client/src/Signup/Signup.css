@@ -1,20 +1,11 @@
-
-button,a{
-    cursor:pointer;
-  }
-  
-input{
-    cursor:text;
-  }
-  
-.login-container{
+.signup-container {
   position: absolute;
-  height: auto; 
+  height: auto;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
   width: auto;
-  background-color:white;
+  background-color: white;
   backdrop-filter: blur(10px);
   margin: 0 auto;
   padding: 10px 10px 20px 20px;
@@ -22,8 +13,10 @@ input{
   border-radius: 15px;
   text-align: left;
   box-shadow: 0 0 20px 0px rgba(0, 28, 105, 0.2);
+  z-index: 100;
 }
-.close-button{
+
+.close-button {
   display: block;
   margin-left: auto;
   background-color: transparent;
@@ -32,23 +25,25 @@ input{
   font-size: 15px;
   border-radius: 5px;
 }
-.close-button:hover{
-  transform:scale(1.1);
-  transition: transform  0.3s ease;
+
+.close-button:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
- h2 {
+
+h2 {
   margin-bottom: 20px;
 }
 
- .Login-input {
+.Signup-input {
   width: 90%;
   padding: 10px;
-  margin: 10px 0px;
+  margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.login-container-Login-button {
+.signup-container-Signup-button {
   width: 40%;
   padding: 10px;
   font-size: 15px;
@@ -57,12 +52,13 @@ input{
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  display: block;                 
-  margin: 0 auto; 
+  display: block;
+  margin: 0 auto;
   transition: background-color 0.3s ease;
   box-shadow: 0 0.625em 1em 0 rgba(37, 192, 101, 0.79);
 }
-.login-container-Login-button:hover{
+
+.signup-container-Signup-button:hover {
   background-color: aliceblue;
   color: #28a745;
 }
@@ -73,10 +69,8 @@ input{
   margin-bottom: 10px;
 }
 
-
 @media screen and (max-width: 768px) {
-
-  .login-container{
-    width:300px;
+  .signup-container {
+    width: 300px;
   }
 }
