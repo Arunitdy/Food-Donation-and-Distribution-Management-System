@@ -10,8 +10,7 @@ public class Login_details {
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto-generates the primary key
     @Column(name = "id")  // Maps to the 'id' column in the table
     private Long id;
-    @Column(name = "email")
-    private String email;
+
     @Column(name = "password")  // Maps to the 'password' column in the table
     private String password;
 
@@ -40,14 +39,6 @@ public class Login_details {
 
     public String getUsername() {
         return username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public void setUsername(String username) {
