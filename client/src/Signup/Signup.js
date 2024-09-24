@@ -37,7 +37,7 @@ const Signup = ({ setSignupVisible, setLoginSiginin }) => {
       console.error('Error:', error.message);
       if((error.message.includes('auth/email-already-in-use')))
       {
-        setErrorMessage('.email-already-in-use.');
+        setErrorMessage('email already in use.');
       }else{
         setErrorMessage('An error occurred during signup. Please try again.');
       }
