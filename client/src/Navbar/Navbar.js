@@ -28,7 +28,11 @@ export const Navbar = ({ loginSiginin, setSignupVisible, setLoginVisible }) => {
 
       {navVisible && (
         <div className="NavButton-Popup">
-          {/* NavButton popup code here */}
+        <Link to="/" className="Home individual-NavButton">Home</Link>
+        <button className="Donor individual-NavButton">Donor</button>
+        <button className="Center individual-NavButton">Center</button>
+        <button className="Receiver individual-NavButton">Receiver</button>
+        <button className="Employee individual-NavButton">Employee</button>
         </div>
       )}
 
