@@ -180,6 +180,9 @@ button, a {
       width: 100px;
       left: 1%;
     }
+    .NavBar-logo-name{
+      font-size: 10px;
+    }
     .NavBar {
       margin: 0px;
     }
