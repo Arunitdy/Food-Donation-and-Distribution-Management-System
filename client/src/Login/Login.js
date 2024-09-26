@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import axios from 'axios'; // Import Axios
-import { auth } from '../firebase/firebase'; // You might still want to keep Firebase for authentication
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase/firebase';
 
 export const Login = ({ setLoginSiginin, setLoginVisible }) => {
   const [email, setEmail] = useState('');
@@ -31,9 +32,10 @@ export const Login = ({ setLoginSiginin, setLoginVisible }) => {
     };
 
     try {
-      // Make a POST request to your login API
+      
+     // await createUserWithEmailAndPassword(auth, email, password);
       const response = await axios.post('https://api.example.com/login', userInfo);
-      console.log(response.data); // Handle the response as needed
+      console.log(response.data); 
       setErrorMessage('Login successful!');
       alert("Login successful!");
       setLoginVisible(false); // Close login modal
