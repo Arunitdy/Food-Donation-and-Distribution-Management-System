@@ -15,7 +15,6 @@
   box-shadow: 0 0 20px 0px rgba(0, 28, 105, 0.2);
   z-index: 100;
 }
-
 .close-button {
   display: block;
   margin-left: auto;
@@ -68,6 +67,7 @@ h2 {
   font-size: 13px;
   margin-bottom: 10px;
 }
+
 
 @media screen and (max-width: 768px) {
   .signup-container {

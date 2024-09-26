@@ -20,19 +20,19 @@ export const Navbar = ({ loginSiginin, setSignupVisible, setLoginVisible }) => {
 
       <div className="NavButton">
         <Link to="/" className="Home individual-NavButton">Home</Link>
-        <button className="Donor individual-NavButton">Donor</button>
-        <button className="Center individual-NavButton">Center</button>
-        <button className="Receiver individual-NavButton">Receiver</button>
-        <button className="Employee individual-NavButton">Employee</button>
+        <button className="Donor individual-NavButton">About</button>
+        <button className="Center individual-NavButton">Services</button>
+        <button className="Receiver individual-NavButton">Contact</button>
+        <button className="Employee individual-NavButton">Blog</button>
       </div>
 
       {navVisible && (
         <div className="NavButton-Popup">
         <Link to="/" className="Home individual-NavButton">Home</Link>
-        <button className="Donor individual-NavButton">Donor</button>
-        <button className="Center individual-NavButton">Center</button>
-        <button className="Receiver individual-NavButton">Receiver</button>
-        <button className="Employee individual-NavButton">Employee</button>
+        <button className="Donor individual-NavButton">About</button>
+        <button className="Center individual-NavButton">Services</button>
+        <button className="Receiver individual-NavButton">Contact</button>
+        <button className="Employee individual-NavButton">Blog</button>
         </div>
       )}
 
