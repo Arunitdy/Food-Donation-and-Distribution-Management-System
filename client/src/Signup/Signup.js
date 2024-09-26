@@ -39,7 +39,7 @@ export const Signup = ({ setSignupVisible, setLoginSiginin }) => {
       setErrorMessage('Signup successful!');
       setIsSuccess(true); // Indicate success
       setSignupVisible(false); // Close signup modal
-      setLoginSiginin(false);
+      setLoginSiginin(true);
       navigate('/'); // Redirect to home page
     } catch (error) {
       setErrorMessage(error.message.includes('auth/email-already-in-use') ? 'Email already in use.' : 'An error occurred during signup.');

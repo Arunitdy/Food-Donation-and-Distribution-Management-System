@@ -1,6 +1,9 @@
 import React from 'react'
-import './Reciver.css'
+import './Receiver.css'
 
-export const Reciver=function(){
-    return(<></>);
+export const Receiver=function(){
+    console.log("Receiver jsx")
+    return(<>
+    <h1>Receiver</h1>
+    </>);
 }
