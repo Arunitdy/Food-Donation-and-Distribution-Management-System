@@ -34,14 +34,29 @@ export const Login = ({ setLoginSiginin, setLoginVisible }) => {
     try {
       
      // await createUserWithEmailAndPassword(auth, email, password);
-      const response = await axios.post('https://api.example.com/login', userInfo);
-      console.log(response.data); 
+     // const response = await axios.post('https://api.example.com/login', userInfo);
+      //console.log(response.data); 
       setErrorMessage('Login successful!');
       alert("Login successful!");
       setLoginVisible(false); // Close login modal
       setLoginSiginin(false);
       setIsSuccess(true);
-      navigate('/');  // Redirect to home page
+      if(sector==='Donor'){
+        console.log("Donor");
+       
+      } else if(sector="Center"){
+        console.log("Center");
+          
+      }else if(sector==='Receiver'){
+        console.log("Receiver");
+       
+      }else if(sector==='Employee'){
+        console.log("Employee");
+       
+      }else{
+        console.log("error to navigate to sector page");
+      }
+      navigate('/'); 
     } catch (error) {
       console.error('Error:', error);
       setErrorMessage('Invalid email or password.');
