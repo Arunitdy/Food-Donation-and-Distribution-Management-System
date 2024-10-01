@@ -13,13 +13,13 @@ import { Employee } from './Sector/Employee/Employee';
 
 function App() {
   const [loginSiginin, setLoginSiginin] = useState(() => {
-    return localStorage.getItem('isLoggedIn') === 'true';
+    return localStorage.getItem('isLoggedIn') === 'true'; // Default to 'true' if logged in
   });
   const [signupVisible, setSignupVisible] = useState(false);
   const [loginVisible, setLoginVisible] = useState(false);
-  
+
   useEffect(() => {
-    localStorage.setItem('isLoggedIn', loginSiginin);
+    localStorage.setItem('isLoggedIn', loginSiginin); // Store login state in local storage
   }, [loginSiginin]);
 
   return (
@@ -42,7 +42,7 @@ function App() {
       {signupVisible && (
         <Signup 
           setSignupVisible={setSignupVisible} 
-          setLoginSiginin={setLoginSiginin} 
+          setLoginSiginin={setLoginSiginin} // Ensure this gets updated correctly
         />
       )}
       {loginVisible && (
@@ -51,10 +51,11 @@ function App() {
           setLoginVisible={setLoginVisible} 
         />
       )}
-      
+
       <Footer />
     </div>
   );
 }
+
 
 export default App;

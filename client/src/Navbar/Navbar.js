@@ -4,7 +4,6 @@ import './Navbar.css';
 
 export const Navbar = ({ loginSiginin, setSignupVisible, setLoginVisible }) => {
   const [navVisible, setNavVisible] = useState(false);
-  const navigate = useNavigate();
 
   const toggleNavMenu = () => {
     setNavVisible(!navVisible);
@@ -13,7 +12,7 @@ export const Navbar = ({ loginSiginin, setSignupVisible, setLoginVisible }) => {
   return (
     <div className="NavBar">
       <img className="NavBar-logo" src="logo.png" alt="logo" />
-      <h1 className='NavBar-logo-name'>FoodCare</h1>
+      <h1 className="NavBar-logo-name">FoodCare</h1>
       <button className="NavBar-Toggle" onClick={toggleNavMenu}>
         Menu {navVisible ? <span>&#9650;</span> : <span>&#9660;</span>}
       </button>
@@ -36,19 +35,19 @@ export const Navbar = ({ loginSiginin, setSignupVisible, setLoginVisible }) => {
         </div>
       )}
 
-      {/* Conditional rendering for the Sign Up / Login buttons or profile */}
-      {loginSiginin ? (
+      {!loginSiginin ? ( // Only show if NOT logged in
         <div className="NavBar-Auth">
           <button className="SignUp-button-navBar" onClick={() => setSignupVisible(true)}>Sign Up</button>
           <button className="Login-button-navBar" onClick={() => setLoginVisible(true)}>Login</button>
         </div>
       ) : (
         <div className="NavBar-Auth">
-          <button className='NavBar-Auth-profile-button'>
-            <img className="NavBar-Auth-profile-button-img" src='profile.png' alt='profile'/>
+          <button className="NavBar-Auth-profile-button">
+            <img className="NavBar-Auth-profile-button-img" src="profile.png" alt="profile" />
           </button>
         </div>
       )}
     </div>
   );
 };
+
