@@ -13,7 +13,7 @@ import { Employee } from './Sector/Employee/Employee';
 
 function App() {
   const [loginSiginin, setLoginSiginin] = useState(() => {
-    return localStorage.getItem('isLoggedIn') === 'true';
+    return localStorage.getItem('isLoggedIn') === 'false';
   });
   const [signupVisible, setSignupVisible] = useState(false);
   const [loginVisible, setLoginVisible] = useState(false);
