@@ -19,23 +19,24 @@ export const Navbar = ({ loginSiginin, setSignupVisible, setLoginVisible }) => {
       </button>
 
       <div className="NavButton">
-          <Link to="/"><button className="Home individual-NavButton">Home</button></Link>
-          <Link to='/'> <button className="Donor individual-NavButton">About</button></Link>
-          <Link to="/"><button className="Services individual-NavButton">Services</button></Link>
-          <Link to="/"><button className="Contact individual-NavButton">Contact</button></Link>
-          <Link to="/"><button className="Blog individual-NavButton">Blog</button></Link>
+        <Link to="/"><button className="Home individual-NavButton">Home</button></Link>
+        <Link to="/"><button className="Donor individual-NavButton">About</button></Link>
+        <Link to="/"><button className="Services individual-NavButton">Services</button></Link>
+        <Link to="/"><button className="Contact individual-NavButton">Contact</button></Link>
+        <Link to="/"><button className="Blog individual-NavButton">Blog</button></Link>
       </div>
 
       {navVisible && (
         <div className="NavButton-Popup">
           <Link to="/"><button className="Home individual-NavButton">Home</button></Link>
-          <Link to='/'><button className="Donor individual-NavButton">About</button></Link>
+          <Link to="/"><button className="Donor individual-NavButton">About</button></Link>
           <Link to="/"><button className="Services individual-NavButton">Services</button></Link>
           <Link to="/"><button className="Contact individual-NavButton">Contact</button></Link>
           <Link to="/"><button className="Blog individual-NavButton">Blog</button></Link>
         </div>
       )}
 
+      {/* Conditional rendering for the Sign Up / Login buttons or profile */}
       {loginSiginin ? (
         <div className="NavBar-Auth">
           <button className="SignUp-button-navBar" onClick={() => setSignupVisible(true)}>Sign Up</button>
