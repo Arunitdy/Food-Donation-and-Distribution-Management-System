@@ -19,7 +19,7 @@ function App() {
   const [loginVisible, setLoginVisible] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('isLoggedIn', loginSiginin); // Store login state in local storage
+    localStorage.setItem('isLoggedIn', loginSiginin); 
   }, [loginSiginin]);
 
   return (
@@ -31,18 +31,10 @@ function App() {
         setLoginSiginin={setLoginSiginin} 
       />
       
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Donor" element={<Donor />} />
-        <Route path="/Center" element={<Center />} />
-        <Route path="/Receiver" element={<Receiver />} />
-        <Route path="/Employee" element={<Employee />} />
-      </Routes>
-
       {signupVisible && (
         <Signup 
           setSignupVisible={setSignupVisible} 
-          setLoginSiginin={setLoginSiginin} // Ensure this gets updated correctly
+          setLoginSiginin={setLoginSiginin} 
         />
       )}
       {loginVisible && (
@@ -51,6 +43,13 @@ function App() {
           setLoginVisible={setLoginVisible} 
         />
       )}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Donor" element={<Donor />} />
+        <Route path="/Center" element={<Center />} />
+        <Route path="/Receiver" element={<Receiver />} />
+        <Route path="/Employee" element={<Employee />} />
+      </Routes>
 
       <Footer />
     </div>

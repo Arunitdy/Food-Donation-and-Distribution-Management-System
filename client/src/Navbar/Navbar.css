@@ -55,12 +55,7 @@ button, a {
     transition: background-color 0.3s ease;
   }
   
-  .NavBar-Auth {
-    padding: 20px 20px 20px 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px; 
-  }
+ 
   
   .individual-NavButton:hover {
     color: #425BA4;
@@ -72,16 +67,11 @@ button, a {
     transform: scale(.8);
     transition: transform 0.3 ease;
   }
-  
-  .navBar-a-creat-new-account {
-    color: #425BA4;
-    text-decoration: none;
-    font-size: 16px;
-    margin-right: 10px;
-  }
-  
-  .navBar-a-creat-new-account:hover {
-    text-decoration: underline;
+  .NavBar-Auth {
+    padding: 20px 20px 20px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px; 
   }
   
   .Login-button-navBar {
@@ -174,20 +164,44 @@ button, a {
     border-radius: 0px;
     width: 100%;
   }
-  
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1000px) {
+    
+    .NavBar-logo {
+      margin: 4px;
+      width: 50px;
+    }
+    .NavBar-logo-name{
+      font-size: 25px;
+    }
+    
+  .individual-NavButton {
+    font-size:10px;
+  }
+    .Login-button-navBar {
+      width: 60px;
+      font-size: 13px;
+      padding: 7px;
+    }
+    .SignUp-button-navBar {
+      width: 60px;
+      font-size: 13px;
+      padding: 7px;
+    }
+  }
+  @media screen and (max-width: 800px) {
     .NavButton-Popup {
       width: 100px;
       left: 1%;
+    }
+    .NavBar-logo {
+      margin: 3px;
+      width: 40px;
     }
     .NavBar-logo-name{
       font-size: 25px;
     }
     .NavBar {
       margin: 0px;
-    }
-    .navBar-a-creat-new-account {
-      font-size: 10px;
     }
     .Login-button-navBar {
       width: 50px;
@@ -198,10 +212,6 @@ button, a {
       width: 50px;
       font-size: 10px;
       padding: 5px;
-    }
-    .NavBar-logo {
-      margin: 3px;
-      width: 40px;
     }
     .NavButton {
       display: none;
@@ -216,7 +226,7 @@ button, a {
     }
   }
   
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 800px) {
     .NavButton-Popup {
       display: none; 
     }

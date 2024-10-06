@@ -33,9 +33,9 @@ export const Signup = ({ setSignupVisible, setLoginSiginin }) => {
     
     try {
      // await createUserWithEmailAndPassword(auth, email, password);
-      const response=await axios.post('https://api.example.com/data',userInfo);
-      const data=await response.json();
-      console.log(data);
+     // const response=await axios.post('https://api.example.com/data',userInfo);
+     // const data=await response.json();
+     // console.log(data);
       setErrorMessage('Signup successful!');
       setIsSuccess(true); // Indicate success
       setSignupVisible(false); // Close signup modal
