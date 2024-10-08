@@ -1,0 +1,43 @@
+.employee {
+    padding: 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+  }
+  
+  .employee h1 {
+    color: #28a745;
+  }
+  
+  .employee p {
+    font-size: 16px;
+    color: #6c757d;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .employee ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .employee ul li {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .employee button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .employee button:hover {
+    background-color: #218838;
+  }
+  

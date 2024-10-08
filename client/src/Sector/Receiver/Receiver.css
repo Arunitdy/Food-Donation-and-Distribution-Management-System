@@ -1,0 +1,43 @@
+.receiver {
+    padding: 20px;
+    background-color: #f1f3f5;
+    text-align: center;
+  }
+  
+  .receiver h1 {
+    color: #007bff;
+  }
+  
+  .receiver p {
+    font-size: 16px;
+    color: #6c757d;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .receiver ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .receiver ul li {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .receiver button {
+    padding: 10px 20px;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .receiver button:hover {
+    background-color: #138496;
+  }
+  
