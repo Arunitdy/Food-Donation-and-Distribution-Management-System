@@ -22,11 +22,11 @@ export const Donor = () => {
       <form onSubmit={handleDonationSubmit}>
         <div>
           <label>Food Type</label>
-          <input type="text" value={foodType} onChange={(e) => setFoodType(e.target.value)} />
+          <input type="text" value={foodType}  placeholder="Enter type of Food"onChange={(e) => setFoodType(e.target.value)} />
         </div>
         <div>
           <label>Quantity</label>
-          <input type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+          <input type="number" value={quantity} placeholder="Kg"onChange={(e) => setQuantity(e.target.value)} />
         </div>
         <div>
           <label>Expiry Date</label>
