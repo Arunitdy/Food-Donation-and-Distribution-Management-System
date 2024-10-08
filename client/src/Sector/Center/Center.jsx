@@ -11,7 +11,7 @@ export const Center = () => {
   };
 
   return (
-    <div className="center-page">
+    <div className="center">
       <h1>Distribution Center</h1>
       <h2>Incoming Donations</h2>
       {donations.length === 0 ? <p>No incoming donations.</p> : 

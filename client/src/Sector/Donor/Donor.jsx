@@ -15,7 +15,7 @@ export const Donor = () => {
   };
 
   return (
-    <div className="donor-page">
+    <div className="donor">
       <h1>Donor Page</h1>
 
       {/* Schedule Donation Form */}
@@ -43,7 +43,7 @@ export const Donor = () => {
       <h2>Your Donation History</h2>
       <ul>
         {donationHistory.map((donation, index) => (
-          <li key={index}>{`${donation.foodType} - ${donation.status}`}</li>
+          <li key={index}>{`${donation.foodType} -${donation.quantity} -${donation.expiryDate}- ${donation.pickupTime} - ${donation.status}`}</li>
         ))}
       </ul>
     </div>

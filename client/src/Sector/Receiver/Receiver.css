@@ -1,43 +1,81 @@
 .receiver {
-    padding: 20px;
-    background-color: #f1f3f5;
-    text-align: center;
-  }
-  
-  .receiver h1 {
-    color: #007bff;
-  }
-  
-  .receiver p {
-    font-size: 16px;
-    color: #6c757d;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  .receiver ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .receiver ul li {
-    background-color: #fff;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .receiver button {
-    padding: 10px 20px;
-    background-color: #17a2b8;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .receiver button:hover {
-    background-color: #138496;
-  }
-  
+  padding: 20px;
+  background-color: #f1f3f5;
+  text-align: center;
+}
+
+.receiver h1 {
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.receiver-form {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: auto;
+  margin: 0 10px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.receiver-form .form-group {
+  margin-bottom: 15px;
+}
+
+.receiver-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.receiver-form input {
+  width: 260px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.receiver-form input[type="number"] {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+
+.receiver-form button {
+  padding: 10px 20px;
+  background-color: #425BA4;
+  color: white;
+  border: 1px solid rgb(179, 185, 245);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.receiver-form button:hover {
+  background-color: #fcfbfa;
+  color: #425BA4;
+}
+
+.previous-requests {
+  margin-top: 20px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.previous-requests li {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 10px;
+}
+
+.previous-requests li:hover {
+  background-color: #f1f3f5;
+}
+

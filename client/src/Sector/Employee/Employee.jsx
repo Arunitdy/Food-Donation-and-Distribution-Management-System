@@ -8,7 +8,7 @@ export const Employee = () => {
   ]);
 
   return (
-    <div className="employee-page">
+    <div className="employee">
       <h1>Employee Dashboard</h1>
       <h2>Your Tasks</h2>
       <ul>
