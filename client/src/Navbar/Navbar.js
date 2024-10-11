@@ -37,8 +37,8 @@ export const Navbar = ({ loginSiginin, setSignupVisible, setLoginVisible }) => {
 
       {!loginSiginin ? ( // Only show if NOT logged in
         <div className="NavBar-Auth">
-          <button className="SignUp-button-navBar" onClick={() => setSignupVisible(true)}>Sign Up</button>
-          <button className="Login-button-navBar" onClick={() => setLoginVisible(true)}>Login</button>
+          <button className="SignUp-button-navBar" onClick={() => {setSignupVisible(true);setLoginVisible(false);}}>Sign Up</button>
+          <button className="Login-button-navBar" onClick={() => {setSignupVisible(false);setLoginVisible(true);}}>Login</button>
         </div>
       ) : (
         <div className="NavBar-Auth">
