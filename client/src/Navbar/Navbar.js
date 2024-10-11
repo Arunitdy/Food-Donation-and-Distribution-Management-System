@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
-export const Navbar = ({ loginSiginin, setSignupVisible, setLoginVisible }) => {
+export const Navbar = ({ loginSiginin, setSignupVisible, setLoginVisible, setLoginSiginin }) => {
   const [navVisible, setNavVisible] = useState(false);
+  const navigate = useNavigate();
 
   const toggleNavMenu = () => {
     setNavVisible(!navVisible);
+  };
+
+  const handleProfileClick = () => {
+    navigate('/profile'); // Navigate to the profile page
   };
 
   return (
@@ -35,14 +40,14 @@ export const Navbar = ({ loginSiginin, setSignupVisible, setLoginVisible }) => {
         </div>
       )}
 
-      {!loginSiginin ? ( // Only show if NOT logged in
+      {!loginSiginin ? (
         <div className="NavBar-Auth">
-          <button className="SignUp-button-navBar" onClick={() => {setSignupVisible(true);setLoginVisible(false);}}>Sign Up</button>
-          <button className="Login-button-navBar" onClick={() => {setSignupVisible(false);setLoginVisible(true);}}>Login</button>
+          <button className="SignUp-button-navBar" onClick={() => { setSignupVisible(true); setLoginVisible(false); }}>Sign Up</button>
+          <button className="Login-button-navBar" onClick={() => { setSignupVisible(false); setLoginVisible(true); }}>Login</button>
         </div>
       ) : (
         <div className="NavBar-Auth">
-          <button className="NavBar-Auth-profile-button">
+          <button className="NavBar-Auth-profile-button" onClick={handleProfileClick}>
             <img className="NavBar-Auth-profile-button-img" src="profile.png" alt="profile" />
           </button>
         </div>
@@ -50,4 +55,3 @@ export const Navbar = ({ loginSiginin, setSignupVisible, setLoginVisible }) => {
     </div>
   );
 };
-

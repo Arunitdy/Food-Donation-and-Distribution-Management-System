@@ -10,6 +10,7 @@ import {Donor} from './Sector/Donor/Donor'
 import { Center } from './Sector/Center/Center';
 import { Receiver } from './Sector/Receiver/Receiver';
 import { Employee } from './Sector/Employee/Employee';
+import { Profile } from './Profile/Profile';
 
 function App() {
   const [loginSiginin, setLoginSiginin] = useState(() => {
@@ -49,6 +50,7 @@ function App() {
         <Route path="/Center" element={<Center />} />
         <Route path="/Receiver" element={<Receiver />} />
         <Route path="/Employee" element={<Employee />} />
+        <Route path="/profile" element={<Profile setLoginSiginin={setLoginSiginin} />} />
       </Routes>
 
       <Footer />
