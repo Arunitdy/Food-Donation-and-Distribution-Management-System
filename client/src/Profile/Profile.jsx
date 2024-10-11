@@ -6,14 +6,11 @@ export const Profile = ({ setLoginSiginin }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Clear user authentication (set loginSiginin to false)
     setLoginSiginin(false);
-    // Redirect to home page
     navigate('/');
   };
 
   const handleDeleteAccount = () => {
-    // Add account deletion logic here
     alert('Account deleted successfully!');
     setLoginSiginin(false);
     navigate('/');
@@ -23,7 +20,6 @@ export const Profile = ({ setLoginSiginin }) => {
     <div className="ProfilePage">
       <h1>User Profile</h1>
       <div className="UserDetails">
-        {/* Display user details here */}
         <p>Username: User123</p>
         <p>Email: user@example.com</p>
       </div>
