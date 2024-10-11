@@ -1,4 +1,4 @@
-/* General layout for the profile page */
+
 .ProfilePage {
     display: flex;
     flex-direction: column;
@@ -16,7 +16,7 @@
     margin-bottom: 20px;
   }
   
-  /* Styling for the user details section */
+  
   .UserDetails {
     background-color: #fff;
     border-radius: 10px;
@@ -34,7 +34,7 @@
     margin: 10px 0;
   }
   
-  /* Styling for buttons */
+ 
   button {
     padding: 10px 20px;
     border-radius: 5px;
@@ -47,7 +47,7 @@
     background-color: #4caf50;
     color: white;
     border: none;
-    margin-right: 10px;
+    margin: 10px;
   }
   
   .LogoutButton:hover {
@@ -64,7 +64,6 @@
     background-color: #e53935;
   }
   
-  /* Responsive design for smaller screens */
   @media (max-width: 600px) {
     .ProfilePage {
       padding: 10px;
