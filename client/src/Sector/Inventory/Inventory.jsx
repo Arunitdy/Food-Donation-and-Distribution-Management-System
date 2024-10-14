@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './Center.css';
+import './Inventory.css';
 
-export const Center = () => {
+export const Inventory = () => {
   const [donations, setDonations] = useState([]);
   const [inventory, setInventory] = useState({ apples: 50, bread: 30 });
 
@@ -11,8 +11,8 @@ export const Center = () => {
   };
 
   return (
-    <div className="center">
-      <h1>Distribution Center</h1>
+    <div className="Inventory">
+      <h1>Distribution Inventory</h1>
       <h2>Incoming Donations</h2>
       {donations.length === 0 ? <p>No incoming donations.</p> : 
         <ul>
@@ -27,7 +27,6 @@ export const Center = () => {
       <h2>Inventory</h2>
       <p>Apples: {inventory.apples}</p>
       <p>Bread: {inventory.bread}</p>
-      {/* Add more inventory tracking here */}
     </div>
   );
 };

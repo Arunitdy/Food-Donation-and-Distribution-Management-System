@@ -5,6 +5,9 @@ export const Receiver = function () {
     console.log("Receiver jsx");
 
     const [formData, setFormData] = useState({
+        name: '',
+        address: '',
+        phone: '',
         foodType: '',
         date: '',
         time: '',
@@ -22,23 +25,69 @@ export const Receiver = function () {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (formData.foodType && formData.date && formData.time && formData.quantity) {
+        const { name, address, phone, foodType, date, time, quantity } = formData;
+        if (name && address && phone  && foodType && date && time && quantity) {
             console.log("Submitted Data:", formData);
             const newRequest = {
                 ...formData,
                 status: "Pending" 
             };
             setDonationHistory([...ReceiverHistory, newRequest]);
-            setFormData({ foodType: '', date: '', time: '', quantity: '' }); 
+            setFormData({
+                name: '', 
+                address: '', 
+                phone: '', 
+                foodType: '', 
+                date: '', 
+                time: '', 
+                quantity: '' 
+            });
         }
     };
 
-    
     return (
         <div className='receiver'>
             <h1 className='receiver-title'>Request Food Assistance</h1>
 
             <form onSubmit={handleSubmit} className='receiver-form'>
+                <div className='form-group'>
+                    <label htmlFor="name">Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Enter your name"
+                        required
+                    />
+                </div>
+
+                <div className='form-group'>
+                    <label htmlFor="address">Address</label>
+                    <input
+                        type="text"
+                        id="address"
+                        name="address"
+                        value={formData.address}
+                        onChange={handleChange}
+                        placeholder="Enter your address"
+                        required
+                    />
+                </div>
+
+                <div className='form-group'>
+                    <label htmlFor="phone">Phone Number</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="Enter your phone number"
+                        required
+                    />
+                </div>
                 <div className='form-group'>
                     <label htmlFor="foodType">Type of Food</label>
                     <input
@@ -96,6 +145,10 @@ export const Receiver = function () {
             <ul className="previous-requests">
                 {ReceiverHistory.map((receiver, index) => (
                     <li key={index} className={`request-item ${receiver.status.toLowerCase()}`}>
+                        <strong>Name:</strong> {receiver.name} <br />
+                        <strong>Address:</strong> {receiver.address} <br />
+                        <strong>Phone:</strong> {receiver.phone} <br />
+                        <strong>Aadhaar:</strong> {receiver.aadhaar} <br />
                         <strong>Food Type:</strong> {receiver.foodType} <br />
                         <strong>Date:</strong> {receiver.date} <br />
                         <strong>Time:</strong> {receiver.time} <br />

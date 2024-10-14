@@ -45,9 +45,9 @@ export const Signup = ({ setSignupVisible, setLoginSiginin }) => {
         console.log("Donor");
         sectorPage="/Donor";
        
-      } else if( sector === "Center" ){
-        console.log("Center");
-        sectorPage="/Center";
+      } else if( sector === "Inventory" ){
+        console.log("Inventory");
+        sectorPage="/Inventory";
           
       }else if( sector === 'Receiver' ){
         console.log("Receiver");
@@ -85,7 +85,7 @@ export const Signup = ({ setSignupVisible, setLoginSiginin }) => {
             >
               <option value="" disabled>Select your sector</option>
               <option value="Donor">Donor</option>
-              <option value="Center">Center</option>
+              <option value="Inventory">Inventory</option>
               <option value="Receiver">Receiver</option>
               <option value="Employee">Employee</option>
             </select>

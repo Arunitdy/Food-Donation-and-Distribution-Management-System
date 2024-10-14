@@ -7,14 +7,14 @@ import { Home } from './Home/Home';
 import { Navbar } from './Navbar/Navbar';
 import { Footer } from './Footer/Footer';
 import {Donor} from './Sector/Donor/Donor'
-import { Center } from './Sector/Center/Center';
+import { Inventory } from './Sector/Inventory/Inventory';
 import { Receiver } from './Sector/Receiver/Receiver';
 import { Employee } from './Sector/Employee/Employee';
 import { Profile } from './Profile/Profile';
 
 function App() {
   const [loginSiginin, setLoginSiginin] = useState(() => {
-    return localStorage.getItem('isLoggedIn') === 'true'; // Default to 'true' if logged in
+    return localStorage.getItem('isLoggedIn') === 'true'; 
   });
   const [signupVisible, setSignupVisible] = useState(false);
   const [loginVisible, setLoginVisible] = useState(false);
@@ -47,7 +47,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Donor" element={<Donor />} />
-        <Route path="/Center" element={<Center />} />
+        <Route path="/Inventory" element={<Inventory />} />
         <Route path="/Receiver" element={<Receiver />} />
         <Route path="/Employee" element={<Employee />} />
         <Route path="/profile" element={<Profile setLoginSiginin={setLoginSiginin} />} />
