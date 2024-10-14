@@ -40,7 +40,27 @@ export const Signup = ({ setSignupVisible, setLoginSiginin }) => {
       setIsSuccess(true); // Indicate success
       setSignupVisible(false); // Close signup modal
       setLoginSiginin(true);
-      navigate('/'); // Redirect to home page
+      let sectorPage;
+      if( sector === 'Donor' ){
+        console.log("Donor");
+        sectorPage="/Donor";
+       
+      } else if( sector === "Center" ){
+        console.log("Center");
+        sectorPage="/Center";
+          
+      }else if( sector === 'Receiver' ){
+        console.log("Receiver");
+        sectorPage="/Receiver";
+       
+      }else if( sector === 'Employee' ){
+        console.log("Employee");
+        sectorPage="/Employee";
+       
+      }else{
+        console.log("error to navigate to sector page");
+      }
+      navigate(sectorPage); 
     } catch (error) {
       setErrorMessage(error.message.includes('auth/email-already-in-use') ? 'Email already in use.' : 'An error occurred during signup.');
     }

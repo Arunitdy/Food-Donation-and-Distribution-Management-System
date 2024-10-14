@@ -165,7 +165,9 @@ button, a {
     width: 100%;
   }
   @media screen and (max-width: 1000px) {
-    
+    .NavBar{
+        margin:10px 0px;
+    }
     .NavBar-logo {
       margin: 4px;
       width: 50px;
