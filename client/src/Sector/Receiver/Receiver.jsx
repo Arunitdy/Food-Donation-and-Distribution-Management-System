@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; 
 import './Receiver.css';
 
 export const Receiver = function () {
@@ -13,7 +14,7 @@ export const Receiver = function () {
         time: '',
         quantity: ''
     });
-    const [ReceiverHistory, setDonationHistory] = useState([]);
+    const [receiverHistory, setDonationHistory] = useState([]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -23,27 +24,47 @@ export const Receiver = function () {
         });
     };
 
-    const handleSubmit = (e) => {
+    const fetchReceiverHistory = async () => {
+        try {
+            const response = await axios.get('/api/receiver-requests'); 
+            setDonationHistory(response.data);
+        } catch (error) {
+            console.error('Error fetching receiver history:', error);
+        }
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const { name, address, phone, foodType, date, time, quantity } = formData;
-        if (name && address && phone  && foodType && date && time && quantity) {
+
+        if (name && address && phone && foodType && date && time && quantity) {
             console.log("Submitted Data:", formData);
             const newRequest = {
                 ...formData,
-                status: "Pending" 
+                status: "Pending"
             };
-            setDonationHistory([...ReceiverHistory, newRequest]);
-            setFormData({
-                name: '', 
-                address: '', 
-                phone: '', 
-                foodType: '', 
-                date: '', 
-                time: '', 
-                quantity: '' 
-            });
+
+            try {
+                const response = await axios.post('/api/receiver-requests', newRequest); 
+                setDonationHistory([...receiverHistory, response.data]);
+                setFormData({
+                    name: '', 
+                    address: '', 
+                    phone: '', 
+                    foodType: '', 
+                    date: '', 
+                    time: '', 
+                    quantity: '' 
+                });
+            } catch (error) {
+                console.error('Error submitting the request:', error);
+            }
         }
     };
+
+    useEffect(() => {
+        fetchReceiverHistory();
+    }, []); 
 
     return (
         <div className='receiver'>
@@ -143,12 +164,11 @@ export const Receiver = function () {
 
             <h2>Your Previous Requests</h2>
             <ul className="previous-requests">
-                {ReceiverHistory.map((receiver, index) => (
+                {receiverHistory.map((receiver, index) => (
                     <li key={index} className={`request-item ${receiver.status.toLowerCase()}`}>
                         <strong>Name:</strong> {receiver.name} <br />
                         <strong>Address:</strong> {receiver.address} <br />
                         <strong>Phone:</strong> {receiver.phone} <br />
-                        <strong>Aadhaar:</strong> {receiver.aadhaar} <br />
                         <strong>Food Type:</strong> {receiver.foodType} <br />
                         <strong>Date:</strong> {receiver.date} <br />
                         <strong>Time:</strong> {receiver.time} <br />

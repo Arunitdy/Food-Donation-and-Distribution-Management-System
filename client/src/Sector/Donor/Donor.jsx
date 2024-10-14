@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; 
 import './Donor.css';
 
 export const Donor = () => {
@@ -6,20 +7,55 @@ export const Donor = () => {
   const [quantity, setQuantity] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [pickupTime, setPickupTime] = useState('');
-  const [address, setAddress] = useState(''); // New state for address
-  const [phone, setPhone] = useState(''); // New state for phone number
-  const [name, setName] = useState(''); // New state for donor name
-  const [aadhaar, setAadhaar] = useState(''); // New state for Aadhaar number
+  const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
+  const [name, setName] = useState('');
+  const [aadhaar, setAadhaar] = useState('');
   const [donationHistory, setDonationHistory] = useState([]);
 
-  const handleDonationSubmit = (e) => {
-    e.preventDefault();
-    // Handle donation logic
-    setDonationHistory([
-      ...donationHistory,
-      { foodType, quantity, expiryDate, pickupTime, address, phone, name, aadhaar, status: 'Pending' }
-    ]);
+  const fetchDonationHistory = async () => {
+    try {
+      const response = await axios.get('/api/donor/history'); 
+      setDonationHistory(response.data); 
+    } catch (error) {
+      console.error('Error fetching donation history:', error); 
+    }
   };
+
+  const handleDonationSubmit = async (e) => {
+    e.preventDefault();
+    const newDonation = {
+      foodType,
+      quantity,
+      expiryDate,
+      pickupTime,
+      address,
+      phone,
+      name,
+      aadhaar,
+      status: 'Pending',
+    };
+
+    try {
+      await axios.post('/api/donor/donate', newDonation);
+      setDonationHistory([...donationHistory, newDonation]); 
+
+      setFoodType('');
+      setQuantity('');
+      setExpiryDate('');
+      setPickupTime('');
+      setAddress('');
+      setPhone('');
+      setName('');
+      setAadhaar('');
+    } catch (error) {
+      console.error('Error submitting donation:', error); 
+    }
+  };
+
+  useEffect(() => {
+    fetchDonationHistory(); 
+  }, []); 
 
   return (
     <div className="donor">
@@ -111,12 +147,16 @@ export const Donor = () => {
       {/* Donation History */}
       <h2>Your Donation History</h2>
       <ul>
-        {donationHistory.map((donation, index) => (
-          <li key={index}>
-            {`Name: ${donation.name}, Address: ${donation.address}, Phone: ${donation.phone}, Aadhaar: ${donation.aadhaar}, 
-            Food: ${donation.foodType}, Quantity: ${donation.quantity}kg, Expiry: ${donation.expiryDate}, Pickup: ${donation.pickupTime}, Status: ${donation.status}`}
-          </li>
-        ))}
+        {donationHistory.length > 0 ? (
+          donationHistory.map((donation, index) => (
+            <li key={index}>
+              {`Name: ${donation.name}, Address: ${donation.address}, Phone: ${donation.phone}, Aadhaar: ${donation.aadhaar}, 
+              Food: ${donation.foodType}, Quantity: ${donation.quantity}kg, Expiry: ${donation.expiryDate}, Pickup: ${donation.pickupTime}, Status: ${donation.status}`}
+            </li>
+          ))
+        ) : (
+          <p>No donation history available</p>
+        )}
       </ul>
     </div>
   );

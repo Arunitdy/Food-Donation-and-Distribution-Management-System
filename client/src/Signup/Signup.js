@@ -16,7 +16,6 @@ export const Signup = ({ setSignupVisible, setLoginSiginin }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Validate fields
     if (username === '' || email === '' || password === ''|| sector === '') {
       setErrorMessage('Please fill in all fields.');
       return;
@@ -37,8 +36,8 @@ export const Signup = ({ setSignupVisible, setLoginSiginin }) => {
      // const data=await response.json();
      // console.log(data);
       setErrorMessage('Signup successful!');
-      setIsSuccess(true); // Indicate success
-      setSignupVisible(false); // Close signup modal
+      setIsSuccess(true);
+      setSignupVisible(false); 
       setLoginSiginin(true);
       let sectorPage;
       if( sector === 'Donor' ){
