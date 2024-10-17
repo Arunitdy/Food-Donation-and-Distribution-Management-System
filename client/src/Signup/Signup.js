@@ -61,7 +61,7 @@ export const Signup = ({ setSignupVisible, setLoginSiginin }) => {
       }
       navigate(sectorPage); 
     } catch (error) {
-      console.log(error);
+      console.error('Error:', error);
       setErrorMessage(error.message.includes('email-already-in-use') ? 'Email already in use.' : 'An error occurred during signup.');
     }
   };
