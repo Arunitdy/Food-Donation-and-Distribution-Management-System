@@ -34,7 +34,7 @@ export const Login = ({ setLoginSiginin, setLoginVisible }) => {
     try {
       
      // await createUserWithEmailAndPassword(auth, email, password);
-      const response = await axios.post('http://localhost:8080/login/all', userInfo);
+      const response = await axios.get('http://localhost:8080/login/all', userInfo);
       console.log(response.data); 
       console.log(userInfo);
       setErrorMessage('Login successful!');
