@@ -45,12 +45,12 @@ export const Inventory = () => {
         <p>No incoming donations.</p>
       ) : (
         <ul>
-          {donations.map((donation) => (
+         {/*} {donations.map((donation) => (
             <li key={donation.id}>
               {donation.foodType} - {donation.quantity} 
               <button onClick={() => acceptDonation(donation.id)}>Accept</button>
             </li>
-          ))}
+         ))}*/}
         </ul>
       )}
 
