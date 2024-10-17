@@ -37,7 +37,9 @@ export const Donor = () => {
     };
 
     try {
-      await axios.post('/api/donor/donate', newDonation);
+      const response = await axios.post('http://localhost:8080/donors/add', newDonation);
+      console.log(response)
+      //await axios.post('/api/donor/donate', newDonation);
       setDonationHistory([...donationHistory, newDonation]); 
 
       setFoodType('');

@@ -32,9 +32,9 @@ export const Signup = ({ setSignupVisible, setLoginSiginin }) => {
     
     try {
      // await createUserWithEmailAndPassword(auth, email, password);
-      const response=await axios.post('http://localhost:8080/login/add',userInfo);
-      const data=await response.json();
-      console.log(data);
+      const response=await axios.post('http://localhost:8080/login/signup',userInfo);
+      //const data=await response.json();
+      console.log(response);
       setErrorMessage('Signup successful!');
       setIsSuccess(true);
       setSignupVisible(false); 
@@ -61,6 +61,7 @@ export const Signup = ({ setSignupVisible, setLoginSiginin }) => {
       }
       navigate(sectorPage); 
     } catch (error) {
+      console.log(error);
       setErrorMessage(error.message.includes('auth/email-already-in-use') ? 'Email already in use.' : 'An error occurred during signup.');
     }
   };

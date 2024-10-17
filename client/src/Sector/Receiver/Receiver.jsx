@@ -45,7 +45,7 @@ export const Receiver = function () {
             };
 
             try {
-                const response = await axios.post('/api/receiver-requests', newRequest); 
+                const response = await axios.post('http://localhost:8080/receivers/add', newRequest); 
                 setDonationHistory([...receiverHistory, response.data]);
                 setFormData({
                     name: '', 
