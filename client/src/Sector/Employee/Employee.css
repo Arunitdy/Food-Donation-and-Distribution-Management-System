@@ -1,43 +1,76 @@
 .employee {
-    padding: 20px;
-    background-color: #f8f9fa;
-    text-align: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.employee h1 {
+  color: #0b269e;
+}
+
+.employee p {
+  font-size: 16px;
+  color: #6c757d;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.employee ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.employee ul li {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.request-item {
+  display: flex;
+  flex-direction: column; /* Ensure column direction */
+}
+
+.task-details {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 10px; /* Space between task details */
+  width: 100%; 
+  margin-bottom: 10px;
+}
+
+.task-details div {
+  margin: 5px; 
+  flex: 1; 
+  min-width: 150px; 
+}
+
+.employee button {
+  padding: 5px 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 2px; 
+  margin-left: auto;
+}
+
+.employee button:hover {
+  background-color: #218838;
+}
+
+@media (max-width: 768px) {
+  .request-item {
+    flex-direction: column; /* Stack items vertically on small screens */
   }
-  
-  .employee h1 {
-    color: #0b269e;
+
+  .task-details {
+    flex-direction: column; 
+    align-items: flex-start; /* Align details to the start */
   }
-  
-  .employee p {
-    font-size: 16px;
-    color: #6c757d;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  .employee ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .employee ul li {
-    background-color: #fff;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .employee button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .employee button:hover {
-    background-color: #218838;
-  }
-  
+}

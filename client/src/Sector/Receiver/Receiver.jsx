@@ -63,6 +63,16 @@ export const Receiver = function () {
         }
     };
 
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`http://localhost:8080/receivers/delete/${id}`); // Assuming your API has a delete endpoint like this
+            // Update local state to remove the deleted request
+            setDonationHistory(receiverHistory.filter(receiver => receiver.id !== id));
+        } catch (error) {
+            console.error('Error deleting the request:', error);
+        }
+    };
+
     useEffect(() => {
         fetchReceiverHistory();
     }, []); 
@@ -163,7 +173,6 @@ export const Receiver = function () {
 
                 <button type="submit" className="submit-button">Request Assistance</button>
             </form>
-
             <h2>Your Previous Requests</h2>
             <ul className="previous-requests">
                 {receiverHistory.map((receiver, index) => (
@@ -176,6 +185,7 @@ export const Receiver = function () {
                         <strong>Time:</strong> {receiver.preferredTime} <br />
                         <strong>Quantity:</strong> {receiver.quantityNeeded} kg <br />
                         <strong>Status:</strong> {receiver.status} <br />
+                        <button onClick={() => handleDelete(receiver.id)} className="delete-button">Delete Request</button>
                     </li>
                 ))}
             </ul>

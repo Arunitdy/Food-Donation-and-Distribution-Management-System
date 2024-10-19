@@ -60,22 +60,60 @@
 }
 
 .previous-requests {
-  margin-top: 20px;
-  list-style-type: none;
+  display: flex; 
+  flex-direction: column; 
+  justify-content: flex-start; 
+  margin-top: 20px; 
+  list-style-type: none; 
   padding: 0;
+  width: 100%;
 }
 
 .previous-requests li {
-  background-color: #fff;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  display: flex;
+  background-color: white; 
+  padding: 15px; 
+  margin-bottom: 10px; 
+  border-radius: 10px; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  width: 100%; 
+  display: flex; 
+  flex-wrap: wrap; 
   gap: 10px;
 }
 
-.previous-requests li:hover {
-  background-color: #f1f3f5;
+.previous-requests li div {
+  flex: 1;
+  margin-right: 10px; 
 }
 
+.previous-requests li div:last-child {
+  margin-right: 0; 
+}
+
+.previous-requests li:hover {
+  background-color: #f1f3f5; 
+}
+.delete-button {
+  padding: 5px 10px;
+  background-color: #ff4d4d; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.delete-button:hover {
+  background-color: #ff1a1a; 
+}
+
+@media (max-width: 600px) {
+  .previous-requests li {
+    flex-direction: column; 
+  }
+
+  .previous-requests li div {
+    margin-right: 0; 
+    margin-bottom: 5px; 
+  }
+}

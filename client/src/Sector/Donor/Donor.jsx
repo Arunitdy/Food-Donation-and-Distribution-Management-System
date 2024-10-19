@@ -15,7 +15,7 @@ export const Donor = () => {
 
   const fetchDonationHistory = async () => {
     try {
-      const response = await axios.get('/api/donor/history'); 
+      const response = await axios.get('http://localhost:8080/donors/all');
       setDonationHistory(response.data); 
     } catch (error) {
       console.error('Error fetching donation history:', error); 
@@ -38,10 +38,7 @@ export const Donor = () => {
 
     try {
       const response = await axios.post('http://localhost:8080/donors/add', newDonation);
-      console.log(response)
-      //await axios.post('/api/donor/donate', newDonation);
-      setDonationHistory([...donationHistory, newDonation]); 
-
+      setDonationHistory([...donationHistory, response.data]); 
       setFoodType('');
       setQuantity('');
       setExpiryDate('');
@@ -52,6 +49,15 @@ export const Donor = () => {
       setAadhaar('');
     } catch (error) {
       console.error('Error submitting donation:', error); 
+    }
+  };
+
+  const handleDeleteDonation = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/donors/delete/${id}`);
+      setDonationHistory(donationHistory.filter(donation => donation.id !== id));
+    } catch (error) {
+      console.error('Error deleting donation:', error);
     }
   };
 
@@ -88,7 +94,7 @@ export const Donor = () => {
         <div>
           <label>Phone Number</label>
           <input 
-            type="tel" 
+            type="number" 
             value={phoneno} 
             placeholder="Enter your phone number" 
             onChange={(e) => setPhone(e.target.value)} 
@@ -98,7 +104,7 @@ export const Donor = () => {
         <div>
           <label>Aadhaar Number</label>
           <input 
-            type="text" 
+            type="number" 
             value={aadhaarno} 
             placeholder="Enter your Aadhaar number" 
             onChange={(e) => setAadhaar(e.target.value)} 
@@ -148,18 +154,31 @@ export const Donor = () => {
 
       {/* Donation History */}
       <h2>Your Donation History</h2>
-      <ul>
-        {donationHistory.length > 0 ? (
-          donationHistory.map((donation, index) => (
-            <li key={index}>
-              {`Name: ${donation.name}, Address: ${donation.address}, Phone: ${donation.phone}, Aadhaar: ${donation.aadhaar}, 
-              Food: ${donation.foodType}, Quantity: ${donation.quantity}kg, Expiry: ${donation.expiryDate}, Pickup: ${donation.pickupTime}, Status: ${donation.status}`}
-            </li>
-          ))
-        ) : (
-          <p>No donation history available</p>
-        )}
+      <ul className="donor-requests">
+          {donationHistory.length > 0 ? (
+            donationHistory.map((donation, index) => (
+              <li key={index} className={`request-item`}>
+                <div className="task-details">
+                  <strong>Name:</strong> {donation.name || 'N/A'}<br />
+                  <strong>Address:</strong> {donation.address || 'N/A'}<br />
+                  <strong>Phone:</strong> {donation.phoneno || 'N/A'}<br />
+                  <strong>Aadhaar:</strong> {donation.aadhaarno || 'N/A'}<br />
+                  <strong>Food Type:</strong> {donation.foodType || 'N/A'}<br />
+                  <strong>Quantity:</strong> {donation.quantity} kg<br />
+                  <strong>Expiry Date:</strong> {donation.expiryDate}<br />
+                  <strong>Pickup Time:</strong> {donation.pickupTime}<br />
+                  <strong>Status:</strong> {donation.status || 'N/A'}
+                  {donation.status !== 'Delivering' && (
+                    <button onClick={() => handleDeleteDonation(donation.id)}>Delete</button>
+                  )}
+                </div>
+                 </li>
+            ))
+          ) : (
+            <p>No donation history available</p>
+          )}
       </ul>
+
     </div>
   );
 };

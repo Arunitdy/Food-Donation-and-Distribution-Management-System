@@ -1,55 +1,97 @@
 .donor {
-    padding: 20px;
-    background-color: #f9f9f9;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.donor form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.donor form label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+.donor form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.donor form button {
+  padding: 10px 20px;
+  background-color: #425BA4;
+  color: white;
+  border: 1px solid rgb(179, 185, 245);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.donor form button:hover {
+  background-color: #ffffff;
+  color: #425BA4;
+}
+
+.donor h2 {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.donor ul {
+  list-style: none;
+  padding: 0;
+}
+.donor-requests {
+  list-style: none;
+  padding: 0;
+}
+
+.donor-requests li {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column; /* Ensure column direction */
+}
+
+.task-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Space between task details */
+  width: 100%;
+  margin-bottom: 10px; /* Space below details */
+}
+
+.task-details strong {
+  margin-right: 5px; /* Add spacing between label and value */
+}
+
+.donor-requests button {
+  padding: 5px 10px;
+  background-color: #ff4d4d; /* Change color to match delete button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: auto; /* Align button to the right */
+}
+
+.donor-requests button:hover {
+  background-color: #d93c3e; /* Darker color on hover */
+}
+
+@media (max-width: 768px) {
+  .donor-requests li {
+    flex-direction: column; /* Stack items vertically on small screens */
   }
-  
-  .donor form {
-    max-width: 500px;
-    margin: 0 auto;
+
+  .task-details {
+    flex-direction: column; 
+    align-items: flex-start; /* Align details to the start */
   }
-  
-  .donor form label {
-    display: block;
-    margin: 10px 0 5px;
-  }
-  
-  .donor form input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .donor form button {
-    padding: 10px 20px;
-    background-color: #425BA4;
-    color: white;
-    border: 1px solid rgb(179, 185, 245);
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .donor form button:hover {
-    background-color: #ffffff;
-    color: #425BA4;
-  }
-  
-  .donor h2 {
-    margin-top: 40px;
-    text-align: center;
-  }
-  
-  .donor  ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .donor ul li {
-    background-color: #fff;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
+}
