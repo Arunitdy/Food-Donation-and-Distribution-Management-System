@@ -8,9 +8,9 @@ export const Donor = () => {
   const [expiryDate, setExpiryDate] = useState('');
   const [pickupTime, setPickupTime] = useState('');
   const [address, setAddress] = useState('');
-  const [phone, setPhone] = useState('');
+  const [phoneno, setPhone] = useState('');
   const [name, setName] = useState('');
-  const [aadhaar, setAadhaar] = useState('');
+  const [aadhaarno, setAadhaar] = useState('');
   const [donationHistory, setDonationHistory] = useState([]);
 
   const fetchDonationHistory = async () => {
@@ -30,9 +30,9 @@ export const Donor = () => {
       expiryDate,
       pickupTime,
       address,
-      phone,
+      phoneno,
       name,
-      aadhaar,
+      aadhaarno,
       status: 'Pending',
     };
 
@@ -89,7 +89,7 @@ export const Donor = () => {
           <label>Phone Number</label>
           <input 
             type="tel" 
-            value={phone} 
+            value={phoneno} 
             placeholder="Enter your phone number" 
             onChange={(e) => setPhone(e.target.value)} 
             required 
@@ -99,7 +99,7 @@ export const Donor = () => {
           <label>Aadhaar Number</label>
           <input 
             type="text" 
-            value={aadhaar} 
+            value={aadhaarno} 
             placeholder="Enter your Aadhaar number" 
             onChange={(e) => setAadhaar(e.target.value)} 
             required 

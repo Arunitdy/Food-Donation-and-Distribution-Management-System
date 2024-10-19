@@ -6,13 +6,13 @@ export const Receiver = function () {
     console.log("Receiver jsx");
 
     const [formData, setFormData] = useState({
-        name: '',
-        address: '',
-        phone: '',
-        foodType: '',
-        date: '',
-        time: '',
-        quantity: ''
+        name: '', 
+        address: '', 
+        phoneno: '', 
+        foodType: '', 
+        dateOfRequirement: '', 
+        quantityNeeded: '', 
+        preferredTime: '' 
     });
     const [receiverHistory, setDonationHistory] = useState([]);
 
@@ -26,7 +26,7 @@ export const Receiver = function () {
 
     const fetchReceiverHistory = async () => {
         try {
-            const response = await axios.get('/api/receiver-requests'); 
+            const response = await axios.get('http://localhost:8080/receivers/all'); 
             setDonationHistory(response.data);
         } catch (error) {
             console.error('Error fetching receiver history:', error);
@@ -35,9 +35,10 @@ export const Receiver = function () {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { name, address, phone, foodType, date, time, quantity } = formData;
 
-        if (name && address && phone && foodType && date && time && quantity) {
+        // Validate form data
+        const { name, address, phoneno, foodType, dateOfRequirement, preferredTime, quantityNeeded } = formData;
+        if (name && address && phoneno && foodType && dateOfRequirement && preferredTime && quantityNeeded) {
             console.log("Submitted Data:", formData);
             const newRequest = {
                 ...formData,
@@ -50,11 +51,11 @@ export const Receiver = function () {
                 setFormData({
                     name: '', 
                     address: '', 
-                    phone: '', 
+                    phoneno: '', 
                     foodType: '', 
-                    date: '', 
-                    time: '', 
-                    quantity: '' 
+                    dateOfRequirement: '', 
+                    quantityNeeded: '', 
+                    preferredTime: '' 
                 });
             } catch (error) {
                 console.error('Error submitting the request:', error);
@@ -98,17 +99,18 @@ export const Receiver = function () {
                 </div>
 
                 <div className='form-group'>
-                    <label htmlFor="phone">Phone Number</label>
+                    <label htmlFor="phoneno">Phone Number</label>
                     <input
                         type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
+                        id="phoneno"
+                        name="phoneno"
+                        value={formData.phoneno}
                         onChange={handleChange}
                         placeholder="Enter your phone number"
                         required
                     />
                 </div>
+
                 <div className='form-group'>
                     <label htmlFor="foodType">Type of Food</label>
                     <input
@@ -123,36 +125,36 @@ export const Receiver = function () {
                 </div>
 
                 <div className='form-group'>
-                    <label htmlFor="date">Date of Request</label>
+                    <label htmlFor="dateOfRequirement">Date of Request</label>
                     <input
                         type="date"
-                        id="date"
-                        name="date"
-                        value={formData.date}
+                        id="dateOfRequirement"
+                        name="dateOfRequirement"
+                        value={formData.dateOfRequirement}
                         onChange={handleChange}
                         required
                     />
                 </div>
 
                 <div className='form-group'>
-                    <label htmlFor="time">Preferred Time</label>
+                    <label htmlFor="preferredTime">Preferred Time</label>
                     <input
                         type="time"
-                        id="time"
-                        name="time"
-                        value={formData.time}
+                        id="preferredTime"
+                        name="preferredTime"
+                        value={formData.preferredTime}
                         onChange={handleChange}
                         required
                     />
                 </div>
 
                 <div className='form-group'>
-                    <label htmlFor="quantity">Quantity Needed</label>
+                    <label htmlFor="quantityNeeded">Quantity Needed</label>
                     <input
                         type="number"
-                        id="quantity"
-                        name="quantity"
-                        value={formData.quantity}
+                        id="quantityNeeded"
+                        name="quantityNeeded"
+                        value={formData.quantityNeeded}
                         onChange={handleChange}
                         placeholder="Enter quantity (in kg)"
                         required
@@ -165,14 +167,14 @@ export const Receiver = function () {
             <h2>Your Previous Requests</h2>
             <ul className="previous-requests">
                 {receiverHistory.map((receiver, index) => (
-                    <li key={index} className={`request-item ${receiver.status.toLowerCase()}`}>
+                    <li key={index} className={`request-item `}>
                         <strong>Name:</strong> {receiver.name} <br />
                         <strong>Address:</strong> {receiver.address} <br />
-                        <strong>Phone:</strong> {receiver.phone} <br />
+                        <strong>Phone:</strong> {receiver.phoneno} <br />
                         <strong>Food Type:</strong> {receiver.foodType} <br />
-                        <strong>Date:</strong> {receiver.date} <br />
-                        <strong>Time:</strong> {receiver.time} <br />
-                        <strong>Quantity:</strong> {receiver.quantity} kg <br />
+                        <strong>Date:</strong> {receiver.dateOfRequirement} <br />
+                        <strong>Time:</strong> {receiver.preferredTime} <br />
+                        <strong>Quantity:</strong> {receiver.quantityNeeded} kg <br />
                         <strong>Status:</strong> {receiver.status} <br />
                     </li>
                 ))}
