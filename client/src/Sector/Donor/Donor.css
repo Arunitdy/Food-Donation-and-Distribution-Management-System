@@ -44,6 +44,21 @@
   list-style: none;
   padding: 0;
 }
+
+/* Donation History */
+.request-item {
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+.request-item .task-details {
+  margin: 10px 0;
+}
+
+/* Donation Requests */
 .donor-requests {
   list-style: none;
   padding: 0;
@@ -56,19 +71,19 @@
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column; /* Ensure column direction */
+  flex-direction: column;
 }
 
 .task-details {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* Space between task details */
+  gap: 10px;
   width: 100%;
-  margin-bottom: 10px; /* Space below details */
+  margin-bottom: 10px;
 }
 
 .task-details strong {
-  margin-right: 5px; /* Add spacing between label and value */
+  margin-right: 5px;
 }
 
 .donor-requests button {
@@ -85,6 +100,27 @@
   background-color: #d93c3e; /* Darker color on hover */
 }
 
+/* Receiver Requests */
+.receiver-requests {
+  list-style-type: none;
+  padding: 0;
+}
+
+.donate-button {
+  background-color: #28a745; /* Bootstrap success color */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.donate-button:hover {
+  background-color: #218838; /* Darker shade on hover */
+}
+
+/* Responsive Styles */
 @media (max-width: 768px) {
   .donor-requests li {
     flex-direction: column; /* Stack items vertically on small screens */

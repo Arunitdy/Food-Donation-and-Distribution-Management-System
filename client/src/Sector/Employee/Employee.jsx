@@ -7,11 +7,12 @@ export const Employee = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/donors/all'); // Adjust the endpoint as necessary
+      const response = await axios.get('http://localhost:8080/donors/all'); 
       const validTasks = response.data.filter(task => 
-        new Date(task.expiryDate) > new Date() && task.status !== 'Delivered'
+        new Date(task.expiryDate) > new Date() && 
+        (task.status !== 'Delivered' || task.status === 'Accepted') 
       );
-      console.log(validTasks); // Check valid tasks structure
+      console.log(validTasks);
       setTasks(validTasks);  
     } catch (error) {
       console.error('Error fetching tasks:', error); 
@@ -60,13 +61,12 @@ export const Employee = () => {
                 <strong>Quantity:</strong> {task.quantity} kg<br />
                 <strong>Status:</strong> {task.status ? task.status : 'Unknown Status'}
                 {task.status !== 'Pending' && (
-                <button onClick={() => handleDelivering(task.id)}>Take Delivery</button>
+                  <button onClick={() => handleDelivering(task.id)}>Take Delivery</button>
                 )}
                 {task.status === 'Delivering' && (
                   <button onClick={() => handleDelivered(task.id)}>Delivery Done</button>
                 )}
               </div>
-         
             </li>
           ))
         ) : (

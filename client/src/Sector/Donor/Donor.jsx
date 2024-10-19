@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; 
+import axios from 'axios';
 import './Donor.css';
 
 export const Donor = () => {
@@ -12,13 +12,25 @@ export const Donor = () => {
   const [name, setName] = useState('');
   const [aadhaarno, setAadhaar] = useState('');
   const [donationHistory, setDonationHistory] = useState([]);
+  const [receiverRequests, setReceiverRequests] = useState([]);
 
+  // Fetch donation history
   const fetchDonationHistory = async () => {
     try {
       const response = await axios.get('http://localhost:8080/donors/all');
-      setDonationHistory(response.data); 
+      setDonationHistory(response.data);
     } catch (error) {
-      console.error('Error fetching donation history:', error); 
+      console.error('Error fetching donation history:', error);
+    }
+  };
+
+  // Fetch receiver requests
+  const fetchReceiverRequests = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/receivers/all'); 
+      setReceiverRequests(response.data);
+    } catch (error) {
+      console.error('Error fetching receiver requests:', error);
     }
   };
 
@@ -38,7 +50,8 @@ export const Donor = () => {
 
     try {
       const response = await axios.post('http://localhost:8080/donors/add', newDonation);
-      setDonationHistory([...donationHistory, response.data]); 
+      setDonationHistory([...donationHistory, response.data]);
+      // Reset form fields
       setFoodType('');
       setQuantity('');
       setExpiryDate('');
@@ -48,10 +61,11 @@ export const Donor = () => {
       setName('');
       setAadhaar('');
     } catch (error) {
-      console.error('Error submitting donation:', error); 
+      console.error('Error submitting donation:', error);
     }
   };
 
+  // Handle deleting donations
   const handleDeleteDonation = async (id) => {
     try {
       await axios.delete(`http://localhost:8080/donors/delete/${id}`);
@@ -61,9 +75,22 @@ export const Donor = () => {
     }
   };
 
+  // Handle accepting a receiver request
+  const handleAcceptRequest = async (id) => {
+    try {
+      await axios.put(`http://localhost:8080/receivers/update/${id}`, { status: 'Accepted' }); // Update status to 'Accepted'
+      setReceiverRequests(receiverRequests.map(request => 
+        request.id === id ? { ...request, status: 'Accepted' } : request
+      ));
+    } catch (error) {
+      console.error('Error accepting the request:', error);
+    }
+  };
+
   useEffect(() => {
-    fetchDonationHistory(); 
-  }, []); 
+    fetchDonationHistory();
+    fetchReceiverRequests(); // Fetch receiver requests on component mount
+  }, []);
 
   return (
     <div className="donor">
@@ -155,30 +182,51 @@ export const Donor = () => {
       {/* Donation History */}
       <h2>Your Donation History</h2>
       <ul className="donor-requests">
-          {donationHistory.length > 0 ? (
-            donationHistory.map((donation, index) => (
-              <li key={index} className={`request-item`}>
-                <div className="task-details">
-                  <strong>Name:</strong> {donation.name || 'N/A'}<br />
-                  <strong>Address:</strong> {donation.address || 'N/A'}<br />
-                  <strong>Phone:</strong> {donation.phoneno || 'N/A'}<br />
-                  <strong>Aadhaar:</strong> {donation.aadhaarno || 'N/A'}<br />
-                  <strong>Food Type:</strong> {donation.foodType || 'N/A'}<br />
-                  <strong>Quantity:</strong> {donation.quantity} kg<br />
-                  <strong>Expiry Date:</strong> {donation.expiryDate}<br />
-                  <strong>Pickup Time:</strong> {donation.pickupTime}<br />
-                  <strong>Status:</strong> {donation.status || 'N/A'}
-                  {donation.status !== 'Delivering' && (
-                    <button onClick={() => handleDeleteDonation(donation.id)}>Delete</button>
-                  )}
-                </div>
-                 </li>
-            ))
-          ) : (
-            <p>No donation history available</p>
-          )}
+        {donationHistory.length > 0 ? (
+          donationHistory.map((donation, index) => (
+            <li key={index} className={`request-item`}>
+              <div className="task-details">
+                <strong>Name:</strong> {donation.name || 'N/A'}<br />
+                <strong>Address:</strong> {donation.address || 'N/A'}<br />
+                <strong>Phone:</strong> {donation.phoneno || 'N/A'}<br />
+                <strong>Aadhaar:</strong> {donation.aadhaarno || 'N/A'}<br />
+                <strong>Food Type:</strong> {donation.foodType || 'N/A'}<br />
+                <strong>Quantity:</strong> {donation.quantity} kg<br />
+                <strong>Expiry Date:</strong> {donation.expiryDate}<br />
+                <strong>Pickup Time:</strong> {donation.pickupTime}<br />
+                <strong>Status:</strong> {donation.status || 'N/A'}
+                {donation.status !== 'Delivering' && (
+                  <button onClick={() => handleDeleteDonation(donation.id)}>Delete</button>
+                )}
+              </div>
+            </li>
+          ))
+        ) : (
+          <p>No donation history available</p>
+        )}
       </ul>
 
+      {/* Receiver Requests */}
+      <h2>Receiver Requests</h2>
+      <ul className="receiver-requests">
+        {receiverRequests.length > 0 ? (
+          receiverRequests.map((request, index) => (
+            <li key={index} className={`request-item`}>
+              <div className="task-details">
+                <strong>Name:</strong> {request.name}<br />
+                <strong>Food Type:</strong> {request.foodType}<br />
+                <strong>Quantity Needed:</strong> {request.quantityNeeded} kg<br />
+                <strong>Status:</strong> {request.status}
+                <button onClick={() => handleAcceptRequest(request.id)} className="donate-button">
+                  Donate
+                </button>
+              </div>
+            </li>
+          ))
+        ) : (
+          <p>No receiver requests available</p>
+        )}
+      </ul>
     </div>
   );
 };
