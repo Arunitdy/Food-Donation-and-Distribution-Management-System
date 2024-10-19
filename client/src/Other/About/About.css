@@ -1,0 +1,14 @@
+.about {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .about h1 {
+    text-align: center;
+  }
+  
+  .about p {
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+  

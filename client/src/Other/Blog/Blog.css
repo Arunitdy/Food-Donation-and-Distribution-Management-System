@@ -1,0 +1,17 @@
+.blog {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .blog h1 {
+    text-align: center;
+  }
+  
+  .blog article {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  

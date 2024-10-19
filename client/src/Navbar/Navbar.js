@@ -24,19 +24,19 @@ export const Navbar = ({ loginSiginin, setSignupVisible, setLoginVisible, setLog
 
       <div className="NavButton">
         <Link to="/"><button className="Home individual-NavButton">Home</button></Link>
-        <Link to="/"><button className="Donor individual-NavButton">About</button></Link>
-        <Link to="/"><button className="Services individual-NavButton">Services</button></Link>
-        <Link to="/"><button className="Contact individual-NavButton">Contact</button></Link>
-        <Link to="/"><button className="Blog individual-NavButton">Blog</button></Link>
+        <Link to="/about"><button className="About individual-NavButton">About</button></Link>
+        <Link to="/services"><button className="Services individual-NavButton">Services</button></Link>
+        <Link to="/contact"><button className="Contact individual-NavButton">Contact</button></Link>
+        <Link to="/blog"><button className="Blog individual-NavButton">Blog</button></Link>
       </div>
 
       {navVisible && (
         <div className="NavButton-Popup">
           <Link to="/"><button className="Home individual-NavButton">Home</button></Link>
-          <Link to="/"><button className="Donor individual-NavButton">About</button></Link>
-          <Link to="/"><button className="Services individual-NavButton">Services</button></Link>
-          <Link to="/"><button className="Contact individual-NavButton">Contact</button></Link>
-          <Link to="/"><button className="Blog individual-NavButton">Blog</button></Link>
+          <Link to="/about"><button className="About individual-NavButton">About</button></Link>
+          <Link to="/services"><button className="Services individual-NavButton">Services</button></Link>
+          <Link to="/contact"><button className="Contact individual-NavButton">Contact</button></Link>
+          <Link to="/blog"><button className="Blog individual-NavButton">Blog</button></Link>
         </div>
       )}
 

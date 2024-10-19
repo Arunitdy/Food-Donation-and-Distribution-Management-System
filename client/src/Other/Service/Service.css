@@ -1,0 +1,22 @@
+.services {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .services h1 {
+    text-align: center;
+  }
+  
+  .services ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .services li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
