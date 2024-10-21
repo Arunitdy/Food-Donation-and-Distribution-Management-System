@@ -35,8 +35,8 @@ export const Inventory = () => {
   };
 
   const isExpired = (expiryDate) => {
-    const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
-    return expiryDate <= today; // Check if the expiry date is today or earlier
+    const today = new Date().toISOString().split('T')[0]; 
+    return expiryDate <= today; 
   };
 
   useEffect(() => {
