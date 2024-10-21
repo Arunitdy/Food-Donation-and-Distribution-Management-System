@@ -153,7 +153,7 @@ export const Donor = () => {
           <input 
             type="number" 
             value={quantity} 
-            placeholder="Enter quantity in kg" 
+            placeholder="Enter quantity (number of people)" 
             onChange={(e) => setQuantity(e.target.value)} 
             required 
           />
@@ -191,7 +191,7 @@ export const Donor = () => {
                 <strong>Phone:</strong> {donation.phoneno || 'N/A'}<br />
                 <strong>Aadhaar:</strong> {donation.aadhaarno || 'N/A'}<br />
                 <strong>Food Type:</strong> {donation.foodType || 'N/A'}<br />
-                <strong>Quantity:</strong> {donation.quantity} kg<br />
+                <strong>Quantity:</strong> {donation.quantity} <br />
                 <strong>Expiry Date:</strong> {donation.expiryDate}<br />
                 <strong>Pickup Time:</strong> {donation.pickupTime}<br />
                 <strong>Status:</strong> {donation.status || 'N/A'}

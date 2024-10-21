@@ -54,7 +54,7 @@ export const Inventory = () => {
           {donations.map((donation) => (
             <li key={donation.id} className="donation-item">
               <strong>Food Type:</strong> {donation.foodType} <br />
-              <strong>Quantity:</strong> {donation.quantity} kg <br />
+              <strong>Quantity:</strong> {donation.quantity}  <br />
               <strong>Expiry Date:</strong> {donation.expiryDate} <br />
               <strong>Pickup Time:</strong> {donation.pickupTime} <br />
               <strong>Status:</strong> {donation.status} <br />

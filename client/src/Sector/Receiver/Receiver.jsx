@@ -166,7 +166,7 @@ export const Receiver = function () {
                         name="quantityNeeded"
                         value={formData.quantityNeeded}
                         onChange={handleChange}
-                        placeholder="Enter quantity (in kg)"
+                        placeholder="Enter quantity (number of people)" 
                         required
                     />
                 </div>
@@ -183,7 +183,7 @@ export const Receiver = function () {
                         <strong>Food Type:</strong> {receiver.foodType} <br />
                         <strong>Date:</strong> {receiver.dateOfRequirement} <br />
                         <strong>Time:</strong> {receiver.preferredTime} <br />
-                        <strong>Quantity:</strong> {receiver.quantityNeeded} kg <br />
+                        <strong>Quantity:</strong> {receiver.quantityNeeded} <br />
                         <strong>Status:</strong> {receiver.status} <br />
                         <button onClick={() => handleDelete(receiver.id)} className="delete-button">Delete Request</button>
                     </li>

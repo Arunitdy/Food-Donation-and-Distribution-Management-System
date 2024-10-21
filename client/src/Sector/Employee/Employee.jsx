@@ -58,7 +58,7 @@ export const Employee = () => {
                 <strong>Address:</strong> {task.address}<br />
                 <strong>Phone No:</strong> {task.phoneno}<br />
                 <strong>Expiry Date:</strong> {task.expiryDate}<br />
-                <strong>Quantity:</strong> {task.quantity} kg<br />
+                <strong>Quantity:</strong> {task.quantity} <br />
                 <strong>Status:</strong> {task.status ? task.status : 'Unknown Status'}
                 {task.status !== 'Pending' && (
                   <button onClick={() => handleDelivering(task.id)}>Take Delivery</button>
