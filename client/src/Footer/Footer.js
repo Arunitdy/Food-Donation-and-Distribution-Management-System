@@ -63,16 +63,16 @@ export const Footer = () => {
 
       {/* Social Media Links */}
       <div className="social">
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a href="" target="_blank" rel="noopener noreferrer">
           <img src='https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-large-size-PNG.png' alt="Facebook" className="fa fa-facebook" />
         </a>
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a href="" target="_blank" rel="noopener noreferrer">
           <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTEEj5FJorXllMEvr7SNuA14DJX6DV7eu09Q&s' alt="Instagram" className="fa fa-instagram" />
         </a>
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a href="" target="_blank" rel="noopener noreferrer">
           <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrIbiofxGclX20CWBDtpmjOcbbuqEJS6PrSQ&s' alt="LinkedIn" className="fa fa-linkedin" />
         </a>
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a href="" target="_blank" rel="noopener noreferrer">
           <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAZjIr23tvjBqyt4fGvtFEVdRaQmbRcgMZLuXHfE7Lj0EbMJHy4Q4bm7ZvBQRxMHu435c&usqp=CAU' alt="YouTube" className="fa fa-youtube" />
         </a>
       </div>
