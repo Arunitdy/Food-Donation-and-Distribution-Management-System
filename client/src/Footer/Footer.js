@@ -61,7 +61,7 @@ export const Footer = () => {
         </div>
       </div>
 
-      {/* Social Media Links */}
+      {/* Social Media Links 
       <div className="social">
         <a href="" target="_blank" rel="noopener noreferrer">
           <img src='https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-large-size-PNG.png' alt="Facebook" className="fa fa-facebook" />
@@ -76,7 +76,7 @@ export const Footer = () => {
           <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAZjIr23tvjBqyt4fGvtFEVdRaQmbRcgMZLuXHfE7Lj0EbMJHy4Q4bm7ZvBQRxMHu435c&usqp=CAU' alt="YouTube" className="fa fa-youtube" />
         </a>
       </div>
-
+*/}
       {/* Footer Links */}
       <div className="footer-link-container">
         <div className="footer-links">
