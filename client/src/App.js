@@ -15,11 +15,6 @@ import { About } from './Other/About/About';
 import { Contact } from './Other/Contact/Contact';
 import { Blog } from './Other/Blog/Blog';
 import { Services } from './Other/Service/Service';
-const express = require('express');
-const cors = require('cors');
-const app = express();
-
-app.use(cors()); // Enables CORS for all routes
 
 function App() {
   const [loginSiginin, setLoginSiginin] = useState(() => {
