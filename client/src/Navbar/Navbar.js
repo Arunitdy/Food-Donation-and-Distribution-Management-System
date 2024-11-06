@@ -32,6 +32,7 @@ export const Navbar = ({ loginSignin, setSignupVisible, setLoginVisible, setLogi
         <Link to="/services"><button className="Services individual-NavButton">Services</button></Link>
         <Link to="/contact"><button className="Contact individual-NavButton">Contact</button></Link>
         <Link to="/blog"><button className="Blog individual-NavButton">Blog</button></Link>
+        <Link to="/help"><button className="Help individual-NavButton">Help</button></Link>
       </div>
 
       {navVisible && (
@@ -41,6 +42,8 @@ export const Navbar = ({ loginSignin, setSignupVisible, setLoginVisible, setLogi
           <Link to="/services" onClick={handleCloseNav}><button className="Services individual-NavButton">Services</button></Link>
           <Link to="/contact" onClick={handleCloseNav}><button className="Contact individual-NavButton">Contact</button></Link>
           <Link to="/blog" onClick={handleCloseNav}><button className="Blog individual-NavButton">Blog</button></Link>
+          <Link to="/help" onClick={handleCloseNav}><button className="Help individual-NavButton">Help</button></Link>
+      
         </div>
       )}
 

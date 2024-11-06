@@ -15,6 +15,7 @@ import { About } from './Other/About/About';
 import { Contact } from './Other/Contact/Contact';
 import { Blog } from './Other/Blog/Blog';
 import { Services } from './Other/Service/Service';
+import { Help } from './Other/Help/Help';
 
 function App() {
   const [loginSiginin, setLoginSiginin] = useState(() => {
@@ -59,6 +60,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/help" element={<Help />} />
       </Routes>
 
       <Footer />
