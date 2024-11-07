@@ -4,15 +4,17 @@ import './Help.css';
 export const Help = () => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
+  const [history, setHistory] = useState([]); 
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Add the user's message to the chat
-    setMessages((prevMessages) => [...prevMessages, { sender: 'user', text: input }]);
+    const userMessage = { sender: 'user', text: input };
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
+    setHistory((prevHistory) => [...prevHistory, userMessage.text]);
 
-    const apiKey = 'AIzaSyCZ-dsLDmfV8N0qaVMhNkrJhAOmTcy-cvE'; // Move to backend for security
+    const apiKey = 'AIzaSyCZ-dsLDmfV8N0qaVMhNkrJhAOmTcy-cvE';
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
 
     const data = {
@@ -34,17 +36,17 @@ export const Help = () => {
                 The project, detailed in a Software Requirements Specification (SRS) document by Aswaljith P R, Arun M, Usam bin Muhammed, and Abijith SL, outlines the platform’s goals and features to support effective development and deployment.
 
                 Respond to user questions with answers that are friendly, easy to understand, and based on the information provided here. Avoid extra symbols or technical language.
-
-                ${input}
               `
-            }
+            },
+            ...history.map((text) => ({ text })), // conversation history
+            { text: input } // current question
           ]
         }
       ]
     };
 
     try {
-      setLoading(true);  // Set loading to true while fetching
+      setLoading(true);
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -56,12 +58,14 @@ export const Help = () => {
       const result = await response.json();
       const aiResponse = result.candidates[0].content.parts[0].text;
 
-      setMessages((prevMessages) => [...prevMessages, { sender: 'ai', text: aiResponse }]);
+      const aiMessage = { sender: 'ai', text: aiResponse };
+      setMessages((prevMessages) => [...prevMessages, aiMessage]);
+      setHistory((prevHistory) => [...prevHistory, aiResponse]); // add AI response to history
       setInput('');
     } catch (error) {
       console.error('Error:', error);
     } finally {
-      setLoading(false);  // Set loading to false once the request completes
+      setLoading(false);
     }
   };
 
