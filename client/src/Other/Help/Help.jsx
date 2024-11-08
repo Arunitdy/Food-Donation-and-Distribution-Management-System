@@ -38,8 +38,8 @@ export const Help = () => {
                 Respond to user questions with answers that are friendly, easy to understand, and based on the information provided here. Avoid extra symbols or technical language.
               `
             },
-            ...history.map((text) => ({ text })), // conversation history
-            { text: input } // current question
+            ...history.map((text) => ({ text })), 
+            { text: input } 
           ]
         }
       ]

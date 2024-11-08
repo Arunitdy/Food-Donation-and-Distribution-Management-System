@@ -9,10 +9,11 @@ export const Receiver = function () {
         name: '', 
         address: '', 
         phoneno: '', 
-        foodType: '', // Default to Breakfast
+        foodType: 'Breakfast', // Default food type
         dateOfRequirement: '', 
         quantityNeeded: '', 
-        preferredTime: '' 
+        preferredTime: '', 
+        status: 'Pending' // Default status
     });
     const [receiverHistory, setDonationHistory] = useState([]);
 
@@ -35,31 +36,21 @@ export const Receiver = function () {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Validate form data
-        const { name, address, phoneno, foodType, dateOfRequirement, preferredTime, quantityNeeded } = formData;
-        if (name && address && phoneno && foodType && dateOfRequirement && preferredTime && quantityNeeded) {
-            console.log("Submitted Data:", formData);
-            const newRequest = {
-                ...formData,
-                status: "Pending"
-            };
-
-            try {
-                const response = await axios.post('http://localhost:8080/receivers/add', newRequest); 
-                setDonationHistory([...receiverHistory, response.data]);
-                setFormData({
-                    name: '', 
-                    address: '', 
-                    phoneno: '', 
-                    foodType: '', 
-                    dateOfRequirement: '', 
-                    quantityNeeded: '', 
-                    preferredTime: '' 
-                });
-            } catch (error) {
-                console.error('Error submitting the request:', error);
-            }
+        try {
+            const response = await axios.post('http://localhost:8080/receivers/add', formData); 
+            setDonationHistory([...receiverHistory, response.data]);
+            setFormData({
+                name: '', 
+                address: '', 
+                phoneno: '', 
+                foodType: 'Breakfast', 
+                dateOfRequirement: '', 
+                quantityNeeded: '', 
+                preferredTime: '', 
+                status: 'Pending' // Reset status to default
+            });
+        } catch (error) {
+            console.error('Error submitting the request:', error);
         }
     };
 
