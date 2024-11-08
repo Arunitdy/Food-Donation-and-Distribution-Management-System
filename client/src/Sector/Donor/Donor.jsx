@@ -12,7 +12,6 @@ export const Donor = () => {
   const [name, setName] = useState('');
   const [aadhaarno, setAadhaar] = useState('');
   const [donationHistory, setDonationHistory] = useState([]);
-  const [receiverRequests, setReceiverRequests] = useState([]);
 
   // Fetch donation history
   const fetchDonationHistory = async () => {
@@ -21,16 +20,6 @@ export const Donor = () => {
       setDonationHistory(response.data);
     } catch (error) {
       console.error('Error fetching donation history:', error);
-    }
-  };
-
-  // Fetch receiver requests
-  const fetchReceiverRequests = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/receivers/all'); 
-      setReceiverRequests(response.data);
-    } catch (error) {
-      console.error('Error fetching receiver requests:', error);
     }
   };
 
@@ -45,11 +34,11 @@ export const Donor = () => {
       phoneno,
       name,
       aadhaarno,
-      status: 'Pending',
+      status: 'Pending', // Add status here with the default value 'Pending'
     };
 
     try {
-      const response = await axios.post('http://localhost:8080/donors/add', newDonation);
+      const response = await axios.post('http://localhost:8080/donors/inventoryadd', newDonation);
       setDonationHistory([...donationHistory, response.data]);
       // Reset form fields
       setFoodType('');
@@ -75,21 +64,8 @@ export const Donor = () => {
     }
   };
 
-  // Handle accepting a receiver request
-  const handleAcceptRequest = async (id) => {
-    try {
-      await axios.put(`http://localhost:8080/receivers/update/${id}`, { status: 'Accepted' }); // Update status to 'Accepted'
-      setReceiverRequests(receiverRequests.map(request => 
-        request.id === id ? { ...request, status: 'Accepted' } : request
-      ));
-    } catch (error) {
-      console.error('Error accepting the request:', error);
-    }
-  };
-
   useEffect(() => {
     fetchDonationHistory();
-    fetchReceiverRequests(); // Fetch receiver requests on component mount
   }, []);
 
   return (
@@ -138,15 +114,18 @@ export const Donor = () => {
             required 
           />
         </div>
-        <div>
+        <div className='foodType'>
           <label>Food Type</label>
-          <input 
-            type="text" 
+          <select 
             value={foodType} 
-            placeholder="Enter type of food" 
             onChange={(e) => setFoodType(e.target.value)} 
-            required 
-          />
+            required
+          >
+            <option value="" disabled>Select type of food</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+          </select>
         </div>
         <div>
           <label>Quantity (Kg)</label>
@@ -203,28 +182,6 @@ export const Donor = () => {
           ))
         ) : (
           <p>No donation history available</p>
-        )}
-      </ul>
-
-      {/* Receiver Requests */}
-      <h2>Receiver Requests</h2>
-      <ul className="receiver-requests">
-        {receiverRequests.length > 0 ? (
-          receiverRequests.map((request, index) => (
-            <li key={index} className={`request-item`}>
-              <div className="task-details">
-                <strong>Name:</strong> {request.name}<br />
-                <strong>Food Type:</strong> {request.foodType}<br />
-                <strong>Quantity Needed:</strong> {request.quantityNeeded} kg<br />
-                <strong>Status:</strong> {request.status}
-                <button onClick={() => handleAcceptRequest(request.id)} className="donate-button">
-                  Donate
-                </button>
-              </div>
-            </li>
-          ))
-        ) : (
-          <p>No receiver requests available</p>
         )}
       </ul>
     </div>
