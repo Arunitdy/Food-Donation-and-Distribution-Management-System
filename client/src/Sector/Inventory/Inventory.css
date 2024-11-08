@@ -13,12 +13,12 @@
   margin-bottom: 20px;
 }
 
-.list-container {
+.inventory .list-container {
   display: flex;
   gap: 20px; /* Reduced gap between sections */
 }
 
-.list-section {
+.inventory .list-section {
   flex: 1;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -26,13 +26,13 @@
   background-color: #fff;
 }
 
-.requests-list, .donations-list {
+.inventory .requests-list, .donations-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-.request-item, .donation-item {
+.inventory .request-item, .donation-item {
   margin-bottom: 15px;
   padding: 12px; /* Reduced padding inside items */
   border: 1px solid #ccc;
@@ -41,16 +41,16 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.request-item:hover, .donation-item:hover {
+.inventory .request-item:hover, .donation-item:hover {
   background-color: #f1f1f1;
   cursor: pointer;
 }
 
-.request-item strong, .donation-item strong {
+.inventory .request-item strong, .donation-item strong {
   color: #333;
 }
 
-button {
+.inventory button {
   padding: 8px 12px; /* Reduced padding for buttons */
   background-color: #007bff;
   color: white;
@@ -60,41 +60,41 @@ button {
   margin-top: 10px;
 }
 
-button:hover {
+.inventory button:hover {
   background-color: #0056b3;
 }
 
-button:disabled {
+.inventory button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-.donation-item p {
+.inventory .donation-item p {
   margin-top: 10px;
   color: red;
   font-weight: bold;
 }
 
-.list-section h2 {
+.inventory .list-section h2 {
   font-size: 1.4rem; /* Reduced font size for section titles */
   color: #333;
   margin-bottom: 15px;
 }
-.modal input{
+.inventory .modal input{
   width: 70%;
 }
-.modal button{
+.inventory .modal button{
   width: auto;
   display: flex;
   margin: 10px;
 }
-.modal .cancel{
+.inventory .modal .cancel{
   background-color: #dc3545;
 }
-.modal .cancel:hover{
+.inventory .modal .cancel:hover{
   background-color: #f75565;
 }
-.modal {
+.inventory .modal {
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -113,7 +113,7 @@ button:disabled {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-.modal > div {
+.inventory .modal > div {
   background-color: white; /* Ensure the modal content background is white */
   padding: 30px;
   border-radius: 8px;
@@ -121,7 +121,7 @@ button:disabled {
   width: 100%;
 }
 
-input {
+.inventory input {
   display: block;
   margin: 10px 0;
   padding: 10px;
@@ -130,16 +130,16 @@ input {
   border-radius: 4px;
 }
 
-button {
+.inventory button {
   width: 100%;
   padding: 10px;
   background-color: #28a745;
 }
 
-button.cancel {
+.inventory button.cancel {
   background-color: #dc3545;
 }
 
-.modal button {
+.inventory .modal button {
   margin-top: 10px;
 }

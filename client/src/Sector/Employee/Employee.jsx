@@ -4,13 +4,20 @@ import './Employee.css';
 
 export const Employee = () => {
   const [tasks, setTasks] = useState([]);
+  const [deliveryDetails, setDeliveryDetails] = useState({
+    name: '',
+    contact: ''
+  });
+  const [isDeliveryFormVisible, setDeliveryFormVisible] = useState(false);
+  const [currentTaskId, setCurrentTaskId] = useState(null);
 
+  // Fetch tasks with 'Pending' status
   const fetchTasks = async () => {
     try {
       const response = await axios.get('http://localhost:8080/donors/all'); 
       const validTasks = response.data.filter(task => 
         new Date(task.expiryDate) > new Date() && 
-        (task.status !== 'Delivered' || task.status === 'Accepted') 
+        task.status === 'Pending'  // Only fetch tasks with Pending status
       );
       console.log(validTasks);
       setTasks(validTasks);  
@@ -19,25 +26,82 @@ export const Employee = () => {
     }
   };
 
-  const handleDelivering = async (id) => {
+  // Handle 'Take Delivery' button click
+  const handleTakeDelivery = (id) => {
+    setCurrentTaskId(id);
+    setDeliveryFormVisible(true);  // Show the delivery form
+  };
+
+  // Handle the delivery form submission
+  const handleSubmitDelivery = async () => {
+    if (!deliveryDetails.name || !deliveryDetails.contact) {
+      alert('Please fill in all the delivery details.');
+      return;
+    }
+
     try {
-      await axios.put(`http://localhost:8080/donors/update/${id}`, { status: 'Delivering' });
+      // Step 1: Delete the existing task (Donor, Receiver, Employee)
+      await Promise.all([
+        axios.delete(`http://localhost:8080/donors/delete/${currentTaskId}`),
+        axios.delete(`http://localhost:8080/receivers/delete/${currentTaskId}`),
+        axios.delete(`http://localhost:8080/employees/delete/${currentTaskId}`)
+      ]);
+      
+      // Step 2: Add the new task with updated status and delivery details
+      const newTask = {
+        id: currentTaskId,
+        status: 'Delivering',
+        deliveryBoyName: deliveryDetails.name,
+        deliveryBoyContact: deliveryDetails.contact
+      };
+
+      await Promise.all([
+        axios.post('http://localhost:8080/donors/add', newTask),
+        axios.post('http://localhost:8080/receivers/add', newTask),
+        axios.post('http://localhost:8080/employees/add', newTask)
+      ]);
+
+      // Update the tasks list with the new status
       setTasks(tasks.map(task => 
-        task.id === id ? { ...task, status: 'Delivering' } : task
+        task.id === currentTaskId ? { ...task, status: 'Delivering', ...newTask } : task
       ));
+
+      // Hide the delivery form
+      setDeliveryFormVisible(false);
+      setDeliveryDetails({ name: '', contact: '' });
     } catch (error) {
-      console.error('Error updating status to Delivering:', error);
+      console.error('Error updating task to Delivering:', error);
     }
   };
 
-  const handleDelivered = async (id) => {
+  // Handle 'Delivery Done' button click
+  const handleDeliveryDone = async (id) => {
     try {
-      await axios.put(`http://localhost:8080/donors/update/${id}`, { status: 'Delivered' });
+      // Step 1: Delete the existing task (Donor, Receiver, Employee)
+      await Promise.all([
+        axios.delete(`http://localhost:8080/donors/delete/${id}`),
+        axios.delete(`http://localhost:8080/receivers/delete/${id}`),
+        axios.delete(`http://localhost:8080/employees/delete/${id}`)
+      ]);
+
+      // Step 2: Add the new task with updated status to 'Delivered'
+      const deliveredTask = {
+        id,
+        status: 'Delivered',
+      };
+
+      await Promise.all([
+        axios.post('http://localhost:8080/donors/add', deliveredTask),
+        axios.post('http://localhost:8080/receivers/add', deliveredTask),
+        axios.post('http://localhost:8080/employees/add', deliveredTask)
+      ]);
+
+      // Update the tasks list with the new status
       setTasks(tasks.map(task => 
         task.id === id ? { ...task, status: 'Delivered' } : task
       ));
     } catch (error) {
-      console.error('Error updating status to Delivered:', error);
+      console.error('Error updating task to Delivered:', error);
     }
   };
 
@@ -60,11 +124,11 @@ export const Employee = () => {
                 <strong>Expiry Date:</strong> {task.expiryDate}<br />
                 <strong>Quantity:</strong> {task.quantity} <br />
                 <strong>Status:</strong> {task.status ? task.status : 'Unknown Status'}
-                {task.status !== 'Pending' && (
-                  <button onClick={() => handleDelivering(task.id)}>Take Delivery</button>
+                {task.status === 'Pending' && (
+                  <button onClick={() => handleTakeDelivery(task.id)}>Take Delivery</button>
                 )}
                 {task.status === 'Delivering' && (
-                  <button onClick={() => handleDelivered(task.id)}>Delivery Done</button>
+                  <button onClick={() => handleDeliveryDone(task.id)}>Delivery Done</button>
                 )}
               </div>
             </li>
@@ -73,6 +137,29 @@ export const Employee = () => {
           <p>No tasks available</p>
         )}
       </ul>
+
+      {/* Delivery Form Modal */}
+      {isDeliveryFormVisible && (
+        <div className="modal">
+          <h2>Enter Delivery Boy Details</h2>
+          <input
+            type="text"
+            placeholder="Delivery Boy's Name"
+            value={deliveryDetails.name}
+            onChange={(e) => setDeliveryDetails({ ...deliveryDetails, name: e.target.value })}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Delivery Boy's Contact"
+            value={deliveryDetails.contact}
+            onChange={(e) => setDeliveryDetails({ ...deliveryDetails, contact: e.target.value })}
+            required
+          />
+          <button onClick={handleSubmitDelivery}>Submit Delivery</button>
+          <button onClick={() => setDeliveryFormVisible(false)}>Cancel</button>
+        </div>
+      )}
     </div>
   );
 };

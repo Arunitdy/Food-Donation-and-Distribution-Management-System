@@ -24,6 +24,7 @@ export const Inventory = () => {
   const [selectedDonationId, setSelectedDonationId] = useState(null);
   const [selectedReceiverId, setSelectedReceiverId] = useState(null);
 
+  // Fetch Donations
   const fetchDonations = async () => {
     try {
       const response = await axios.get('http://localhost:8080/donors/all');
@@ -34,6 +35,7 @@ export const Inventory = () => {
     }
   };
 
+  // Fetch Receiver Requests
   const fetchReceiverRequests = async () => {
     try {
       const response = await axios.get('http://localhost:8080/receivers/all');
@@ -43,6 +45,7 @@ export const Inventory = () => {
     }
   };
 
+  // Handle Donation Action
   const handleDonate = (receiverId) => {
     const receiver = receiverRequests.find(req => req.id === receiverId);
     setReceiverDetails({
@@ -56,6 +59,7 @@ export const Inventory = () => {
     setReceiverFormVisible(true);
   };
 
+  // Handle Accept Donation
   const handleAcceptDonation = (donationId) => {
     const donation = donations.find(don => don.id === donationId);
     setDonorDetails({
@@ -69,6 +73,7 @@ export const Inventory = () => {
     setDonationFormVisible(true);
   };
 
+  // Submit Donation
   const handleSubmitDonation = async () => {
     if (!donorDetails.name || !donorDetails.address || !donorDetails.phoneno || !donorDetails.foodType || !donorDetails.quantity) {
       alert('All fields are required!');
@@ -92,6 +97,9 @@ export const Inventory = () => {
         status: 'Pending',
       });
 
+      // Step 4: Send the delivery details
+      await sendDeliveryDetails();
+
       // Refetch data after submitting
       fetchDonations();
       fetchReceiverRequests();
@@ -101,6 +109,7 @@ export const Inventory = () => {
     }
   };
 
+  // Submit Receiver
   const handleSubmitReceiver = async () => {
     if (!receiverDetails.name || !receiverDetails.address || !receiverDetails.phoneno || !receiverDetails.foodType || !receiverDetails.quantityNeeded) {
       alert('All fields are required!');
@@ -124,6 +133,9 @@ export const Inventory = () => {
         status: 'Accepted',
       });
 
+      // Step 4: Send the delivery details
+      await sendDeliveryDetails();
+
       // Refetch data after submitting
       fetchDonations();
       fetchReceiverRequests();
@@ -133,11 +145,34 @@ export const Inventory = () => {
     }
   };
 
+  // Check if Donation Expired
   const isExpired = (expiryDate) => {
     const today = new Date().toISOString().split('T')[0];
     return expiryDate <= today;
   };
 
+  // Send Delivery Details
+  const sendDeliveryDetails = async () => {
+    const deliveryData = {
+      donorName: donorDetails.name,
+      donorAddress: donorDetails.address,
+      donorPhone: donorDetails.phoneno,
+      receiverName: receiverDetails.name,
+      receiverAddress: receiverDetails.address,
+      receiverPhone: receiverDetails.phoneno,
+      foodType: donorDetails.foodType,
+      quantity: donorDetails.quantity,
+    };
+
+    try {
+      await axios.post('http://localhost:8080/deliveries/create', deliveryData);
+      alert('Delivery details submitted successfully!');
+    } catch (error) {
+      console.error('Error submitting delivery details:', error);
+    }
+  };
+
+  // Fetch Data on Component Mount
   useEffect(() => {
     fetchDonations();
     fetchReceiverRequests();
@@ -230,7 +265,7 @@ export const Inventory = () => {
             required
           />
           <button onClick={handleSubmitDonation}>Submit Donation</button>
-          <button onClick={() => setDonationFormVisible(false)}>Cancel</button>
+          <button onClick={() => setDonationFormVisible(false)}className="cancel">Cancel</button>
         </div>
       )}
 
@@ -274,9 +309,11 @@ export const Inventory = () => {
             required
           />
           <button onClick={handleSubmitReceiver}>Submit Request</button>
-          <button onClick={() => setReceiverFormVisible(false)}>Cancel</button>
+          <button onClick={() => setReceiverFormVisible(false)}className="cancel">Cancel</button>
         </div>
       )}
     </div>
   );
 };
+
+export default Inventory;
