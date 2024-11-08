@@ -13,8 +13,9 @@ export const Receiver = function () {
         dateOfRequirement: '', 
         quantityNeeded: '', 
         preferredTime: '', 
-        status: 'Pending' // Default status
+        status: 'PENDING' // Default status as per backend enum
     });
+
     const [receiverHistory, setDonationHistory] = useState([]);
 
     const handleChange = (e) => {
@@ -37,6 +38,7 @@ export const Receiver = function () {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            // Send form data to the backend
             const response = await axios.post('http://localhost:8080/receivers/add', formData); 
             setDonationHistory([...receiverHistory, response.data]);
             setFormData({
@@ -47,7 +49,7 @@ export const Receiver = function () {
                 dateOfRequirement: '', 
                 quantityNeeded: '', 
                 preferredTime: '', 
-                status: 'Pending' // Reset status to default
+                status: 'PENDING' // Reset status to default
             });
         } catch (error) {
             console.error('Error submitting the request:', error);
@@ -175,7 +177,7 @@ export const Receiver = function () {
                         <strong>Quantity:</strong> {receiver.quantityNeeded} &nbsp;
                         <strong>Expiry Date:</strong> {receiver.dateOfRequirement} &nbsp;
                         <strong>Pickup Time:</strong> {receiver.preferredTime} &nbsp;
-                        <strong>Status:</strong> <span className={receiver.status === 'Expired' ? 'status-expired' : 'status-active'}>
+                        <strong>Status:</strong> <span className={receiver.status === 'EXPIRED' ? 'status-expired' : 'status-active'}>
                         {receiver.status}
                         </span>
                     </div>
