@@ -9,7 +9,7 @@ export const Receiver = function () {
         name: '', 
         address: '', 
         phoneno: '', 
-        foodType: 'Breakfast', // Default to Breakfast
+        foodType: '', // Default to Breakfast
         dateOfRequirement: '', 
         quantityNeeded: '', 
         preferredTime: '' 
@@ -52,7 +52,7 @@ export const Receiver = function () {
                     name: '', 
                     address: '', 
                     phoneno: '', 
-                    foodType: 'Breakfast', 
+                    foodType: '', 
                     dateOfRequirement: '', 
                     quantityNeeded: '', 
                     preferredTime: '' 

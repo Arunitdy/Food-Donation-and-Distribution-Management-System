@@ -19,10 +19,41 @@ export const Employee = () => {
         new Date(task.expiryDate) > new Date() && 
         task.status === 'Pending'  // Only fetch tasks with Pending status
       );
-      console.log(validTasks);
+      console.log('Fetched tasks:', validTasks);
       setTasks(validTasks);  
     } catch (error) {
       console.error('Error fetching tasks:', error); 
+    }
+  };
+
+  // Helper function for deleting and adding task
+  const updateTaskStatus = async (id, status, deliveryDetails = {}) => {
+    try {
+      // Delete existing task (Donor, Receiver, Employee)
+      await Promise.all([
+        axios.delete(`http://localhost:8080/donors/delete/${id}`),
+        axios.delete(`http://localhost:8080/receivers/delete/${id}`),
+        axios.delete(`http://localhost:8080/employees/delete/${id}`)
+      ]);
+
+      // Add updated task with new status
+      const updatedTask = {
+        id,
+        status,
+        ...deliveryDetails
+      };
+
+      await Promise.all([
+        axios.post('http://localhost:8080/donors/add', updatedTask),
+        axios.post('http://localhost:8080/receivers/add', updatedTask),
+        axios.post('http://localhost:8080/employees/add', updatedTask)
+      ]);
+
+      console.log(`Task ${status}:`, updatedTask);
+      return updatedTask;
+    } catch (error) {
+      console.error(`Error updating task to ${status}:`, error);
+      throw error;
     }
   };
 
@@ -40,68 +71,34 @@ export const Employee = () => {
     }
 
     try {
-      // Step 1: Delete the existing task (Donor, Receiver, Employee)
-      await Promise.all([
-        axios.delete(`http://localhost:8080/donors/delete/${currentTaskId}`),
-        axios.delete(`http://localhost:8080/receivers/delete/${currentTaskId}`),
-        axios.delete(`http://localhost:8080/employees/delete/${currentTaskId}`)
-      ]);
+      const updatedTask = await updateTaskStatus(currentTaskId, 'Delivering', deliveryDetails);
       
-      // Step 2: Add the new task with updated status and delivery details
-      const newTask = {
-        id: currentTaskId,
-        status: 'Delivering',
-        deliveryBoyName: deliveryDetails.name,
-        deliveryBoyContact: deliveryDetails.contact
-      };
-
-      await Promise.all([
-        axios.post('http://localhost:8080/donors/add', newTask),
-        axios.post('http://localhost:8080/receivers/add', newTask),
-        axios.post('http://localhost:8080/employees/add', newTask)
-      ]);
-
       // Update the tasks list with the new status
       setTasks(tasks.map(task => 
-        task.id === currentTaskId ? { ...task, status: 'Delivering', ...newTask } : task
+        task.id === currentTaskId ? { ...task, status: 'Delivering', ...updatedTask } : task
       ));
 
       // Hide the delivery form
       setDeliveryFormVisible(false);
       setDeliveryDetails({ name: '', contact: '' });
     } catch (error) {
-      console.error('Error updating task to Delivering:', error);
+      alert('Error updating task to Delivering');
     }
   };
 
   // Handle 'Delivery Done' button click
   const handleDeliveryDone = async (id) => {
     try {
-      // Step 1: Delete the existing task (Donor, Receiver, Employee)
-      await Promise.all([
-        axios.delete(`http://localhost:8080/donors/delete/${id}`),
-        axios.delete(`http://localhost:8080/receivers/delete/${id}`),
-        axios.delete(`http://localhost:8080/employees/delete/${id}`)
-      ]);
-
-      // Step 2: Add the new task with updated status to 'Delivered'
-      const deliveredTask = {
-        id,
-        status: 'Delivered',
-      };
-
-      await Promise.all([
-        axios.post('http://localhost:8080/donors/add', deliveredTask),
-        axios.post('http://localhost:8080/receivers/add', deliveredTask),
-        axios.post('http://localhost:8080/employees/add', deliveredTask)
-      ]);
-
+      const updatedTask = await updateTaskStatus(id, 'Delivered');
+      
       // Update the tasks list with the new status
       setTasks(tasks.map(task => 
-        task.id === id ? { ...task, status: 'Delivered' } : task
+        task.id === id ? { ...task, status: 'Delivered', ...updatedTask } : task
       ));
+
+      console.log('Task delivered:', updatedTask);
     } catch (error) {
-      console.error('Error updating task to Delivered:', error);
+      alert('Error updating task to Delivered');
     }
   };
 

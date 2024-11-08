@@ -28,6 +28,7 @@ export const Inventory = () => {
   const fetchDonations = async () => {
     try {
       const response = await axios.get('http://localhost:8080/donors/all');
+      console.log('Fetched Donations:', response.data); // Console log
       const validDonations = response.data.filter(donation => donation.status !== 'Accepted' && !isExpired(donation.expiryDate));
       setDonations(validDonations);
     } catch (error) {
@@ -39,6 +40,7 @@ export const Inventory = () => {
   const fetchReceiverRequests = async () => {
     try {
       const response = await axios.get('http://localhost:8080/receivers/all');
+      console.log('Fetched Receiver Requests:', response.data); // Console log
       setReceiverRequests(response.data.filter(request => request.status !== 'Accepted'));
     } catch (error) {
       console.error('Error fetching receiver requests:', error);
@@ -83,19 +85,24 @@ export const Inventory = () => {
     try {
       // Step 1: Delete the existing donation
       await axios.delete(`http://localhost:8080/donors/delete/${selectedDonationId}`);
+      console.log(`Deleted donation with ID: ${selectedDonationId}`); // Console log
 
       // Step 2: Add the donation again with 'Pending' status
-      await axios.post('http://localhost:8080/donors/add', {
+      const donationResponse = await axios.post('http://localhost:8080/donors/add', {
         ...donorDetails,
         status: 'Pending',
       });
+      console.log('Added donation with Pending status:', donationResponse.data); // Console log
 
       // Step 3: Delete the receiver request and add it with 'Pending' status
       await axios.delete(`http://localhost:8080/receivers/delete/${selectedReceiverId}`);
-      await axios.post('http://localhost:8080/receivers/add', {
+      console.log(`Deleted receiver request with ID: ${selectedReceiverId}`); // Console log
+
+      const receiverResponse = await axios.post('http://localhost:8080/receivers/add', {
         ...receiverDetails,
         status: 'Pending',
       });
+      console.log('Added receiver request with Pending status:', receiverResponse.data); // Console log
 
       // Step 4: Send the delivery details
       await sendDeliveryDetails();
@@ -119,19 +126,24 @@ export const Inventory = () => {
     try {
       // Step 1: Delete the existing receiver request
       await axios.delete(`http://localhost:8080/receivers/delete/${selectedReceiverId}`);
+      console.log(`Deleted receiver request with ID: ${selectedReceiverId}`); // Console log
 
       // Step 2: Add the receiver request again with 'Pending' status
-      await axios.post('http://localhost:8080/receivers/add', {
+      const receiverResponse = await axios.post('http://localhost:8080/receivers/add', {
         ...receiverDetails,
         status: 'Pending',
       });
+      console.log('Added receiver request with Pending status:', receiverResponse.data); // Console log
 
       // Step 3: Delete the donation and add it with 'Accepted' status
       await axios.delete(`http://localhost:8080/donors/delete/${selectedDonationId}`);
-      await axios.post('http://localhost:8080/donors/add', {
+      console.log(`Deleted donation with ID: ${selectedDonationId}`); // Console log
+
+      const donorResponse = await axios.post('http://localhost:8080/donors/add', {
         ...donorDetails,
         status: 'Accepted',
       });
+      console.log('Added donation with Accepted status:', donorResponse.data); // Console log
 
       // Step 4: Send the delivery details
       await sendDeliveryDetails();
@@ -165,7 +177,8 @@ export const Inventory = () => {
     };
 
     try {
-      await axios.post('http://localhost:8080/deliveries/create', deliveryData);
+      const response = await axios.post('http://localhost:8080/deliveries/create', deliveryData);
+      console.log('Delivery details submitted successfully:', response.data); // Console log
       alert('Delivery details submitted successfully!');
     } catch (error) {
       console.error('Error submitting delivery details:', error);
@@ -227,93 +240,83 @@ export const Inventory = () => {
 
       {/* Donation Form Modal */}
       {isDonationFormVisible && (
-        <div className="modal">
-          <h2>Enter Donor Details</h2>
-          <input
-            type="text"
-            placeholder="Name"
-            value={donorDetails.name}
-            onChange={(e) => setDonorDetails({ ...donorDetails, name: e.target.value })}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Address"
-            value={donorDetails.address}
-            onChange={(e) => setDonorDetails({ ...donorDetails, address: e.target.value })}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Phone Number"
-            value={donorDetails.phoneno}
-            onChange={(e) => setDonorDetails({ ...donorDetails, phoneno: e.target.value })}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Food Type"
-            value={donorDetails.foodType}
-            onChange={(e) => setDonorDetails({ ...donorDetails, foodType: e.target.value })}
-            required
-          />
-          <input
-            type="number"
-            placeholder="Quantity"
-            value={donorDetails.quantity}
-            onChange={(e) => setDonorDetails({ ...donorDetails, quantity: e.target.value })}
-            required
-          />
-          <button onClick={handleSubmitDonation}>Submit Donation</button>
-          <button onClick={() => setDonationFormVisible(false)}className="cancel">Cancel</button>
+        <div className="form-modal">
+          <h3>Submit Donation</h3>
+          <form onSubmit={(e) => { e.preventDefault(); handleSubmitDonation(); }}>
+            <label>Name:</label>
+            <input
+              type="text"
+              value={donorDetails.name}
+              onChange={(e) => setDonorDetails({ ...donorDetails, name: e.target.value })}
+            />
+            <label>Address:</label>
+            <input
+              type="text"
+              value={donorDetails.address}
+              onChange={(e) => setDonorDetails({ ...donorDetails, address: e.target.value })}
+            />
+            <label>Phone Number:</label>
+            <input
+              type="text"
+              value={donorDetails.phoneno}
+              onChange={(e) => setDonorDetails({ ...donorDetails, phoneno: e.target.value })}
+            />
+            <label>Food Type:</label>
+            <input
+              type="text"
+              value={donorDetails.foodType}
+              onChange={(e) => setDonorDetails({ ...donorDetails, foodType: e.target.value })}
+            />
+            <label>Quantity:</label>
+            <input
+              type="text"
+              value={donorDetails.quantity}
+              onChange={(e) => setDonorDetails({ ...donorDetails, quantity: e.target.value })}
+            />
+            <button type="submit">Submit Donation</button>
+          </form>
         </div>
       )}
 
       {/* Receiver Form Modal */}
       {isReceiverFormVisible && (
-        <div className="modal">
-          <h2>Enter Receiver Details</h2>
-          <input
-            type="text"
-            placeholder="Name"
-            value={receiverDetails.name}
-            onChange={(e) => setReceiverDetails({ ...receiverDetails, name: e.target.value })}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Address"
-            value={receiverDetails.address}
-            onChange={(e) => setReceiverDetails({ ...receiverDetails, address: e.target.value })}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Phone Number"
-            value={receiverDetails.phoneno}
-            onChange={(e) => setReceiverDetails({ ...receiverDetails, phoneno: e.target.value })}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Food Type"
-            value={receiverDetails.foodType}
-            onChange={(e) => setReceiverDetails({ ...receiverDetails, foodType: e.target.value })}
-            required
-          />
-          <input
-            type="number"
-            placeholder="Quantity Needed"
-            value={receiverDetails.quantityNeeded}
-            onChange={(e) => setReceiverDetails({ ...receiverDetails, quantityNeeded: e.target.value })}
-            required
-          />
-          <button onClick={handleSubmitReceiver}>Submit Request</button>
-          <button onClick={() => setReceiverFormVisible(false)}className="cancel">Cancel</button>
+        <div className="form-modal">
+          <h3>Submit Receiver Request</h3>
+          <form onSubmit={(e) => { e.preventDefault(); handleSubmitReceiver(); }}>
+            <label>Name:</label>
+            <input
+              type="text"
+              value={receiverDetails.name}
+              onChange={(e) => setReceiverDetails({ ...receiverDetails, name: e.target.value })}
+            />
+            <label>Address:</label>
+            <input
+              type="text"
+              value={receiverDetails.address}
+              onChange={(e) => setReceiverDetails({ ...receiverDetails, address: e.target.value })}
+            />
+            <label>Phone Number:</label>
+            <input
+              type="text"
+              value={receiverDetails.phoneno}
+              onChange={(e) => setReceiverDetails({ ...receiverDetails, phoneno: e.target.value })}
+            />
+            <label>Food Type:</label>
+            <input
+              type="text"
+              value={receiverDetails.foodType}
+              onChange={(e) => setReceiverDetails({ ...receiverDetails, foodType: e.target.value })}
+            />
+            <label>Quantity Needed:</label>
+            <input
+              type="text"
+              value={receiverDetails.quantityNeeded}
+              onChange={(e) => setReceiverDetails({ ...receiverDetails, quantityNeeded: e.target.value })}
+            />
+            <button type="submit">Submit Receiver Request</button>
+          </form>
         </div>
       )}
     </div>
   );
 };
-
-export default Inventory;
