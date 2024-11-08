@@ -6,31 +6,32 @@ export const Inventory = () => {
   const [donations, setDonations] = useState([]);
   const [receiverRequests, setReceiverRequests] = useState([]);
   const [donorDetails, setDonorDetails] = useState({
-    name: '',
+    expiryDate: '',
+    pickupTime: '',
     address: '',
     phoneno: '',
-    foodType: '',
-    quantity: ''
+    name: '',
+    aadhaarno: ''
   });
   const [receiverDetails, setReceiverDetails] = useState({
-    name: '',
+    expiryDate: '',
+    pickupTime: '',
     address: '',
     phoneno: '',
-    foodType: '',
-    quantityNeeded: ''
+    name: '',
+    aadhaarno: ''
   });
   const [isDonationFormVisible, setDonationFormVisible] = useState(false);
   const [isReceiverFormVisible, setReceiverFormVisible] = useState(false);
-  const [selectedDonationId, setSelectedDonationId] = useState(null);
-  const [selectedReceiverId, setSelectedReceiverId] = useState(null);
+  const [selectedDonation, setSelectedDonation] = useState(null);
+  const [selectedReceiver, setSelectedReceiver] = useState(null);
 
   // Fetch Donations
   const fetchDonations = async () => {
     try {
       const response = await axios.get('http://localhost:8080/donors/all');
-      console.log('Fetched Donations:', response.data); // Console log
-      const validDonations = response.data.filter(donation => donation.status !== 'Accepted' && !isExpired(donation.expiryDate));
-      setDonations(validDonations);
+      setDonations(response.data);
+      console.log(response)
     } catch (error) {
       console.error('Error fetching donations:', error);
     }
@@ -40,150 +41,134 @@ export const Inventory = () => {
   const fetchReceiverRequests = async () => {
     try {
       const response = await axios.get('http://localhost:8080/receivers/all');
-      console.log('Fetched Receiver Requests:', response.data); // Console log
-      setReceiverRequests(response.data.filter(request => request.status !== 'Accepted'));
+      setReceiverRequests(response.data);
+      console.log(response)
     } catch (error) {
       console.error('Error fetching receiver requests:', error);
     }
   };
 
-  // Handle Donation Action
-  const handleDonate = (receiverId) => {
-    const receiver = receiverRequests.find(req => req.id === receiverId);
-    setReceiverDetails({
-      name: receiver.name,
-      address: receiver.address,
-      phoneno: receiver.phoneno,
-      foodType: receiver.foodType,
-      quantityNeeded: receiver.quantityNeeded
-    });
-    setSelectedReceiverId(receiverId);
-    setReceiverFormVisible(true);
-  };
-
   // Handle Accept Donation
-  const handleAcceptDonation = (donationId) => {
-    const donation = donations.find(don => don.id === donationId);
+  const handleAcceptDonation = (donation) => {
     setDonorDetails({
-      name: donation.donorName,
-      address: donation.donorAddress,
-      phoneno: donation.donorPhone,
-      foodType: donation.foodType,
-      quantity: donation.quantity
+      expiryDate: '',
+      pickupTime: '',
+      address: '',
+      phoneno: '',
+      name: '',
+      aadhaarno: ''
     });
-    setSelectedDonationId(donationId);
+    setSelectedDonation(donation);
     setDonationFormVisible(true);
   };
 
-  // Submit Donation
-  const handleSubmitDonation = async () => {
-    if (!donorDetails.name || !donorDetails.address || !donorDetails.phoneno || !donorDetails.foodType || !donorDetails.quantity) {
-      alert('All fields are required!');
-      return;
-    }
-
-    try {
-      // Step 1: Delete the existing donation
-      await axios.delete(`http://localhost:8080/donors/delete/${selectedDonationId}`);
-      console.log(`Deleted donation with ID: ${selectedDonationId}`); // Console log
-
-      // Step 2: Add the donation again with 'Pending' status
-      const donationResponse = await axios.post('http://localhost:8080/donors/add', {
-        ...donorDetails,
-        status: 'Pending',
-      });
-      console.log('Added donation with Pending status:', donationResponse.data); // Console log
-
-      // Step 3: Delete the receiver request and add it with 'Pending' status
-      await axios.delete(`http://localhost:8080/receivers/delete/${selectedReceiverId}`);
-      console.log(`Deleted receiver request with ID: ${selectedReceiverId}`); // Console log
-
-      const receiverResponse = await axios.post('http://localhost:8080/receivers/add', {
-        ...receiverDetails,
-        status: 'Pending',
-      });
-      console.log('Added receiver request with Pending status:', receiverResponse.data); // Console log
-
-      // Step 4: Send the delivery details
-      await sendDeliveryDetails();
-
-      // Refetch data after submitting
-      fetchDonations();
-      fetchReceiverRequests();
-      setDonationFormVisible(false);
-    } catch (error) {
-      console.error('Error submitting donation:', error);
-    }
+  // Handle Donate to Receiver
+  const handleDonate = (receiver) => {
+    setReceiverDetails({
+      expiryDate: '',
+      pickupTime: '',
+      address: '',
+      phoneno: '',
+      name: '',
+      aadhaarno: ''
+    });
+    setSelectedReceiver(receiver);
+    setReceiverFormVisible(true);
   };
+    // Submit Donation
+    const handleSubmitDonation = async () => {
+      try {
+        if (!donorDetails.expiryDate || !donorDetails.pickupTime || !donorDetails.address || !donorDetails.phoneno || !donorDetails.name || !donorDetails.aadhaarno) {
+          alert('All fields are required!');
+          return;
+        }
 
-  // Submit Receiver
-  const handleSubmitReceiver = async () => {
-    if (!receiverDetails.name || !receiverDetails.address || !receiverDetails.phoneno || !receiverDetails.foodType || !receiverDetails.quantityNeeded) {
-      alert('All fields are required!');
-      return;
-    }
+        // Create a new donation object
+        const newDonation = {
+          foodType: selectedDonation.foodType,
+          quantity: selectedDonation.quantity,
+          expiryDate: donorDetails.expiryDate,
+          pickupTime: donorDetails.pickupTime,
+          address: donorDetails.address,
+          phoneno: donorDetails.phoneno,
+          name: donorDetails.name,
+          aadhaarno: donorDetails.aadhaarno
+        };
 
-    try {
-      // Step 1: Delete the existing receiver request
-      await axios.delete(`http://localhost:8080/receivers/delete/${selectedReceiverId}`);
-      console.log(`Deleted receiver request with ID: ${selectedReceiverId}`); // Console log
+        // Send POST request to add the donation to the backend
+        const donationResponse = await axios.post('http://localhost:8080/donors/inventoryadd', newDonation);
+        console.log('Donation added successfully:', donationResponse.data);
 
-      // Step 2: Add the receiver request again with 'Pending' status
-      const receiverResponse = await axios.post('http://localhost:8080/receivers/add', {
-        ...receiverDetails,
-        status: 'Pending',
-      });
-      console.log('Added receiver request with Pending status:', receiverResponse.data); // Console log
+        // Create an employee object from the donor details
+        const newEmployee = {
+          name: donorDetails.name,
+          email: donorDetails.email, // If available
+          phone: donorDetails.phoneno,
+          donorAddress: donorDetails.address,
+          foodType: selectedDonation.foodType,
+          receiverAddress: donorDetails.address, // Adjust according to your logic
+        };
 
-      // Step 3: Delete the donation and add it with 'Accepted' status
-      await axios.delete(`http://localhost:8080/donors/delete/${selectedDonationId}`);
-      console.log(`Deleted donation with ID: ${selectedDonationId}`); // Console log
+        // Send POST request to add the employee to the backend
+        const employeeResponse = await axios.post('http://localhost:8080/employees/add', newEmployee);
+        console.log('Employee added successfully:', employeeResponse.data);
 
-      const donorResponse = await axios.post('http://localhost:8080/donors/add', {
-        ...donorDetails,
-        status: 'Accepted',
-      });
-      console.log('Added donation with Accepted status:', donorResponse.data); // Console log
-
-      // Step 4: Send the delivery details
-      await sendDeliveryDetails();
-
-      // Refetch data after submitting
-      fetchDonations();
-      fetchReceiverRequests();
-      setReceiverFormVisible(false);
-    } catch (error) {
-      console.error('Error submitting receiver request:', error);
-    }
-  };
-
-  // Check if Donation Expired
-  const isExpired = (expiryDate) => {
-    const today = new Date().toISOString().split('T')[0];
-    return expiryDate <= today;
-  };
-
-  // Send Delivery Details
-  const sendDeliveryDetails = async () => {
-    const deliveryData = {
-      donorName: donorDetails.name,
-      donorAddress: donorDetails.address,
-      donorPhone: donorDetails.phoneno,
-      receiverName: receiverDetails.name,
-      receiverAddress: receiverDetails.address,
-      receiverPhone: receiverDetails.phoneno,
-      foodType: donorDetails.foodType,
-      quantity: donorDetails.quantity,
+        // Reset the form and close the modal
+        setDonationFormVisible(false);
+        fetchDonations();  // Refresh the list of donations
+      } catch (error) {
+        console.error('Error submitting donation:', error);
+      }
     };
 
-    try {
-      const response = await axios.post('http://localhost:8080/deliveries/create', deliveryData);
-      console.log('Delivery details submitted successfully:', response.data); // Console log
-      alert('Delivery details submitted successfully!');
-    } catch (error) {
-      console.error('Error submitting delivery details:', error);
-    }
-  };
+    // Submit Receiver
+    const handleSubmitReceiver = async () => {
+      try {
+        if (!receiverDetails.expiryDate || !receiverDetails.pickupTime || !receiverDetails.address || !receiverDetails.phoneno || !receiverDetails.name || !receiverDetails.aadhaarno) {
+          alert('All fields are required!');
+          return;
+        }
+
+        // Create a new receiver request object
+        const newReceiverRequest = {
+          foodType: selectedReceiver.foodType,
+          quantity: selectedReceiver.quantity,
+          expiryDate: receiverDetails.expiryDate,
+          pickupTime: receiverDetails.pickupTime,
+          address: receiverDetails.address,
+          phoneno: receiverDetails.phoneno,
+          name: receiverDetails.name,
+          aadhaarno: receiverDetails.aadhaarno
+        };
+
+        // Send POST request to add the receiver request to the backend
+        const receiverResponse = await axios.post('http://localhost:8080/receivers/add', newReceiverRequest);
+        console.log('Receiver request added successfully:', receiverResponse.data);
+
+        // Create an employee object from the receiver details
+        const newEmployee = {
+          name: receiverDetails.name,
+          email: receiverDetails.email, // If available
+          phone: receiverDetails.phoneno,
+          receiverAddress: receiverDetails.address,
+          foodType: selectedReceiver.foodType,
+          donorAddress: receiverDetails.address, // Adjust according to your logic
+        };
+
+        // Send POST request to add the employee to the backend
+        const employeeResponse = await axios.post('http://localhost:8080/employees/add', newEmployee);
+        console.log('Employee added successfully:', employeeResponse.data);
+
+        // Reset the form and close the modal
+        setReceiverFormVisible(false);
+        fetchReceiverRequests();  // Refresh the list of receiver requests
+      } catch (error) {
+        console.error('Error submitting receiver request:', error);
+      }
+    };
+
+
+
 
   // Fetch Data on Component Mount
   useEffect(() => {
@@ -202,12 +187,16 @@ export const Inventory = () => {
           ) : (
             <ul className="requests-list">
               {receiverRequests.map((request) => (
-                <li key={request.id} className="request-item">
-                  <strong>Food Type:</strong> {request.foodType} <br />
-                  <strong>Quantity Needed:</strong> {request.quantityNeeded} <br />
-                  <strong>Preferred Time:</strong> {request.preferredTime} <br />
-                  <strong>Status:</strong> {request.status} <br />
-                  <button onClick={() => handleDonate(request.id)}>Donate</button>
+                <li key={request.id} className="request-item"> 
+                  <strong>Food Type:</strong> {request.foodType || 'N/A'} <br />
+                  <strong>Quantity:</strong> {request.quantity || 'N/A'} <br />
+                  <strong>Expiry Date:</strong> {request.expiryDate || 'N/A'} <br />
+                  <strong>Pickup Time:</strong> {request.pickupTime || 'N/A'} <br />
+                  <strong>Address:</strong> {request.address || 'N/A'} <br />
+                  <strong>Phone Number:</strong> {request.phoneno || 'N/A'} <br />
+                  <strong>Name:</strong> {request.name || 'N/A'} <br />
+                  <strong>Aadhaar Number:</strong> {request.aadhaarno || 'N/A'} <br />
+                  <button className="allbutton" onClick={() => handleDonate(request)}>Donate</button>
                 </li>
               ))}
             </ul>
@@ -215,22 +204,22 @@ export const Inventory = () => {
         </div>
 
         <div className="list-section">
-          <h2>Donate</h2>
+          <h2>Donations</h2>
           {donations.length === 0 ? (
             <p>No incoming donations.</p>
           ) : (
             <ul className="donations-list">
               {donations.map((donation) => (
                 <li key={donation.id} className="donation-item">
-                  <strong>Food Type:</strong> {donation.foodType} <br />
-                  <strong>Quantity:</strong> {donation.quantity} <br />
-                  <strong>Status:</strong> {donation.status} <br />
-                  {!isExpired(donation.expiryDate) && (
-                    <button onClick={() => handleAcceptDonation(donation.id)}>Accept Donation</button>
-                  )}
-                  {isExpired(donation.expiryDate) && (
-                    <p style={{ color: 'red' }}>Expired</p>
-                  )}
+                  <strong>Food Type:</strong> {donation.foodType || 'N/A'} <br />
+                  <strong>Quantity:</strong> {donation.quantity || 'N/A'} <br />
+                  <strong>Expiry Date:</strong> {donation.expiryDate || 'N/A'} <br />
+                  <strong>Pickup Time:</strong> {donation.pickupTime || 'N/A'} <br />
+                  <strong>Address:</strong> {donation.address || 'N/A'} <br />
+                  <strong>Phone Number:</strong> {donation.phoneno || 'N/A'} <br />
+                  <strong>Name:</strong> {donation.name || 'N/A'} <br />
+                  <strong>Aadhaar Number:</strong> {donation.aadhaarno || 'N/A'} <br />
+                    <button className="allbutton" onClick={() => handleAcceptDonation(donation)}>Accept Donation</button>
                 </li>
               ))}
             </ul>
@@ -239,84 +228,67 @@ export const Inventory = () => {
       </div>
 
       {/* Donation Form Modal */}
-      {isDonationFormVisible && (
-        <div className="form-modal">
-          <h3>Submit Donation</h3>
-          <form onSubmit={(e) => { e.preventDefault(); handleSubmitDonation(); }}>
-            <label>Name:</label>
-            <input
-              type="text"
-              value={donorDetails.name}
-              onChange={(e) => setDonorDetails({ ...donorDetails, name: e.target.value })}
-            />
-            <label>Address:</label>
-            <input
-              type="text"
-              value={donorDetails.address}
-              onChange={(e) => setDonorDetails({ ...donorDetails, address: e.target.value })}
-            />
-            <label>Phone Number:</label>
-            <input
-              type="text"
-              value={donorDetails.phoneno}
-              onChange={(e) => setDonorDetails({ ...donorDetails, phoneno: e.target.value })}
-            />
-            <label>Food Type:</label>
-            <input
-              type="text"
-              value={donorDetails.foodType}
-              onChange={(e) => setDonorDetails({ ...donorDetails, foodType: e.target.value })}
-            />
-            <label>Quantity:</label>
-            <input
-              type="text"
-              value={donorDetails.quantity}
-              onChange={(e) => setDonorDetails({ ...donorDetails, quantity: e.target.value })}
-            />
-            <button type="submit">Submit Donation</button>
-          </form>
-        </div>
-      )}
+        {isDonationFormVisible && (
+          <div className="form-modal">
+            <button className="close-button" onClick={() => setDonationFormVisible(false)}>×</button>
+            <h3>Submit Donation</h3>
+            <form onSubmit={(e) => { e.preventDefault(); handleSubmitDonation(); }}>
+              <div className='modalsub'>
+              <label>Food Type:</label>
+              <input type="text" value={selectedDonation.foodType} readOnly />
+              <label>Quantity:</label>
+              <input type="text" value={selectedDonation.quantity} readOnly />
+              <label>Expiry Date:</label>
+              <input type="date" onChange={(e) => setDonorDetails({ ...donorDetails, expiryDate: e.target.value })} />
+              <label>Pickup Time:</label>
+              <input type="time" onChange={(e) => setDonorDetails({ ...donorDetails, pickupTime: e.target.value })} />
+              </div>
+              <div className='modalsub'>
+              <label>Address:</label>
+              <input type="text" onChange={(e) => setDonorDetails({ ...donorDetails, address: e.target.value })} />
+              <label>Phone Number:</label>
+              <input type="text" onChange={(e) => setDonorDetails({ ...donorDetails, phoneno: e.target.value })} />
+              <label>Name:</label>
+              <input type="text" onChange={(e) => setDonorDetails({ ...donorDetails, name: e.target.value })} />
+              <label>Aadhaar Number:</label>
+              <input type="text" onChange={(e) => setDonorDetails({ ...donorDetails, aadhaarno: e.target.value })} />
+              <button type="submit" className="allbutton">Submit</button>
+              </div>
+            </form>
+          </div>
+        )}
 
-      {/* Receiver Form Modal */}
-      {isReceiverFormVisible && (
-        <div className="form-modal">
-          <h3>Submit Receiver Request</h3>
-          <form onSubmit={(e) => { e.preventDefault(); handleSubmitReceiver(); }}>
-            <label>Name:</label>
-            <input
-              type="text"
-              value={receiverDetails.name}
-              onChange={(e) => setReceiverDetails({ ...receiverDetails, name: e.target.value })}
-            />
-            <label>Address:</label>
-            <input
-              type="text"
-              value={receiverDetails.address}
-              onChange={(e) => setReceiverDetails({ ...receiverDetails, address: e.target.value })}
-            />
-            <label>Phone Number:</label>
-            <input
-              type="text"
-              value={receiverDetails.phoneno}
-              onChange={(e) => setReceiverDetails({ ...receiverDetails, phoneno: e.target.value })}
-            />
-            <label>Food Type:</label>
-            <input
-              type="text"
-              value={receiverDetails.foodType}
-              onChange={(e) => setReceiverDetails({ ...receiverDetails, foodType: e.target.value })}
-            />
-            <label>Quantity Needed:</label>
-            <input
-              type="text"
-              value={receiverDetails.quantityNeeded}
-              onChange={(e) => setReceiverDetails({ ...receiverDetails, quantityNeeded: e.target.value })}
-            />
-            <button type="submit">Submit Receiver Request</button>
-          </form>
-        </div>
-      )}
+        {/* Receiver Form Modal */}
+        {isReceiverFormVisible && (
+          <div className="form-modal">
+            <button className="close-button" onClick={() => setReceiverFormVisible(false)}>×</button>
+            <h3>Submit Receiver Request</h3>
+            <form onSubmit={(e) => { e.preventDefault(); handleSubmitReceiver(); }}>
+              <div className='modalsub'>
+                <label>Food Type:</label>
+                <input type="text" value={selectedReceiver.foodType} readOnly />
+                <label>Quantity:</label>
+                <input type="text" value={selectedReceiver.quantity} readOnly />
+                <label>Expiry Date:</label>
+                <input type="date" onChange={(e) => setReceiverDetails({ ...receiverDetails, expiryDate: e.target.value })} />
+                <label>Pickup Time:</label>
+                <input type="time" onChange={(e) => setReceiverDetails({ ...receiverDetails, pickupTime: e.target.value })} />
+              </div>
+              <div className='modalsub'>
+                <label>Address:</label>
+                <input type="text" onChange={(e) => setReceiverDetails({ ...receiverDetails, address: e.target.value })} />
+                <label>Phone Number:</label>
+                <input type="text" onChange={(e) => setReceiverDetails({ ...receiverDetails, phoneno: e.target.value })} />
+                <label>Name:</label>
+                <input type="text" onChange={(e) => setReceiverDetails({ ...receiverDetails, name: e.target.value })} />
+                <label>Aadhaar Number:</label>
+                <input type="text" onChange={(e) => setReceiverDetails({ ...receiverDetails, aadhaarno: e.target.value })} />
+                <button type="submit" className="allbutton">Submit</button>
+              </div>
+            </form>
+          </div>
+        )}
+
     </div>
   );
 };
