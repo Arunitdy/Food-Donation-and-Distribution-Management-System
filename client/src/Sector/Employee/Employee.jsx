@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; 
+import axios from 'axios';
 import './Employee.css';
 
 export const Employee = () => {
@@ -11,14 +11,11 @@ export const Employee = () => {
   const [isDeliveryFormVisible, setDeliveryFormVisible] = useState(false);
   const [currentTaskId, setCurrentTaskId] = useState(null);
 
-  // Fetch tasks with 'Pending' status
+  // Fetch all tasks from the backend
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/donors/all'); 
-      const validTasks = response.data.filter(task => 
-        new Date(task.expiryDate) > new Date() && 
-        task.status === 'Pending'  // Only fetch tasks with Pending status
-      );
+      const response = await axios.get('http://localhost:8080/employees/all'); 
+      const validTasks = response.data;
       console.log('Fetched tasks:', validTasks);
       setTasks(validTasks);  
     } catch (error) {
@@ -26,15 +23,11 @@ export const Employee = () => {
     }
   };
 
-  // Helper function for deleting and adding task
+  // Helper function for deleting and adding task with updated status
   const updateTaskStatus = async (id, status, deliveryDetails = {}) => {
     try {
-      // Delete existing task (Donor, Receiver, Employee)
-      await Promise.all([
-        axios.delete(`http://localhost:8080/donors/delete/${id}`),
-        axios.delete(`http://localhost:8080/receivers/delete/${id}`),
-        axios.delete(`http://localhost:8080/employees/delete/${id}`)
-      ]);
+      // Delete existing task from Employee table
+      await axios.delete(`http://localhost:8080/employees/delete/${id}`);
 
       // Add updated task with new status
       const updatedTask = {
@@ -43,11 +36,8 @@ export const Employee = () => {
         ...deliveryDetails
       };
 
-      await Promise.all([
-        axios.post('http://localhost:8080/donors/add', updatedTask),
-        axios.post('http://localhost:8080/receivers/add', updatedTask),
-        axios.post('http://localhost:8080/employees/add', updatedTask)
-      ]);
+      // Add updated task back to Employee table
+      await axios.post('http://localhost:8080/employees/add', updatedTask);
 
       console.log(`Task ${status}:`, updatedTask);
       return updatedTask;
@@ -115,13 +105,14 @@ export const Employee = () => {
           tasks.map((task, index) => (
             <li key={index} className={`request-item ${task.status ? task.status.toLowerCase() : 'unknown'}`}>
               <div className="task-details">
-                <strong>Food Type:</strong> {task.foodType}<br />
-                <strong>Address:</strong> {task.address}<br />
-                <strong>Phone No:</strong> {task.phoneno}<br />
-                <strong>Expiry Date:</strong> {task.expiryDate}<br />
-                <strong>Quantity:</strong> {task.quantity} <br />
-                <strong>Status:</strong> {task.status ? task.status : 'Unknown Status'}
-                {task.status === 'Pending' && (
+                <strong>Food Type:</strong> {task.foodType || 'N/A'}<br />
+                <strong>Donor Address:</strong> {task.donor_address || 'N/A'}<br />
+                <strong>Receiver Address:</strong> {task.receiver_address || 'N/A'}<br />
+                <strong>Phone No:</strong> {task.phone || 'N/A'}<br />
+                <strong>Expiry Date:</strong> {task.expiryDate ? new Date(task.expiryDate).toLocaleString() : 'N/A'}<br />
+                <strong>Quantity:</strong> {task.quantity || 'N/A'}<br />
+                <strong>Status:</strong> {task.status || 'Unknown Status'}<br />
+                {task.status === 'ready to deliver' && (
                   <button onClick={() => handleTakeDelivery(task.id)}>Take Delivery</button>
                 )}
                 {task.status === 'Delivering' && (
