@@ -13,7 +13,7 @@ export const Receiver = function () {
         dateOfRequirement: '', 
         quantityNeeded: '', 
         preferredTime: '', 
-        status: 'PENDING' // Default status as per backend enum
+        status: 'Pending' // Default status as per backend enum
     });
 
     const [receiverHistory, setDonationHistory] = useState([]);
@@ -49,7 +49,7 @@ export const Receiver = function () {
                 dateOfRequirement: '', 
                 quantityNeeded: '', 
                 preferredTime: '', 
-                status: 'PENDING' // Reset status to default
+                status: 'Pending' // Reset status to default
             });
         } catch (error) {
             console.error('Error submitting the request:', error);
@@ -174,17 +174,24 @@ export const Receiver = function () {
                     <li key={index} className="request-item">
                     <div>
                         <strong>Food Type:</strong> {receiver.foodType} &nbsp;
-                        <strong>Quantity:</strong> {receiver.quantityNeeded} &nbsp;
+                        <strong>Quantity Needed:</strong> {receiver.quantityNeeded} &nbsp;
+                        <strong>Address:</strong> {receiver.address} &nbsp;
                         <strong>Expiry Date:</strong> {receiver.dateOfRequirement} &nbsp;
                         <strong>Pickup Time:</strong> {receiver.preferredTime} &nbsp;
-                        <strong>Status:</strong> <span className={receiver.status === 'EXPIRED' ? 'status-expired' : 'status-active'}>
+                        <strong>Name:</strong> {receiver.name} &nbsp;
+                        <strong>Phone No:</strong> {receiver.phoneno} &nbsp;
+                        <strong>Status:</strong> 
+                        <span className={receiver.status === 'EXPIRED' ? 'status-expired' : 'status-active'}>
                         {receiver.status}
                         </span>
                     </div>
-                    <button onClick={() => handleDelete(receiver.id)} className="delete-button">Delete Request</button>
+                    <button onClick={() => handleDelete(receiver.id)} className="delete-button">
+                        Delete Request
+                    </button>
                     </li>
                 ))}
             </ul>
+
         </div>
     );
 };

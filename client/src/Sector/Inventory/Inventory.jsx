@@ -6,26 +6,28 @@ export const Inventory = () => {
   const [donations, setDonations] = useState([]);
   const [receiverRequests, setReceiverRequests] = useState([]);
   const [donorDetails, setDonorDetails] = useState({
-    expiryDate: '',
-    pickupTime: '',
-    address: '',
-    phoneno: '',
-    name: '',
-    aadhaarno: ''
-  });
-  const [receiverDetails, setReceiverDetails] = useState({
-    expiryDate: '',
-    pickupTime: '',
-    address: '',
-    phoneno: '',
-    name: '',
-    aadhaarno: ''
-  });
+  expiryDate: '',
+  pickupTime: '',
+  address: '',  // Ensure 'address' is initialized
+  phoneno: '',
+  name: '',
+  aadhaarno: ''
+});
+
+const [receiverDetails, setReceiverDetails] = useState({
+  expiryDate: '',
+  pickupTime: '',
+  address: '',  // Ensure 'address' is initialized
+  phoneno: '',
+  name: '',
+  aadhaarno: ''
+});
+
   const [isDonationFormVisible, setDonationFormVisible] = useState(false);
   const [isReceiverFormVisible, setReceiverFormVisible] = useState(false);
   const [selectedDonation, setSelectedDonation] = useState(null);
   const [selectedReceiver, setSelectedReceiver] = useState(null);
-
+  const [selectedDonor, setSelectedDonor] = useState(null); 
   // Fetch Donations
   const fetchDonations = async () => {
     try {
@@ -59,6 +61,7 @@ export const Inventory = () => {
       aadhaarno: ''
     });
     setSelectedDonation(donation);
+    setSelectedDonor(donation);
     setDonationFormVisible(true);
   };
 
@@ -74,101 +77,117 @@ export const Inventory = () => {
     });
     setSelectedReceiver(receiver);
     setReceiverFormVisible(true);
+  };// Submit Donation
+  const handleSubmitDonation = async () => {
+    try {
+      console.log("handleSubmitDonation");
+      if (!donorDetails.expiryDate || !donorDetails.pickupTime || !donorDetails.address || !donorDetails.phoneno || !donorDetails.name || !donorDetails.aadhaarno) {
+        alert('All fields are required!');
+        return;
+      }
+  
+      // Create a new donation object
+      const newDonation = {
+        foodType: selectedDonation.foodType,
+        quantity: selectedDonation.quantity,
+        expiryDate: donorDetails.expiryDate,
+        pickupTime: donorDetails.pickupTime,
+        address: donorDetails.address,
+        phoneno: donorDetails.phoneno,
+        name: donorDetails.name,
+        aadhaarno: donorDetails.aadhaarno,
+        status: 'ready to deliver'
+      };
+  
+      // Send POST request to add the donation to the backend
+      const donationResponse = await axios.post('http://localhost:8080/donors/add', newDonation);
+      console.log('Donation added successfully:', donationResponse.data);
+  
+      // Delete receiver request
+      if (selectedDonor?.id) {
+        const donationResponsedelete = await axios.delete(`http://localhost:8080/donors/delete/${selectedDonor.id}`);
+        console.log("receiverRequestsdelete:", donationResponsedelete.data);
+      }
+  
+      // Create an employee object from the donor details
+      const newEmployee = {
+        name: donorDetails.name,
+        email: donorDetails.email, // If available
+        phone: donorDetails.phoneno,
+        donorAddress: donorDetails.address,
+        foodType: selectedDonation.foodType,
+        receiverAddress: donorDetails.address, // Adjust according to your logic
+        status: 'ready to deliver'
+      };
+  
+      // Send POST request to add the employee to the backend
+      const employeeResponse = await axios.post('http://localhost:8080/employees/add', newEmployee);
+      console.log('Employee added successfully:', employeeResponse.data);
+  
+    // Reset the form and close the modal
+    setDonationFormVisible(false);
+    setSelectedDonor(null);  // Reset selectedDonor state
+    fetchDonations();  // Refresh the list of donations
+    } catch (error) {
+      console.error('Error submitting donation:', error);
+    }
   };
-    // Submit Donation
-    const handleSubmitDonation = async () => {
-      try {
-        if (!donorDetails.expiryDate || !donorDetails.pickupTime || !donorDetails.address || !donorDetails.phoneno || !donorDetails.name || !donorDetails.aadhaarno) {
-          alert('All fields are required!');
-          return;
-        }
-
-        // Create a new donation object
-        const newDonation = {
-          foodType: selectedDonation.foodType,
-          quantity: selectedDonation.quantity,
-          expiryDate: donorDetails.expiryDate,
-          pickupTime: donorDetails.pickupTime,
-          address: donorDetails.address,
-          phoneno: donorDetails.phoneno,
-          name: donorDetails.name,
-          aadhaarno: donorDetails.aadhaarno
-        };
-
-        // Send POST request to add the donation to the backend
-        const donationResponse = await axios.post('http://localhost:8080/donors/inventoryadd', newDonation);
-        console.log('Donation added successfully:', donationResponse.data);
-
-        // Create an employee object from the donor details
-        const newEmployee = {
-          name: donorDetails.name,
-          email: donorDetails.email, // If available
-          phone: donorDetails.phoneno,
-          donorAddress: donorDetails.address,
-          foodType: selectedDonation.foodType,
-          receiverAddress: donorDetails.address, // Adjust according to your logic
-        };
-
-        // Send POST request to add the employee to the backend
-        const employeeResponse = await axios.post('http://localhost:8080/employees/add', newEmployee);
-        console.log('Employee added successfully:', employeeResponse.data);
-
-        // Reset the form and close the modal
-        setDonationFormVisible(false);
-        fetchDonations();  // Refresh the list of donations
-      } catch (error) {
-        console.error('Error submitting donation:', error);
+  
+  // Submit Receiver
+  const handleSubmitReceiver = async () => {
+    console.log("handleSubmitReceiver");
+    try {
+      if (!receiverDetails.expiryDate || !receiverDetails.pickupTime || !receiverDetails.address || !receiverDetails.phoneno || !receiverDetails.name || !receiverDetails.aadhaarno) {
+        alert('All fields are required!');
+        return;
       }
-    };
-
-    // Submit Receiver
-    const handleSubmitReceiver = async () => {
-      try {
-        if (!receiverDetails.expiryDate || !receiverDetails.pickupTime || !receiverDetails.address || !receiverDetails.phoneno || !receiverDetails.name || !receiverDetails.aadhaarno) {
-          alert('All fields are required!');
-          return;
-        }
-
-        // Create a new receiver request object
-        const newReceiverRequest = {
-          foodType: selectedReceiver.foodType,
-          quantity: selectedReceiver.quantity,
-          expiryDate: receiverDetails.expiryDate,
-          pickupTime: receiverDetails.pickupTime,
-          address: receiverDetails.address,
-          phoneno: receiverDetails.phoneno,
-          name: receiverDetails.name,
-          aadhaarno: receiverDetails.aadhaarno
-        };
-
-        // Send POST request to add the receiver request to the backend
-        const receiverResponse = await axios.post('http://localhost:8080/receivers/add', newReceiverRequest);
-        console.log('Receiver request added successfully:', receiverResponse.data);
-
-        // Create an employee object from the receiver details
-        const newEmployee = {
-          name: receiverDetails.name,
-          email: receiverDetails.email, // If available
-          phone: receiverDetails.phoneno,
-          receiverAddress: receiverDetails.address,
-          foodType: selectedReceiver.foodType,
-          donorAddress: receiverDetails.address, // Adjust according to your logic
-        };
-
-        // Send POST request to add the employee to the backend
-        const employeeResponse = await axios.post('http://localhost:8080/employees/add', newEmployee);
-        console.log('Employee added successfully:', employeeResponse.data);
-
-        // Reset the form and close the modal
-        setReceiverFormVisible(false);
-        fetchReceiverRequests();  // Refresh the list of receiver requests
-      } catch (error) {
-        console.error('Error submitting receiver request:', error);
+  
+      // Create a new receiver request object with default status
+      const newReceiverRequest = {
+        name: receiverDetails.name,
+        address: receiverDetails.address,
+        phoneno: receiverDetails.phoneno,
+        foodType: selectedReceiver.foodType,
+        pickupTime: receiverDetails.pickupTime,
+        quantity: selectedReceiver.quantity,
+        expiryDate: receiverDetails.expiryDate,
+        aadhaarno: receiverDetails.aadhaarno,
+        status: 'ready to deliver' // Set default status here
+      };
+  
+      // Send POST request to add the receiver request to the backend
+      const receiverResponse = await axios.post('http://localhost:8080/receivers/add', newReceiverRequest);
+      console.log('Receiver request added successfully:', receiverResponse.data);
+  
+      // Delete receiver request
+      if (selectedReceiver?.id) {
+        const receiverResponsedelete = await axios.delete(`http://localhost:8080/receivers/delete/${selectedReceiver.id}`);
+        console.log("receiverRequestsdelete:", receiverResponsedelete.data);
       }
-    };
-
-
-
+  
+      // Create an employee object from the receiver details
+      const newEmployee = {
+        name: receiverDetails.name,
+        email: receiverDetails.email, // If available
+        phone: receiverDetails.phoneno,
+        receiverAddress: receiverDetails.address,
+        foodType: selectedReceiver.foodType,
+        donorAddress: receiverDetails.address, // Adjust according to your logic
+         status: 'ready to deliver'
+      };
+  
+      // Send POST request to add the employee to the backend
+      const employeeResponse = await axios.post('http://localhost:8080/employees/add', newEmployee);
+      console.log('Employee added successfully:', employeeResponse.data);
+  
+      // Reset the form and close the modal
+      setReceiverFormVisible(false);
+      fetchReceiverRequests();  // Refresh the list of receiver requests
+    } catch (error) {
+      console.error('Error submitting receiver request:', error);
+    }
+  };
+  
 
   // Fetch Data on Component Mount
   useEffect(() => {
@@ -186,20 +205,25 @@ export const Inventory = () => {
             <p>No incoming receiver requests.</p>
           ) : (
             <ul className="requests-list">
-              {receiverRequests.map((request) => (
-                <li key={request.id} className="request-item"> 
-                  <strong>Food Type:</strong> {request.foodType || 'N/A'} <br />
-                  <strong>Quantity:</strong> {request.quantity || 'N/A'} <br />
-                  <strong>Expiry Date:</strong> {request.expiryDate || 'N/A'} <br />
-                  <strong>Pickup Time:</strong> {request.pickupTime || 'N/A'} <br />
-                  <strong>Address:</strong> {request.address || 'N/A'} <br />
-                  <strong>Phone Number:</strong> {request.phoneno || 'N/A'} <br />
-                  <strong>Name:</strong> {request.name || 'N/A'} <br />
-                  <strong>Aadhaar Number:</strong> {request.aadhaarno || 'N/A'} <br />
-                  <button className="allbutton" onClick={() => handleDonate(request)}>Donate</button>
-                </li>
-              ))}
-            </ul>
+            {
+              receiverRequests
+                .filter((request) => request.status.toLowerCase() === 'pending') // Filtering requests with "pending" status
+                .map((request) => (
+                  <li key={request.id} className="request-item">
+                    <strong>Food Type:</strong> {request.foodType || 'N/A'} <br />
+                    <strong>Quantity:</strong> {request.quantityNeeded || 'N/A'} <br />
+                    <strong>Expiry Date:</strong> {request.dateOfRequirement ||'N/A'} <br />
+                    <strong>Pickup Time:</strong> {request.preferredTime || 'N/A'} <br />
+                    <strong>Address:</strong> {request.address || 'N/A'} <br />
+                    <strong>Phone Number:</strong> {request.phoneno || 'N/A'} <br />
+                    <strong>Name:</strong> {request.name || 'N/A'} <br />
+                    <strong>Aadhaar Number:</strong> {'N/A'} <br />
+                    <button className="allbutton" onClick={() => handleDonate(request)}>Donate</button>
+                  </li>
+                ))
+            }
+          </ul>
+          
           )}
         </div>
 
@@ -209,19 +233,24 @@ export const Inventory = () => {
             <p>No incoming donations.</p>
           ) : (
             <ul className="donations-list">
-              {donations.map((donation) => (
-                <li key={donation.id} className="donation-item">
-                  <strong>Food Type:</strong> {donation.foodType || 'N/A'} <br />
-                  <strong>Quantity:</strong> {donation.quantity || 'N/A'} <br />
-                  <strong>Expiry Date:</strong> {donation.expiryDate || 'N/A'} <br />
-                  <strong>Pickup Time:</strong> {donation.pickupTime || 'N/A'} <br />
-                  <strong>Address:</strong> {donation.address || 'N/A'} <br />
-                  <strong>Phone Number:</strong> {donation.phoneno || 'N/A'} <br />
-                  <strong>Name:</strong> {donation.name || 'N/A'} <br />
-                  <strong>Aadhaar Number:</strong> {donation.aadhaarno || 'N/A'} <br />
+            {
+              donations
+                .filter((donation) => donation.status.toLowerCase() === 'pending') // Filter donations with 'pending' status
+                .map((donation) => (
+                  <li key={donation.id} className="donation-item">
+                    <strong>Food Type:</strong> {donation.foodType || 'N/A'} <br />
+                    <strong>Quantity:</strong> {donation.quantity || 'N/A'} <br />
+                    <strong>Expiry Date:</strong> {donation.expiryDate || 'N/A'} <br />
+                    <strong>Pickup Time:</strong> {donation.pickupTime || 'N/A'} <br />
+                    <strong>Address:</strong> {donation.address || 'N/A'} <br />
+                    <strong>Phone Number:</strong> {donation.phoneno || 'N/A'} <br />
+                    <strong>Name:</strong> {donation.name || 'N/A'} <br />
+                    <strong>Aadhaar Number:</strong> { 'N/A'} <br />
                     <button className="allbutton" onClick={() => handleAcceptDonation(donation)}>Accept Donation</button>
-                </li>
-              ))}
+                  </li>
+                ))
+            }
+
             </ul>
           )}
         </div>
