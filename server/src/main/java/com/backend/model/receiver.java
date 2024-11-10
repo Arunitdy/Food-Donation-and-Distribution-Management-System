@@ -28,15 +28,24 @@ public class receiver {
     private String address;
 
     @Column(name = "phoneno")
-    private Integer phoneno;
+    private String phoneno;
 
     @Column(name = "name")
     private String name;
 
+    // Enum for donation status
+    // public enum DonationStatus {
+    //     PENDING, RECEIVED, FAILED
+    // }
+
+    // @Enumerated(EnumType.STRING)
+    // @Column(name = "status")
+    // private DonationStatus status;  // Status field using enum type
+
     // Default constructor
     public receiver() {}
 
-    // Getters and Setters
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -85,11 +94,11 @@ public class receiver {
         this.address = address;
     }
 
-    public Integer getPhoneno() {
+    public String getPhoneno() {
         return phoneno;
     }
 
-    public void setPhoneno(Integer phoneno) {
+    public void setPhoneno(String phoneno) {
         this.phoneno = phoneno;
     }
 
@@ -101,5 +110,11 @@ public class receiver {
         this.name = name;
     }
 
-    
+    // public DonationStatus getStatus() {
+    //     return status;
+    // }
+
+    // public void setStatus(DonationStatus status) {
+    //     this.status = status;
+    // }
 }

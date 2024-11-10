@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.backend.backend.model.receiver;
 import com.backend.backend.service.receiverservice;
-
+import com.backend.backend.service.inventoryservice;
 import java.util.List;
 
 @RestController
@@ -15,13 +15,26 @@ public class receivercontroller {
     @Autowired
     private receiverservice receiverservice;
 
-    // Add a new receiver
+    @Autowired
+    private inventoryservice inventoryservice;
+
+    // Add a new receiver and decrement inventory accordingly
     @PostMapping("/add")
     public receiver addReceiver(@RequestBody receiver receiver) {
-        return receiverservice.saveReceiver(receiver);
+        // First, save the receiver's details
+        receiver savedReceiver = receiverservice.saveReceiver(receiver);
+
+        // Now, decrement the inventory based on the receiver's request
+        try {
+            inventoryservice.receiveFood(receiver.getFoodType(), receiver.getQuantityNeeded());
+        } catch (RuntimeException e) {
+            // Handle the case where the food item is not found or there is insufficient stock
+            throw new RuntimeException("Error processing the request: " + e.getMessage());
+        }
+
+        return savedReceiver;
     }
 
-    // Get all receivers
     @GetMapping("/all")
     public List<receiver> getAllReceivers() {
         return receiverservice.getAllReceivers();
@@ -39,4 +52,3 @@ public class receivercontroller {
         receiverservice.deleteReceiver(id);
     }
 }
-

@@ -17,6 +17,9 @@ public class inventory {
     @Column(name = "quantity")
     private int quantity;
 
+    @Column(name= "status")
+    private String status;
+
     // Default constructor
     public inventory() {}
 
@@ -44,4 +47,13 @@ public class inventory {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
 }

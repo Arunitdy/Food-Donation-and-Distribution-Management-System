@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 
 @Entity
 public class donor {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "donor_id")
@@ -25,14 +25,17 @@ public class donor {
     @Column(name = "quantity")
     private Integer quantity;  
 
-    @Column(name = "food_type")
+    @Column(name = "foodType")
     private String foodType;
 
-    @Column(name = "expiry_date")
+    @Column(name = "expiryDate")
     private LocalDate expiryDate;
 
-    @Column(name = "pickup_time")
+    @Column(name = "pickupTime")
     private LocalTime pickupTime;
+
+    @Column(name = "phoneno")
+    private String phoneno;
 
     // Default constructor
     public donor() {}
@@ -102,4 +105,11 @@ public class donor {
         this.aadhaarno = aadhaarno;
     }
 
+    public String getPhoneno() {
+        return phoneno;
+    }
+
+    public void setPhoneno(String phoneno) {
+        this.phoneno = phoneno;
+    }
 }

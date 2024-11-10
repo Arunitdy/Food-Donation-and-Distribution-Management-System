@@ -8,6 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface inventoryrepo extends JpaRepository<inventory, Long> {
-    // Inherits methods like save(), findById(), findAll() from JpaRepository
     Optional<inventory> findByFoodItem(String foodItem);
 }
